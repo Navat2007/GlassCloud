@@ -12,9 +12,9 @@ export class TableComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.names.push({name: 'Ivan'});
-    this.names.push({name: 'Petr'});
-    this.names.push({name: 'Petr'});
+    this.names.push({row: '1', name: 'Ivan1', email: 'm@m.ru'});
+    this.names.push({row: '2', name: 'Ivan2', email: 'm@m.ru'});
+    this.names.push({row: '3', name: 'Ivan3', email: 'm@m.ru'});
   }
 
 }

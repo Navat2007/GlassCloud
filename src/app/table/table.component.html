@@ -1,6 +1,17 @@
-<table>
-  <tr *ngFor="let item of names">
-    <td>{{item.name}}</td>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>email</th>
   </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of names">
+    <th scope="row">{{item.row}}</th>
+    <td>{{item.name}}</td>
+    <td>{{item.email}}</td>
+  </tr>
+  </tbody>
 </table>
 
