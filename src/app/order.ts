@@ -1,3 +1,5 @@
+import { Reception } from './reception';
+
 export class Order {
   id: number;
   name: string;
@@ -11,4 +13,5 @@ export class Order {
   area: number;
   perimeter: number;
   updateDate: string;
+  receptionOfOrder: Reception;
 }

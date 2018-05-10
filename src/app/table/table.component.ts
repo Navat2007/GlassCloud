@@ -23,4 +23,18 @@ export class TableComponent implements OnInit {
     this.orderService.getOrders()
       .subscribe(orders => this.orders = orders);
   }
+
+  // add(name: string): void {
+  //   name = name.trim();
+  //   if (!name) { return; }
+  //   this.orderService.addOrder({ order } as Order)
+  //     .subscribe(order => {
+  //       this.orders.push(order);
+  //     });
+  // }
+
+  delete(order: Order): void {
+    this.orders = this.orders.filter(h => h !== order);
+    this.orderService.deleteOrder(order).subscribe();
+  }
 }

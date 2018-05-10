@@ -1,9 +1,11 @@
 <table class="table table-hover">
-  <thead>
+  <thead class="blue-grey lighten-4">
   <tr>
-    <th>#</th>
-    <th>Name</th>
-    <th>email</th>
+    <th>Номер заказа</th>
+    <th>Сумма заказа</th>
+    <th>Дата обновления</th>
+    <th></th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -11,6 +13,15 @@
     <th scope="row">{{item.number}}</th>
     <td>{{item.summa}}</td>
     <td>{{item.updateDate}}</td>
+    <td>
+      <a routerLink="/api/order/{{item.id}}">
+        <span class="badge">{{item.id}}</span> {{item.name}}
+      </a>
+    </td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="delete(item)">x</button>
+    </td>
   </tr>
   </tbody>
 </table>
