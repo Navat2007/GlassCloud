@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
@@ -10,7 +11,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
-  { path: 'table', component: TableComponent }
+  { path: 'glass/order', component: AppComponent }
 ];
 
 @NgModule({
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
+    HttpClientModule,
     NgbModule.forRoot(),
     MDBBootstrapModule.forRoot()
   ],

@@ -20,7 +20,7 @@ export class TableComponent implements OnInit {
     this.names.push({row: '2', name: 'Ivan2', email: 'm@m.ru'});
     this.names.push({row: '3', name: 'Ivan3', email: 'm@m.ru'});
 
-    // this.getOrders();
+    this.getOrders();
   }
 
   getOrders(): void {
