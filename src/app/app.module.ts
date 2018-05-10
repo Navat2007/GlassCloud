@@ -11,28 +11,32 @@ import { TableComponent } from './table/table.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import {AppRoutingModule} from './app-routing.module';
+import { OrdersComponent } from './orders/orders.component';
 
 const appRoutes: Routes = [
   { path: 'glass/order', component: AppComponent }
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TableComponent,
-    NavBarComponent,
-    FooterComponent,
-    OrderDetailComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule,
     RouterModule.forRoot(
       appRoutes
     ),
     HttpClientModule,
     NgbModule.forRoot(),
     MDBBootstrapModule.forRoot()
+  ],
+  declarations: [
+    AppComponent,
+    TableComponent,
+    NavBarComponent,
+    FooterComponent,
+    OrderDetailComponent,
+    OrdersComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
