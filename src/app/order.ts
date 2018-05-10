@@ -1,6 +1,7 @@
 export class Order {
   id: number;
   name: string;
+  number: string;
   desc: string;
   accountNumber: string;
   discount: string;
@@ -9,4 +10,5 @@ export class Order {
   summa: string;
   area: number;
   perimeter: number;
+  updateDate: string;
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../order.service';
+import { Order } from '../order';
 
 @Component({
   selector: 'app-table',
@@ -9,17 +10,12 @@ import {OrderService} from '../order.service';
 
 
 export class TableComponent implements OnInit {
-  names = [];
-  orders = [];
+  orders: Order[];
   constructor(
     private orderService: OrderService
   ) { }
 
   ngOnInit() {
-    this.names.push({row: '1', name: 'Ivan1', email: 'm@m.ru'});
-    this.names.push({row: '2', name: 'Ivan2', email: 'm@m.ru'});
-    this.names.push({row: '3', name: 'Ivan3', email: 'm@m.ru'});
-
     this.getOrders();
   }
 
