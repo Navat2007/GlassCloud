@@ -7,12 +7,6 @@ import { Order } from '../order';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
-
-@Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
-})
 export class OrdersComponent implements OnInit {
 
   orders: Order[];

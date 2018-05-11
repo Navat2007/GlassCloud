@@ -15,7 +15,7 @@ import {AppRoutingModule} from './app-routing.module';
 import { OrdersComponent } from './orders/orders.component';
 
 const appRoutes: Routes = [
-  { path: 'glass/order', component: AppComponent }
+  { path: 'order', component: AppComponent }
 ];
 
 @NgModule({
