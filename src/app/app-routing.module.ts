@@ -5,9 +5,9 @@ import {OrderDetailComponent} from './order-detail/order-detail.component';
 import {OrdersComponent} from './orders/orders.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/order', pathMatch: 'full' },
   { path: 'order/:id', component: OrderDetailComponent },
-  { path: 'order', component: OrdersComponent },
-  { path: '', redirectTo: '/order', pathMatch: 'full' }
+  { path: 'order', component: OrdersComponent }
 ];
 
 @NgModule({

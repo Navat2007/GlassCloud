@@ -1,4 +1,7 @@
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo" xmlns:th="http://www.thymeleaf.org">
+<!--<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar ie-nav"-->
+            <!--[containerInside]="false">-->
+  <!--<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">-->
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar intro-fixed-nav" [containerInside]="false">
 
   <!-- Navbar brand -->
   <logo><a class="navbar-brand" href="#">GlassCloud</a></logo>
@@ -53,23 +56,32 @@
     </ul>
     <!-- Links -->
 
-    <div *ngIf="currentReception[0]">
-      <ul class="navbar-nav mr-auto" >
-        <li class="nav-item">
-          <a class="nav-link">Точка приема заказов: {{currentReception[0].name}}
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Выход</a>
-        </li>
-      </ul>
-    </div>
+    <ul class="navbar-nav nav-flex-icons">
+      <li class="nav-item" *ngIf="currentReception[0]">
+        <a class="nav-link">Точка приема заказов: {{currentReception[0].name}}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Выход</a>
+      </li>
+    </ul>
     <!-- Search form -->
     <!--<form class="form-inline waves-light" mdbWavesEffect>-->
     <!--<div class="md-form mt-0">-->
     <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
     <!--</div>-->
     <!--</form>-->
+    <!--<ul class="navbar-nav nav-flex-icons">-->
+      <!--<li class="nav-item waves-light" mdbWavesEffect>-->
+        <!--<a class="nav-link"><i class="fa fa-facebook"></i></a>-->
+      <!--</li>-->
+      <!--<li class="nav-item waves-light" mdbWavesEffect>-->
+        <!--<a class="nav-link"><i class="fa fa-twitter"></i></a>-->
+      <!--</li>-->
+      <!--<li class="nav-item waves-light" mdbWavesEffect>-->
+        <!--<a class="nav-link"><i class="fa fa-instagram"></i></a>-->
+      <!--</li>-->
+    <!--</ul>-->
   </links>
   <!-- Collapsible content -->
 
