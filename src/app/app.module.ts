@@ -19,6 +19,14 @@ import { OrdersComponent } from './orders/orders.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { ReceptionsComponent } from './receptions/receptions.component';
+import { ClientsComponent } from './clients/clients.component';
+import { MaterialsComponent } from './materials/materials.component';
+import { MaterialColorsComponent } from './material-colors/material-colors.component';
+import { MaterialTypesComponent } from './material-types/material-types.component';
+import { ProcessesComponent } from './processes/processes.component';
+import { ProcessTypeComponent } from './process-type/process-type.component';
+import { UsersComponent } from './users/users.component';
+import { PermissionsComponent } from './permissions/permissions.component';
 
 const appRoutes: Routes = [
   { path: 'order', component: AppComponent }
@@ -52,7 +60,15 @@ const appRoutes: Routes = [
     OrdersComponent,
     CompaniesComponent,
     CompanyDetailsComponent,
-    ReceptionsComponent
+    ReceptionsComponent,
+    ClientsComponent,
+    MaterialsComponent,
+    MaterialColorsComponent,
+    MaterialTypesComponent,
+    ProcessesComponent,
+    ProcessTypeComponent,
+    UsersComponent,
+    PermissionsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

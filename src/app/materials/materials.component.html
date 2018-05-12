@@ -1,0 +1,35 @@
+<h1>Материалы</h1>
+<table class="table table-hover">
+  <thead class="blue-grey lighten-4">
+  <tr>
+    <th>Тип</th>
+    <th>Толщина</th>
+    <th>Длина</th>
+    <th>Ширина</th>
+    <th>Цвет</th>
+    <th>Стоимость</th>
+    <th>Примечание</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of materials" routerLink="/company/{{item.id}}">
+    <td>{{item.type.name}}</td>
+    <td>{{item.depth}}</td>
+    <td>{{item.length}}</td>
+    <td>{{item.width}}</td>
+    <td>{{item.color.name}}</td>
+    <td>{{item.price}}</td>
+    <td>{{item.desc}}</td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="edit(item)">Edit</button>
+    </td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="delete(item)">x</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

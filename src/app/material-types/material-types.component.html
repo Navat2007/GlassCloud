@@ -1,4 +1,4 @@
-<h1>Кампании</h1>
+<h1>Типы материалов</h1>
 <table class="table table-hover">
   <thead class="blue-grey lighten-4">
   <tr>
@@ -8,7 +8,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of companies" routerLink="/company/{{item.id}}">
+  <tr *ngFor="let item of materialTypes" routerLink="/company/{{item.id}}">
     <td>{{item.name}}</td>
     <td>
       <button class="delete" title="delete order"
