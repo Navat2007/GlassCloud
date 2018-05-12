@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ProcessType} from '../process';
+import {processTypes} from '../mock-dtos';
 
 @Component({
   selector: 'app-process-type',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProcessTypeComponent implements OnInit {
 
+  processTypes: ProcessType[];
+
   constructor() { }
 
   ngOnInit() {
+    this.processTypes = processTypes;
   }
 
 }

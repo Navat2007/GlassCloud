@@ -1,3 +1,31 @@
-<p>
-  users works!
-</p>
+<h1>Пользователи</h1>
+<table class="table table-hover">
+  <thead class="blue-grey lighten-4">
+  <tr>
+    <th>ФИО</th>
+    <th>login</th>
+    <th>email</th>
+    <!--<th>Роль</th>-->
+    <th>Статус</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of users" routerLink="/process/{{item.id}}">
+    <td>{{item.name}}</td>
+    <td>{{item.login}}</td>
+    <td>{{item.email}}</td>
+    <!--<td>{{item.role}}</td>-->
+    <td>{{item.status}}</td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="edit(item)">Edit</button>
+    </td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="delete(item)">x</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

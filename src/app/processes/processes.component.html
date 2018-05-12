@@ -1,3 +1,37 @@
-<p>
-  processes works!
-</p>
+<h1>Работы</h1>
+<table class="table table-hover">
+  <thead class="blue-grey lighten-4">
+  <tr>
+    <th>Толщина материала</th>
+    <th>Работа</th>
+    <th>Материал</th>
+    <th>Стоимость</th>
+    <th>Примечание</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of processes" routerLink="/process/{{item.id}}">
+    <td>{{item.depth}}</td>
+    <td>{{item.type.name}}</td>
+    <td>
+      <table class="table table-hover">
+        <tr *ngFor="let material of item.material">
+          <td>{{material.type.name}}</td>
+        </tr>
+      </table>
+    </td>
+    <td>{{item.price}}</td>
+    <td>{{item.desc}}</td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="edit(item)">Edit</button>
+    </td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="delete(item)">x</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
