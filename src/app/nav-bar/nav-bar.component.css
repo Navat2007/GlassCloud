@@ -3,3 +3,14 @@
   background-size: cover;
   height: 100vh;
 }
+
+.submenu-caption {
+  background-color: rgb(180, 180, 180);
+  border: 1px rgba(128, 128, 128, 0.5) solid;
+
+  font-weight: bold;
+  box-sizing: border-box;
+
+  text-align: center;
+  color: #DAE6EE;
+}
