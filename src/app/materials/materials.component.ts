@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Material} from '../material';
-import {materias} from '../mock-dtos';
+import {materials} from '../mock-dtos';
 
 @Component({
   selector: 'app-materials',
@@ -14,7 +14,7 @@ export class MaterialsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.materials = materias;
+    this.materials = materials;
   }
 
 }
