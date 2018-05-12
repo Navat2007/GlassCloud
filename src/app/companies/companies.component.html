@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead class="blue-grey lighten-4">
+  <tr>
+    <th>Название</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of companies" routerLink="/company/{{item.id}}">
+    <td>{{item.name}}</td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="edit(item)">Edit</button>
+    </td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="delete(item)">x</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

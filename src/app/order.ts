@@ -1,4 +1,5 @@
 import {Reception} from './reception';
+import {Client} from './client';
 
 export class Order {
   id: number;
@@ -14,6 +15,7 @@ export class Order {
   perimeter: number;
   updateDate: string;
   receptionOfOrder: Reception;
+  client: Client;
 }
 
 export class OrderItem {

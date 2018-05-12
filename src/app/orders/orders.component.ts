@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../order.service';
-import { Order } from '../order';
+import {Order} from '../order';
 
 @Component({
   selector: 'app-orders',
@@ -10,9 +10,11 @@ import { Order } from '../order';
 export class OrdersComponent implements OnInit {
 
   orders: Order[];
+
   constructor(
     private orderService: OrderService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.getOrders();
@@ -37,4 +39,11 @@ export class OrdersComponent implements OnInit {
     this.orderService.deleteOrder(order).subscribe();
   }
 
+  print(order: Order): void {
+    console.log('print order');
+  }
+
+  edit(order: Order): void {
+    console.log('edit order');
+  }
 }

@@ -16,6 +16,9 @@ import { FooterComponent } from './footer/footer.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import {AppRoutingModule} from './app-routing.module';
 import { OrdersComponent } from './orders/orders.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { ReceptionsComponent } from './receptions/receptions.component';
 
 const appRoutes: Routes = [
   { path: 'order', component: AppComponent }
@@ -46,7 +49,10 @@ const appRoutes: Routes = [
     NavBarComponent,
     FooterComponent,
     OrderDetailComponent,
-    OrdersComponent
+    OrdersComponent,
+    CompaniesComponent,
+    CompanyDetailsComponent,
+    ReceptionsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

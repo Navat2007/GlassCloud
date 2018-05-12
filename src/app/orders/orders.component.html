@@ -2,22 +2,41 @@
   <thead class="blue-grey lighten-4">
   <tr>
     <th>Номер заказа</th>
-    <th>Сумма заказа</th>
-    <th>Дата обновления</th>
-    <!--<th></th>-->
+    <th>Дата создания</th>
+    <th>Описание</th>
+    <th>Заказчик</th>
+    <th>Точка приема заказов</th>
+    <th>Скидка</th>
+    <th>Сумма</th>
+    <th>Сумма со скидкой</th>
+    <th></th>
+    <th></th>
     <th></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let item of orders" routerLink="/order/{{item.id}}">
     <th scope="row">{{item.number}}</th>
-    <td>{{item.summa}}</td>
     <td>{{item.updateDate}}</td>
+    <td>{{item.desc}}</td>
+    <td>{{item.client.name}}</td>
+    <td>{{item.receptionOfOrder.name}}</td>
+    <td>{{item.discount}}</td>
+    <td>{{item.summa}}</td>
+    <td>{{item.discountSum}}</td>
     <!--<td>-->
       <!--<a routerLink="/order/{{item.id}}">-->
         <!--<span class="badge">{{item.id}}</span> {{item.name}}-->
       <!--</a>-->
     <!--</td>-->
+    <td>
+      <button class="delete" title="delete order"
+              (click)="print(item)">Print</button>
+    </td>
+    <td>
+      <button class="delete" title="delete order"
+              (click)="edit(item)">Edit</button>
+    </td>
     <td>
       <button class="delete" title="delete order"
               (click)="delete(item)">x</button>
