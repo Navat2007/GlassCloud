@@ -27,6 +27,8 @@ import { ProcessesComponent } from './processes/processes.component';
 import { ProcessTypeComponent } from './process-type/process-type.component';
 import { UsersComponent } from './users/users.component';
 import { PermissionsComponent } from './permissions/permissions.component';
+import { LoginComponent } from './login/login.component';
+import {AuthService} from './auth.service';
 
 const appRoutes: Routes = [
   { path: 'order', component: AppComponent }
@@ -47,9 +49,9 @@ const appRoutes: Routes = [
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { dataEncapsulation: false }
+    // )
   ],
   declarations: [
     AppComponent,
@@ -68,9 +70,10 @@ const appRoutes: Routes = [
     ProcessesComponent,
     ProcessTypeComponent,
     UsersComponent,
-    PermissionsComponent
+    PermissionsComponent,
+    LoginComponent
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

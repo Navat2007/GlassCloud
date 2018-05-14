@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ReceptionService} from '../reception.service';
 import {Reception} from '../reception';
+import {Router} from '@angular/router';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,7 +13,8 @@ export class NavBarComponent implements OnInit {
   currentReception: Reception[] = [];
 
   constructor(
-    private receptionService: ReceptionService
+    private receptionService: ReceptionService,
+    private as: AuthService, private router: Router
   ) { }
 
   ngOnInit() {
@@ -21,5 +24,14 @@ export class NavBarComponent implements OnInit {
   getCurrentReception(): void {
     this.receptionService.getCurrentReception()
       .subscribe(currentReception => this.currentReception = currentReception);
+  }
+
+  logout(): void {
+    this.as.logout().subscribe((isAuth: boolean) => {
+      if (!isAuth) {
+        console.log('logout');
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

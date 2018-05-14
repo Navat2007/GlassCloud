@@ -1,5 +1,6 @@
 import {Reception} from './reception';
 import {Client} from './client';
+import {Material} from './material';
 
 export class Order {
   id: number;
@@ -16,6 +17,7 @@ export class Order {
   updateDate: string;
   receptionOfOrder: Reception;
   client: Client;
+  items: OrderItem[];
 }
 
 export class OrderItem {
@@ -29,5 +31,5 @@ export class OrderItem {
   perimeter: number;
   processSum: number;
   summa: number;
-  material: string;
+  material: Material;
 }

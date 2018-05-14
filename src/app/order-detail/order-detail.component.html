@@ -1,11 +1,77 @@
-<div *ngIf="order">
-  <h2>{{ order.number | uppercase }} Details</h2>
-  <div><span>id: </span>{{order.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="order.desc" placeholder="desc"/>
-    </label>
+<!--<div *ngIf="order">-->
+  <!--<div>-->
+    <!--<label>name:-->
+      <!--<input [(ngModel)]="order.desc" placeholder="desc"/>-->
+    <!--</label>-->
+  <!--</div>-->
+  <!--<button (click)="goBack()">go back</button>-->
+  <!--<button (click)="save()">save</button>-->
+<!--</div>-->
+
+<!--<div class="card" *ngIf="order">-->
+  <!--<div class="card-header primary-color lighten-1 white-text">-->
+    <!--<h2>Заказ {{ order.number }}</h2>-->
+  <!--</div>-->
+  <!--<div class="card-body">-->
+    <!--<h4 class="card-title">Special title treatment</h4>-->
+    <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+    <!--<a class="btn btn-deep-orange waves-light" mdbWavesEffect>Go somewhere</a>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="card" *ngIf="order">
+  <div class="card-header primary-color lighten-1 white-text">
+    <h2>Заказ {{ order.number }}</h2>
   </div>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+  <div class="card-body">
+    <h4 class="card-title">Special title treatment</h4>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a class="btn btn-deep-orange waves-light" mdbWavesEffect>Редактироать</a>
+    <a class="btn btn-deep-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead class="blue-grey lighten-4">
+      <tr>
+        <th>N</th>
+        <th>Толщина</th>
+        <th>Тип</th>
+        <th>Длина</th>
+        <th>Ширина</th>
+        <th>Площадь</th>
+        <th>Периметр</th>
+        <!--<th>Работа</th>-->
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+        <th>Примечание</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of order.items let num = 'index'" >
+        <th scope="row">{{num + 1}}</th>
+        <td>{{item.material.depth}}</td>
+        <td>{{item.material.type.name}}</td>
+        <td>{{item.length}}</td>
+        <td>{{item.width}}</td>
+        <td>{{item.area}}</td>
+        <td>{{item.perimeter}}</td>
+        <td>{{item.count}}</td>
+        <td>{{item.material.price}}</td>
+        <td>{{item.summa}}</td>
+        <td>{{item.desc}}</td>
+        <td>
+          <button class="delete" title="delete order"
+                  (click)="edit(item)">Edit</button>
+        </td>
+        <td>
+          <button class="delete" title="delete order"
+                  (click)="delete(item)">x</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

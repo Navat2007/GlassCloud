@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' })
 export class OrderService {
 
-  private orderByReceprionsUrl = 'http://localhost:8080/api/order';
+  private orderByReceprionsUrl = 'http://localhost:8080/api/1/order';
   private orderUrl = 'http://localhost:8080/api/order';
 
   constructor(

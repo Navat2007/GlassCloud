@@ -1,6 +1,5 @@
 import {Company} from './company';
 import {Reception} from './reception';
-import {Order} from './order';
 import {Client} from './client';
 import {Material, MaterialColor, MaterialType} from './material';
 import {Process, ProcessType} from './process';
@@ -17,15 +16,9 @@ export const receptions: Reception[] = [
 ];
 
 export const clients: Client[] = [
-  {id: 1, name: 'Иванов', inn: '11111', account: '22222', phone: '11111', email: 'm@m.ru', desc: 'client', discount: '10%', type: 'Юр.лицо'},
-  {id: 2, name: 'Иванов', inn: '11111', account: '22222', phone: '11111', email: 'm@m.ru', desc: 'client', discount: '10%', type: 'Юр.лицо'},
-  {id: 3, name: 'Иванов', inn: '11111', account: '22222', phone: '11111', email: 'm@m.ru', desc: 'client', discount: '10%', type: 'Юр.лицо'},
-];
-export const orders: Order[] = [
-  { id: 1, name: 'Name 1' , number: 'Number 1', desc: 'Desc 1', summa: '100', updateDate: '2011-01-01', client: clients[0], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90'},
-  { id: 2, name: 'Name 2' , number: 'Number 2', desc: 'Desc 1', summa: '100', updateDate: '2011-01-01', client: clients[1], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90'},
-  { id: 3, name: 'Name 3' , number: 'Number 3', desc: 'Desc 1', summa: '100', updateDate: '2011-01-01', client: clients[0], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90'},
-  { id: 4, name: 'Name 4' , number: 'Number 4', desc: 'Desc 1', summa: '100', updateDate: '2011-01-01', client: clients[1], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90'},
+  {id: 1, name: 'Иванов', inn: '11111', account: '22222', phone: '11111', email: 'm@m.ru', desc: 'client', discount: 10, type: 'Юр.лицо'},
+  {id: 2, name: 'Иванов', inn: '11111', account: '22222', phone: '11111', email: 'm@m.ru', desc: 'client', discount: 5, type: 'Юр.лицо'},
+  {id: 3, name: 'Иванов', inn: '11111', account: '22222', phone: '11111', email: 'm@m.ru', desc: 'client', discount: 0, type: 'Юр.лицо'},
 ];
 
 export const materialColors: MaterialColor[] = [
@@ -39,9 +32,9 @@ export const materialTypes: MaterialType[] = [
 ];
 
 export const materials: Material[] = [
-  {id: 1, name: 'mirror 1', color: materialColors[0], desc: '', length: 1, width: 2, price: '100', depth: 3, type: materialTypes[0]},
-  {id: 2, name: 'mirror 2', color: materialColors[1], desc: '', length: 1, width: 2, price: '100', depth: 3, type: materialTypes[1]},
-  {id: 3, name: 'mirror 3', color: materialColors[0], desc: '', length: 1, width: 2, price: '100', depth: 3, type: materialTypes[0]},
+  {id: 1, name: 'mirror 1', color: materialColors[0], desc: '', length: 1, width: 2, price: 100, depth: 3, type: materialTypes[0]},
+  {id: 2, name: 'mirror 2', color: materialColors[1], desc: '', length: 1, width: 2, price: 300, depth: 3, type: materialTypes[1]},
+  {id: 3, name: 'mirror 3', color: materialColors[0], desc: '', length: 1, width: 2, price: 200, depth: 3, type: materialTypes[0]},
 ];
 
 
@@ -62,3 +55,17 @@ export const users: User[] = [
   {id: 2, name: 'user 2', comment: 'comment', login: 'login_2', email: 'u@u.ru', phone: '11111', enabled: true},
   {id: 3, name: 'user 3', comment: 'comment', login: 'login_3', email: 'u@u.ru', phone: '11111', enabled: true},
 ];
+
+// export const orderItems: OrderItem[] = [
+//   {id: 1, material: materials[0], count: 5, width: 1, length: 4, perimeter: 100, summa: 100, area: 300, desc: 'qq', number: 'ee'},
+//   {id: 2, material: materials[0], count: 5, width: 1, length: 4, perimeter: 100, summa: 100, area: 300, desc: 'qq', number: 'ee'},
+//   {id: 3, material: materials[0], count: 5, width: 1, length: 4, perimeter: 100, summa: 100, area: 300, desc: 'qq', number: 'ee'},
+//   {id: 4, material: materials[0], count: 5, width: 1, length: 4, perimeter: 100, summa: 100, area: 300, desc: 'qq', number: 'ee'},
+// ];
+//
+// export const orders: Order[] = [
+//   { id: 1, name: 'Name 1' , number: 'Number 1', desc: 'Desc 1', summa: 100, updateDate: '2011-01-01', client: clients[0], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90', accountNumber: '1', items: orderItems},
+//   { id: 2, name: 'Name 2' , number: 'Number 2', desc: 'Desc 1', summa: 200, updateDate: '2011-01-01', client: clients[1], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90', accountNumber: '1', items: orderItems},
+//   { id: 3, name: 'Name 3' , number: 'Number 3', desc: 'Desc 1', summa: 300, updateDate: '2011-01-01', client: clients[0], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90', accountNumber: '1', items: orderItems},
+//   { id: 4, name: 'Name 4' , number: 'Number 4', desc: 'Desc 1', summa: 400, updateDate: '2011-01-01', client: clients[1], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90', accountNumber: '1', items: orderItems},
+// ];
