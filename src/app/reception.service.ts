@@ -28,22 +28,14 @@ export class ReceptionService implements OnInit {
   }
 
   getReceptions(): Observable<Reception[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-XSRF-TOKEN': this.as.getCookie(this.as.COOKIE_CONSENT),
-        'Authorization': this.as.getCookie('Authorization'),
-      }),
-      withCredentials: true
-    };
-    return this.http.get<Reception[]>(this.receptionUrl, httpOptions)
+    return this.http.get<Reception[]>(this.receptionUrl, this.as.getHeaders())
       .pipe(
         catchError(this.handleError('getReceptions', []))
       );
   }
 
   selectReception(id: number): Observable<boolean[]> {
-    return this.http.get<boolean[]>(this.receptionUrl + '/select/' + id)
+    return this.http.post<boolean[]>(this.receptionUrl + '/select/' + id, this.as.getHeaders())
       .pipe(
         catchError(this.handleError(' select Reception', []))
       );

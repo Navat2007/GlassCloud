@@ -5,6 +5,7 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
 
 import {Order} from './order';
+import {AuthService} from './auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,12 +21,12 @@ export class OrderService {
   private orderUrl = 'http://localhost:8080/api/order';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient, private as: AuthService
   ) {
   }
 
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.orderByReceprionsUrl)
+    return this.http.get<Order[]>(this.orderByReceprionsUrl, this.as.getHeaders())
       .pipe(
         tap(orders => this.log(`fetched orders` + orders)),
         catchError(this.handleError('getOrders', []))

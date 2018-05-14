@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ReceptionService} from '../reception.service';
 import {Reception} from '../reception';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-select-reception',
@@ -12,7 +13,8 @@ export class SelectReceptionComponent implements OnInit {
   receptions: Reception[];
   id: number;
 
-  constructor(private service: ReceptionService) { }
+  constructor(private service: ReceptionService, private router: Router) {
+  }
 
   ngOnInit() {
     this.getReceptions();
@@ -23,7 +25,12 @@ export class SelectReceptionComponent implements OnInit {
       .subscribe(receptions => this.receptions = receptions);
   }
 
-  selectReception() {
-    this.service.selectReception(this.id);
+  selectReception(): void {
+    this.service.selectReception(1).subscribe(() => {
+      if (true) {
+        console.log('/order');
+        this.router.navigate(['/order']);
+      }
+    });
   }
 }

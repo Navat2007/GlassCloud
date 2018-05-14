@@ -27,23 +27,13 @@ export class AuthService {
   }
 
   login(credentials): Observable<boolean> {
-    console.log('auth ...' + credentials.name);
     const data: string = JSON.stringify(credentials);
     const url = this.loginUrl + '?username=' + credentials.name + '&password=' + credentials.password;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-XSRF-TOKEN': this.getCookie(this.COOKIE_CONSENT),
-        'Authorization': this.getCookie('Authorization'),
-      }),
-      withCredentials: true
-    };
-    console.log();
     // httpOptions.headers.append('X-XSRF-TOKEN', this.getCookie(this.COOKIE_CONSENT));
     // const params: URLSearchParams = new URLSearchParams();
     // httpOptions.params.set('action', 'login');
     // const options: RequestOptions = new RequestOptions({params: params});
-    return this.http.post(url, data, httpOptions)
+    return this.http.post(url, data, this.getHeaders())
       .map((r: Response) => {
         console.log(r);
         this.isAuth = true;
@@ -60,7 +50,18 @@ export class AuthService {
       });
   }
 
-  getCookie(name: string) {
+  getHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-XSRF-TOKEN': this.getCookie(this.COOKIE_CONSENT),
+        'Authorization': this.getCookie('Authorization'),
+      }),
+      withCredentials: true
+    };
+  }
+
+  private getCookie(name: string) {
     const ca: Array<string> = document.cookie.split(';');
     const caLen: number = ca.length;
     const cookieName = `${name}=`;
