@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
@@ -29,6 +29,8 @@ import { UsersComponent } from './users/users.component';
 import { PermissionsComponent } from './permissions/permissions.component';
 import { LoginComponent } from './login/login.component';
 import {AuthService} from './auth.service';
+import { SelectReceptionComponent } from './select-reception/select-reception.component';
+import {AuthInterceptor} from './auth-interceptor';
 
 const appRoutes: Routes = [
   { path: 'order', component: AppComponent }
@@ -46,6 +48,7 @@ const appRoutes: Routes = [
     MDBBootstrapModule.forRoot(),
 
     HttpClientModule,
+    HttpClientXsrfModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
@@ -71,9 +74,10 @@ const appRoutes: Routes = [
     ProcessTypeComponent,
     UsersComponent,
     PermissionsComponent,
-    LoginComponent
+    LoginComponent,
+    SelectReceptionComponent
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,10 +14,12 @@ import {ProcessTypeComponent} from './process-type/process-type.component';
 import {UsersComponent} from './users/users.component';
 import {PermissionsComponent} from './permissions/permissions.component';
 import {LoginComponent} from './login/login.component';
+import {SelectReceptionComponent} from './select-reception/select-reception.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/order', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'select-reception', component: SelectReceptionComponent },
   { path: 'order/:id', component: OrderDetailComponent },
   { path: 'order', component: OrdersComponent },
   { path: 'company', component: CompaniesComponent },

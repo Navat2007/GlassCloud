@@ -4,6 +4,7 @@ import {Client} from './client';
 import {Material, MaterialColor, MaterialType} from './material';
 import {Process, ProcessType} from './process';
 import {User} from './user';
+import {Order} from './order';
 
 export const companies: Company[] = [
   {id: 1, name: 'Рога и копыта'}
@@ -63,9 +64,4 @@ export const users: User[] = [
 //   {id: 4, material: materials[0], count: 5, width: 1, length: 4, perimeter: 100, summa: 100, area: 300, desc: 'qq', number: 'ee'},
 // ];
 //
-// export const orders: Order[] = [
-//   { id: 1, name: 'Name 1' , number: 'Number 1', desc: 'Desc 1', summa: 100, updateDate: '2011-01-01', client: clients[0], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90', accountNumber: '1', items: orderItems},
-//   { id: 2, name: 'Name 2' , number: 'Number 2', desc: 'Desc 1', summa: 200, updateDate: '2011-01-01', client: clients[1], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90', accountNumber: '1', items: orderItems},
-//   { id: 3, name: 'Name 3' , number: 'Number 3', desc: 'Desc 1', summa: 300, updateDate: '2011-01-01', client: clients[0], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90', accountNumber: '1', items: orderItems},
-//   { id: 4, name: 'Name 4' , number: 'Number 4', desc: 'Desc 1', summa: 400, updateDate: '2011-01-01', client: clients[1], receptionOfOrder: receptions[0], discount: '10%', discountSum: '90', accountNumber: '1', items: orderItems},
-// ];
+export const orders: Order[] = [];

@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.as.login(this.credentials).subscribe((isAuth: boolean) => {
       if (isAuth) {
-        console.log('/order');
-        this.router.navigate(['/login-reception-of-order']);
+        console.log('/select-reception');
+        this.router.navigate(['/select-reception']);
       } else {
         console.log('/login');
       }

@@ -1,0 +1,15 @@
+<h1>Добро пожаловать</h1>
+<h2>В какой точке приёма заказов вы находитесь?</h2>
+
+<form class="aut_form" (ngSubmit)="selectReception()">
+  <div>
+    <select>
+      <option *ngFor="let item of receptions" value={{item.id}}>{{item.name}}</option>
+    </select>
+  </div>
+  <div class="m-2">
+    <button type="submit" class="btn btn-lg btn-primary">
+      Войти &raquo;
+    </button>
+  </div>
+</form>
