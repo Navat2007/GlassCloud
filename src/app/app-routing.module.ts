@@ -15,23 +15,25 @@ import {UsersComponent} from './users/users.component';
 import {PermissionsComponent} from './permissions/permissions.component';
 import {LoginComponent} from './login/login.component';
 import {SelectReceptionComponent} from './select-reception/select-reception.component';
+import {AuthGuard} from './auth.guard';
+import {ReceptionGuard} from './reception.guard';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/order', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'select-reception', component: SelectReceptionComponent },
-  { path: 'order/:id', component: OrderDetailComponent },
-  { path: 'order', component: OrdersComponent },
-  { path: 'company', component: CompaniesComponent },
-  { path: 'reception', component: ReceptionsComponent },
-  { path: 'client', component: ClientsComponent },
-  { path: 'material', component: MaterialsComponent },
-  { path: 'material-color', component: MaterialColorsComponent },
-  { path: 'material-type', component: MaterialTypesComponent },
-  { path: 'process', component: ProcessesComponent },
-  { path: 'process-type', component: ProcessTypeComponent },
-  { path: 'user', component: UsersComponent },
-  { path: 'permission', component: PermissionsComponent },
+  { path: 'select-reception', component: SelectReceptionComponent, canActivate: [AuthGuard] },
+  { path: 'order/:id', component: OrderDetailComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'order', component: OrdersComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'company', component: CompaniesComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'reception', component: ReceptionsComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'client', component: ClientsComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'material', component: MaterialsComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'material-color', component: MaterialColorsComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'material-type', component: MaterialTypesComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'process', component: ProcessesComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'process-type', component: ProcessTypeComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'user', component: UsersComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'permission', component: PermissionsComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

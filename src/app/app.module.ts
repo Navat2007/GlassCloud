@@ -27,6 +27,8 @@ import {LoginComponent} from './login/login.component';
 import {AuthService} from './services/auth.service';
 import {SelectReceptionComponent} from './select-reception/select-reception.component';
 import {AuthInterceptor} from './auth-interceptor';
+import {AuthGuard} from './auth.guard';
+import {ReceptionGuard} from './reception.guard';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -67,7 +69,9 @@ const appRoutes: Routes = [
     SelectReceptionComponent
   ],
   providers: [
-    AuthService,
+    // AuthService,
+    AuthGuard,
+    ReceptionGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

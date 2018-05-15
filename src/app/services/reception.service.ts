@@ -1,10 +1,10 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Reception} from '../reception';
-import {AuthService} from './auth.service';
+import {LoggingService} from './logging.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -13,7 +13,8 @@ export class ReceptionService implements OnInit {
   private receptionUrl = 'http://localhost:8080/api/receptionOfOrder';
 
   constructor(
-    private http: HttpClient, private as: AuthService
+    private http: HttpClient,
+    private logger: LoggingService,
   ) {
   }
 
@@ -23,31 +24,21 @@ export class ReceptionService implements OnInit {
   getCurrentReception(): Observable<any> {
     return this.http.get<any>(this.receptionUrl + '/current')
       .pipe(
-        catchError(this.handleError('getCurrentReception', []))
+        catchError(this.logger.handleError('getCurrentReception', []))
       );
   }
 
   getReceptions(): Observable<Reception[]> {
     return this.http.get<Reception[]>(this.receptionUrl)
       .pipe(
-        catchError(this.handleError('getReceptions', []))
+        catchError(this.logger.handleError('getReceptions', []))
       );
   }
 
   selectReception(id: number): Observable<boolean[]> {
     return this.http.post<boolean[]>(this.receptionUrl + '/select/' + id, '')
       .pipe(
-        catchError(this.handleError(' select Reception', []))
+        catchError(this.logger.handleError(' select Reception', []))
       );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 }

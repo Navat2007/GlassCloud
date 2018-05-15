@@ -3,6 +3,8 @@ import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import {HttpClient} from '@angular/common/http';
+import {catchError, tap} from 'rxjs/operators';
+import {LoggingService} from './logging.service';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}),
@@ -15,18 +17,28 @@ import {HttpClient} from '@angular/common/http';
 export class AuthService implements OnInit {
   private loginUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
-  isAuth = false;
+  private serviceUrl = 'http://localhost:8080/api/is_auth';
+  private _isAuth = false;
 
   COOKIE_CONSENT = 'XSRF-TOKEN';
   COOKIE_AUTH = 'Authorization';
   private COOKIE_CONSENT_EXPIRE_DAYS = 3600;
 
-  constructor(private http: HttpClient) {
-    this.isAuth = !!this.getCookie(this.COOKIE_AUTH);
+  constructor(private http: HttpClient, private logging: LoggingService) {
+    console.log('construct auth service');
   }
 
   ngOnInit() {
+    console.log('init auth service');
+    this.isAuth().subscribe(res => this._isAuth = res);
+  }
 
+  isAuth(): Observable<any> {
+    return this.http.get(this.serviceUrl)
+      .pipe(
+        tap(orders => this.logging.log(`fetched ${name}` + orders)),
+        catchError(this.logging.handleError('get ${name}'))
+      );
   }
 
   login(credentials): Observable<boolean> {
@@ -35,9 +47,8 @@ export class AuthService implements OnInit {
 
     return this.http.post(url, '')
       .map((r: Response) => {
-        console.log(r);
-        this.isAuth = true;
-        return this.isAuth;
+        this._isAuth = true;
+        return this._isAuth;
       });
   }
 
@@ -45,8 +56,8 @@ export class AuthService implements OnInit {
     return this.http.get(this.logoutUrl)
       .map((r: Response) => {
         console.log('logout');
-        this.isAuth = false;
-        return this.isAuth;
+        this._isAuth = false;
+        return this._isAuth;
       });
   }
 
@@ -79,10 +90,10 @@ export class AuthService implements OnInit {
 
   private consent(isConsent: boolean, e: any) {
     if (!isConsent) {
-      return this.isAuth;
+      return this._isAuth;
     } else if (isConsent) {
       this.setCookie(this.COOKIE_CONSENT, '1', this.COOKIE_CONSENT_EXPIRE_DAYS);
-      this.isAuth = true;
+      this._isAuth = true;
       e.preventDefault();
     }
   }
