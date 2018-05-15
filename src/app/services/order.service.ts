@@ -39,14 +39,16 @@ export class OrderService implements OnInit {
 
   getOrder(id: number): Observable<Order> {
     const url = `${this.serviceUrl}/${id}`;
-    return this.http.get<Order>(url).pipe(
-      tap(_ => this.logging.log(`fetched order id=${id}`)),
-      catchError(this.logging.handleError<Order>(`getOrder id=${id}`))
-    );
+    return this.http.get<Order>(url)
+      .pipe(
+        tap(_ => this.logging.log(`fetched order id=${id}`)),
+        catchError(this.logging.handleError<Order>(`getOrder id=${id}`))
+      );
   }
 
   addOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.serviceUrl, order).pipe(
+    return this.http.post<Order>(this.serviceUrl, order)
+      .pipe(
       tap((_: Order) => this.logging.log(`added order w/ id=${order.id}`)),
       catchError(this.logging.handleError<Order>('addOrder'))
     );
@@ -56,7 +58,8 @@ export class OrderService implements OnInit {
     const id = typeof order === 'number' ? order : order.id;
     const url = `${this.serviceUrl}/${id}`;
 
-    return this.http.delete<Order>(url).pipe(
+    return this.http.delete<Order>(url)
+      .pipe(
       tap(_ => this.logging.log(`deleted order id=${id}`)),
       catchError(this.logging.handleError<Order>('deleteOrder'))
     );

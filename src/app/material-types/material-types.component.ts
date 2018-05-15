@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MaterialType} from '../material';
-import {materialTypes} from '../mock-dtos';
+import {MaterialTypeService} from '../services/material-type.service';
 
 @Component({
   selector: 'app-material-types',
@@ -11,10 +11,17 @@ export class MaterialTypesComponent implements OnInit {
 
   materialTypes: MaterialType[];
 
-  constructor() { }
+  constructor(
+    private service: MaterialTypeService
+  ) { }
 
   ngOnInit() {
-    this.materialTypes = materialTypes;
+    this.getMaterials();
+  }
+
+  getMaterials(): void {
+    this.service.getMaterialTypes()
+      .subscribe(items => this.materialTypes = items);
   }
 
 }
