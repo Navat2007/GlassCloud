@@ -7,16 +7,17 @@ import {catchError, tap} from 'rxjs/operators';
 import {Order} from '../order';
 import {environment} from '../../environments/environment';
 import {ReceptionService} from './reception.service';
+import {LoggingService} from './logging.service';
 
 @Injectable({providedIn: 'root'})
 export class OrderService implements OnInit {
 
-  // private orderByReceptionsUrl = environment.serverHost + '/api/1/order';
-  private orderUrl = environment.serverHost + '/api/order';
+  private serviceUrl = environment.serverHost + '/api/order';
 
   constructor(
     private http: HttpClient,
-    private receptionService: ReceptionService
+    private receptionService: ReceptionService,
+    private logging: LoggingService
   ) {
   }
 
@@ -29,56 +30,42 @@ export class OrderService implements OnInit {
   }
 
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.orderUrl)
+    return this.http.get<Order[]>(this.serviceUrl)
       .pipe(
-        tap(orders => this.log(`fetched orders` + orders)),
-        catchError(this.handleError('getOrders'))
+        tap(orders => this.logging.log(`fetched orders` + orders)),
+        catchError(this.logging.handleError('getOrders'))
       );
   }
 
   getOrder(id: number): Observable<Order> {
-    const url = `${this.orderUrl}/${id}`;
+    const url = `${this.serviceUrl}/${id}`;
     return this.http.get<Order>(url).pipe(
-      tap(_ => this.log(`fetched order id=${id}`)),
-      catchError(this.handleError<Order>(`getOrder id=${id}`))
+      tap(_ => this.logging.log(`fetched order id=${id}`)),
+      catchError(this.logging.handleError<Order>(`getOrder id=${id}`))
     );
   }
 
   addOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.orderUrl, order).pipe(
-      tap((_: Order) => this.log(`added order w/ id=${order.id}`)),
-      catchError(this.handleError<Order>('addOrder'))
+    return this.http.post<Order>(this.serviceUrl, order).pipe(
+      tap((_: Order) => this.logging.log(`added order w/ id=${order.id}`)),
+      catchError(this.logging.handleError<Order>('addOrder'))
     );
   }
 
   deleteOrder(order: Order | number): Observable<Order> {
     const id = typeof order === 'number' ? order : order.id;
-    const url = `${this.orderUrl}/${id}`;
+    const url = `${this.serviceUrl}/${id}`;
 
     return this.http.delete<Order>(url).pipe(
-      tap(_ => this.log(`deleted order id=${id}`)),
-      catchError(this.handleError<Order>('deleteOrder'))
+      tap(_ => this.logging.log(`deleted order id=${id}`)),
+      catchError(this.logging.handleError<Order>('deleteOrder'))
     );
   }
 
   updateOrder(order: Order): Observable<any> {
-    return this.http.put(this.orderUrl, order).pipe(
-      tap(_ => this.log(`updated order id=${order.id}`)),
-      catchError(this.handleError<any>('updateOrder'))
+    return this.http.put(this.serviceUrl, order).pipe(
+      tap(_ => this.logging.log(`updated order id=${order.id}`)),
+      catchError(this.logging.handleError<any>('updateOrder'))
     );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-
-  private log(message: string) {
-    console.log('HOrderService: ' + message);
   }
 }
