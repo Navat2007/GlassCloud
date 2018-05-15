@@ -11,9 +11,9 @@ import {Router} from '@angular/router';
 export class SelectReceptionComponent implements OnInit {
 
   receptions: Reception[];
-  id: number;
+  private receptionId: number;
 
-  constructor(private service: ReceptionService, private router: Router) {
+  constructor(private service: ReceptionService, private router: Router, ) {
   }
 
   ngOnInit() {
@@ -22,15 +22,24 @@ export class SelectReceptionComponent implements OnInit {
 
   getReceptions() {
     this.service.getReceptions()
-      .subscribe(receptions => this.receptions = receptions);
+      .subscribe(receptions => {
+        this.receptions = receptions;
+        if (receptions.length > 0) {
+          this.receptionId = receptions[0].id;
+        }
+      });
   }
 
   selectReception(): void {
-    this.service.selectReception(1).subscribe(() => {
-      if (true) {
-        console.log('/order');
+    if (this.receptionId) {
+      this.service.selectReception(this.receptionId).subscribe(() => {
         this.router.navigate(['/order']);
-      }
-    });
+      });
+    }
+  }
+
+  onChange(receptionId: number) {
+    console.log(receptionId);
+    this.receptionId = receptionId;
   }
 }

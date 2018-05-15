@@ -1,36 +1,38 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 import {Observable, of} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 
 import {Order} from './order';
-import {AuthService} from './auth.service';
 import {environment} from '../environments/environment';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
-  })
-};
+import {ReceptionService} from './reception.service';
 
 @Injectable({providedIn: 'root'})
-export class OrderService {
+export class OrderService implements OnInit {
 
-  private orderByReceprionsUrl = environment.serverHost + '/api/1/order';
+  // private orderByReceptionsUrl = environment.serverHost + '/api/1/order';
   private orderUrl = environment.serverHost + '/api/order';
 
   constructor(
-    private http: HttpClient, private as: AuthService
+    private http: HttpClient,
+    private receptionService: ReceptionService
   ) {
   }
 
+  ngOnInit(): void {
+    // this.receptionService.getCurrentReception()
+    //   .subscribe(currentReception => {
+    //     const id = currentReception.id;
+    //     this.orderByReceptionsUrl = environment.serverHost + '/api/ ' + id + '/order';
+    //   });
+  }
+
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.orderByReceprionsUrl)
+    return this.http.get<Order[]>(this.orderUrl)
       .pipe(
         tap(orders => this.log(`fetched orders` + orders)),
-        catchError(this.handleError('getOrders', []))
+        catchError(this.handleError('getOrders'))
       );
   }
 
@@ -43,7 +45,7 @@ export class OrderService {
   }
 
   addOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.orderUrl, order, httpOptions).pipe(
+    return this.http.post<Order>(this.orderUrl, order).pipe(
       tap((_: Order) => this.log(`added order w/ id=${order.id}`)),
       catchError(this.handleError<Order>('addOrder'))
     );
@@ -53,14 +55,14 @@ export class OrderService {
     const id = typeof order === 'number' ? order : order.id;
     const url = `${this.orderUrl}/${id}`;
 
-    return this.http.delete<Order>(url, httpOptions).pipe(
+    return this.http.delete<Order>(url).pipe(
       tap(_ => this.log(`deleted order id=${id}`)),
       catchError(this.handleError<Order>('deleteOrder'))
     );
   }
 
   updateOrder(order: Order): Observable<any> {
-    return this.http.put(this.orderUrl, order, httpOptions).pipe(
+    return this.http.put(this.orderUrl, order).pipe(
       tap(_ => this.log(`updated order id=${order.id}`)),
       catchError(this.handleError<any>('updateOrder'))
     );

@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
@@ -20,8 +20,8 @@ export class ReceptionService implements OnInit {
   ngOnInit() {
   }
 
-  getCurrentReception(): Observable<Reception[]> {
-    return this.http.get<Reception[]>(this.receptionUrl + '/current')
+  getCurrentReception(): Observable<any> {
+    return this.http.get<any>(this.receptionUrl + '/current')
       .pipe(
         catchError(this.handleError('getCurrentReception', []))
       );

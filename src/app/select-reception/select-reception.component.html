@@ -3,12 +3,12 @@
 
 <form class="aut_form" (ngSubmit)="selectReception()">
   <div>
-    <select class="btn btn-lg btn-primary">
+    <select (change)="onChange($event.target.value)" class="btn btn-lg btn-primary dropdown-toggle waves-light">
       <option *ngFor="let item of receptions" value={{item.id}}>{{item.name}}</option>
     </select>
   </div>
   <div class="m-2">
-    <button type="submit" (click)="selectReception()" class="btn btn-lg btn-primary">
+    <button type="submit" class="btn btn-lg btn-primary">
       Войти &raquo;
     </button>
   </div>

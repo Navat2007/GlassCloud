@@ -18,10 +18,11 @@ export class AuthService implements OnInit {
   isAuth = false;
 
   COOKIE_CONSENT = 'XSRF-TOKEN';
+  COOKIE_AUTH = 'Authorization';
   private COOKIE_CONSENT_EXPIRE_DAYS = 3600;
 
   constructor(private http: HttpClient) {
-    this.isAuth = !!this.getCookie(this.COOKIE_CONSENT);
+    this.isAuth = !!this.getCookie(this.COOKIE_AUTH);
   }
 
   ngOnInit() {
@@ -29,7 +30,8 @@ export class AuthService implements OnInit {
   }
 
   login(credentials): Observable<boolean> {
-    const url = this.loginUrl + '?username=' + credentials.name + '&password=' + credentials.password;
+    const url =
+      this.loginUrl + '?username=' + credentials.name + '&password=' + credentials.password + '&remember-me=' + credentials.rememberMe;
 
     return this.http.post(url, '')
       .map((r: Response) => {

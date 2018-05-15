@@ -8,17 +8,13 @@ import {AuthService} from './auth.service';
 })
 export class AppComponent implements OnInit {
 
-  title = 'app-1';
+  title = 'Glass cloud';
 
-  constructor(private as: AuthService) {
+  constructor() {
 
   }
 
   ngOnInit() {
 
-  }
-
-  isNotAuth() {
-    return this.as.isAuth;
   }
 }

@@ -10,7 +10,7 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  currentReception: Reception[] = [];
+  currentReception?: Reception;
 
   constructor(
     private receptionService: ReceptionService,
@@ -18,6 +18,7 @@ export class NavBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('init NavBarComponent');
     this.getCurrentReception();
   }
 

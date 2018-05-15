@@ -23,9 +23,9 @@ export class AuthInterceptor implements HttpInterceptor {
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        if (err.status === 403) {
-          document.location.href = '/login';
-        }
+        // if (err.status === 403) {
+        //   document.location.href = '/login';
+        // }
       }
     });
   }
