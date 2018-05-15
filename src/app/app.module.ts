@@ -7,7 +7,6 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
-import {TableComponent} from './table/table.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {FooterComponent} from './footer/footer.component';
 import {OrderDetailComponent} from './orders/order-detail.component';
@@ -49,7 +48,6 @@ const appRoutes: Routes = [
   ],
   declarations: [
     AppComponent,
-    TableComponent,
     NavBarComponent,
     FooterComponent,
     OrderDetailComponent,
