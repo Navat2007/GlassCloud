@@ -1,9 +1,24 @@
 <h1>Вход</h1>
 <div class="centered">
-  <form #loginform="ngForm" (ngSubmit)="login()">
-    <p>Имя<br><input [(ngModel)]="credentials.name" name="name" required maxlenght="20"></p>
-    <p>Пароль<br><input type="password" [(ngModel)]="credentials.password" name="password"
-                        required maxlenght="20"></p>
-    <p><input type="submit" value="Войти" [disabled]="!loginform.valid"></p>
+  <form #loginform="ngForm" class="form-signin" (ngSubmit)="login()">
+    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Добро пожаловать</h1>
+
+    <p class="alert alert-danger" role="alert">Неправильное имя или пароль.</p>
+
+    <label for="input_login" class="sr-only">Login</label>
+    <input type="text" id="input_login" class="form-control" placeholder="Login" required maxlenght="20" autofocus name="username"
+           [(ngModel)]="credentials.name">
+
+    <label for="input_password" class="sr-only">Password</label>
+    <input type="password" id="input_password" class="form-control" placeholder="Password" required maxlenght="20" name="password"
+           [(ngModel)]="credentials.password">
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Запомнить меня
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginform.valid">Вход</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
   </form>
 </div>

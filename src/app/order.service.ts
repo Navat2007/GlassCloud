@@ -6,6 +6,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 
 import {Order} from './order';
 import {AuthService} from './auth.service';
+import {environment} from '../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,8 +18,8 @@ const httpOptions = {
 @Injectable({providedIn: 'root'})
 export class OrderService {
 
-  private orderByReceprionsUrl = 'http://localhost:8080/api/1/order';
-  private orderUrl = 'http://localhost:8080/api/order';
+  private orderByReceprionsUrl = environment.serverHost + '/api/1/order';
+  private orderUrl = environment.serverHost + '/api/order';
 
   constructor(
     private http: HttpClient, private as: AuthService
@@ -26,7 +27,7 @@ export class OrderService {
   }
 
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.orderByReceprionsUrl, this.as.getHeaders())
+    return this.http.get<Order[]>(this.orderByReceprionsUrl)
       .pipe(
         tap(orders => this.log(`fetched orders` + orders)),
         catchError(this.handleError('getOrders', []))

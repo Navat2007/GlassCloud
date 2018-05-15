@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
@@ -12,28 +12,26 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit {
   private loginUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
-  private isAuth = false;
+  isAuth = false;
 
   COOKIE_CONSENT = 'XSRF-TOKEN';
   private COOKIE_CONSENT_EXPIRE_DAYS = 3600;
 
-  private isConsented = false;
-
   constructor(private http: HttpClient) {
-    this.isConsented = this.getCookie(this.COOKIE_CONSENT) === '1';
+    this.isAuth = !!this.getCookie(this.COOKIE_CONSENT);
+  }
+
+  ngOnInit() {
+
   }
 
   login(credentials): Observable<boolean> {
-    const data: string = JSON.stringify(credentials);
     const url = this.loginUrl + '?username=' + credentials.name + '&password=' + credentials.password;
-    // httpOptions.headers.append('X-XSRF-TOKEN', this.getCookie(this.COOKIE_CONSENT));
-    // const params: URLSearchParams = new URLSearchParams();
-    // httpOptions.params.set('action', 'login');
-    // const options: RequestOptions = new RequestOptions({params: params});
-    return this.http.post(url, data, this.getHeaders())
+
+    return this.http.post(url, '')
       .map((r: Response) => {
         console.log(r);
         this.isAuth = true;
@@ -50,18 +48,7 @@ export class AuthService {
       });
   }
 
-  getHeaders() {
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-XSRF-TOKEN': this.getCookie(this.COOKIE_CONSENT),
-        'Authorization': this.getCookie('Authorization'),
-      }),
-      withCredentials: true
-    };
-  }
-
-  private getCookie(name: string) {
+  getCookie(name: string) {
     const ca: Array<string> = document.cookie.split(';');
     const caLen: number = ca.length;
     const cookieName = `${name}=`;
@@ -90,15 +77,11 @@ export class AuthService {
 
   private consent(isConsent: boolean, e: any) {
     if (!isConsent) {
-      return this.isConsented;
+      return this.isAuth;
     } else if (isConsent) {
       this.setCookie(this.COOKIE_CONSENT, '1', this.COOKIE_CONSENT_EXPIRE_DAYS);
-      this.isConsented = true;
+      this.isAuth = true;
       e.preventDefault();
     }
-  }
-
-  getAuthorizationToken() {
-
   }
 }

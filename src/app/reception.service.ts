@@ -28,14 +28,14 @@ export class ReceptionService implements OnInit {
   }
 
   getReceptions(): Observable<Reception[]> {
-    return this.http.get<Reception[]>(this.receptionUrl, this.as.getHeaders())
+    return this.http.get<Reception[]>(this.receptionUrl)
       .pipe(
         catchError(this.handleError('getReceptions', []))
       );
   }
 
   selectReception(id: number): Observable<boolean[]> {
-    return this.http.post<boolean[]>(this.receptionUrl + '/select/' + id, this.as.getHeaders())
+    return this.http.post<boolean[]>(this.receptionUrl + '/select/' + id, '')
       .pipe(
         catchError(this.handleError(' select Reception', []))
       );

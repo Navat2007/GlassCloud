@@ -3,7 +3,7 @@
 
 <form class="aut_form" (ngSubmit)="selectReception()">
   <div>
-    <select>
+    <select class="btn btn-lg btn-primary">
       <option *ngFor="let item of receptions" value={{item.id}}>{{item.name}}</option>
     </select>
   </div>
