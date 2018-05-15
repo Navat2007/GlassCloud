@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {MaterialType} from '../material';
-import {MaterialTypeService} from '../services/material-type.service';
+import {MaterialColor, MaterialType} from '../material';
+import {GlassServiceService} from '../services/glass-service.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-material-types',
@@ -11,16 +12,20 @@ export class MaterialTypesComponent implements OnInit {
 
   materialTypes: MaterialType[];
 
-  constructor(
-    private service: MaterialTypeService
-  ) { }
+  private serviceUrl = environment.serverHost + '/api/material/type';
 
-  ngOnInit() {
-    this.getMaterials();
+  constructor(
+    private service: GlassServiceService<MaterialColor>
+  ) {
+    this.service.setUrl(this.serviceUrl).setName('material-type');
   }
 
-  getMaterials(): void {
-    this.service.getMaterialTypes()
+  ngOnInit() {
+    this.getProcessTypes();
+  }
+
+  getProcessTypes(): void {
+    this.service.getItems()
       .subscribe(items => this.materialTypes = items);
   }
 

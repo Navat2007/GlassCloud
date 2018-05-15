@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Reception} from '../reception';
-import {receptions} from '../mock-dtos';
+import {environment} from '../../environments/environment';
+import {GlassServiceService} from '../services/glass-service.service';
 
 @Component({
   selector: 'app-receptions',
@@ -9,12 +10,23 @@ import {receptions} from '../mock-dtos';
 })
 export class ReceptionsComponent implements OnInit {
 
+  private serviceUrl = environment.serverHost + '/api/receptionOfOrder';
+
   receptions: Reception[];
 
-  constructor() { }
+  constructor(
+    private service: GlassServiceService<Reception>
+  ) {
+    this.service.setUrl(this.serviceUrl).setName('receptionOfOrder');
+  }
 
   ngOnInit() {
-    this.receptions = receptions;
+    this.getProcessTypes();
+  }
+
+  getProcessTypes(): void {
+    this.service.getItems()
+      .subscribe(items => this.receptions = items);
   }
 
   delete(reception: Reception): void {

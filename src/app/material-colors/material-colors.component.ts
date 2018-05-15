@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MaterialColor} from '../material';
-import {MaterialColorService} from '../services/material-color.service';
+import {environment} from '../../environments/environment';
+import {GlassServiceService} from '../services/glass-service.service';
 
 @Component({
   selector: 'app-material-colors',
@@ -11,16 +12,21 @@ export class MaterialColorsComponent implements OnInit {
 
   materialColors: MaterialColor[];
 
-  constructor(private service: MaterialColorService) {
+  private serviceUrl = environment.serverHost + '/api/material/color';
+
+  constructor(
+    private service: GlassServiceService<MaterialColor>
+  ) {
+    this.service.setUrl(this.serviceUrl).setName('material-color');
   }
 
   ngOnInit() {
-    this.getMaterialColors();
+    this.getProcessTypes();
   }
 
-  getMaterialColors(): void {
-    this.service.getMaterialColors()
-      .subscribe(materials => this.materialColors = materials);
+  getProcessTypes(): void {
+    this.service.getItems()
+      .subscribe(items => this.materialColors = items);
   }
 
   // add(name: string): void {
