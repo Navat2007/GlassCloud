@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProcessType} from '../process';
-import {processTypes} from '../mock-dtos';
+import {GlassServiceService} from '../services/glass-service.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-process-type',
@@ -9,12 +10,23 @@ import {processTypes} from '../mock-dtos';
 })
 export class ProcessTypeComponent implements OnInit {
 
+  private serviceUrl = environment.serverHost + '/api/process/type';
+
   processTypes: ProcessType[];
 
-  constructor() { }
+  constructor(
+    private service: GlassServiceService<ProcessType>
+  ) {
+    this.service.setUrl(this.serviceUrl).setName('process-type');
+  }
 
   ngOnInit() {
-    this.processTypes = processTypes;
+    this.getProcessTypes();
+  }
+
+  getProcessTypes(): void {
+    this.service.getItems()
+      .subscribe(items => this.processTypes = items);
   }
 
 }
