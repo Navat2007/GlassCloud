@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderService} from '../services/order.service';
 import {Order} from '../order';
+import {GlassServiceService} from '../services/glass-service.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-orders',
@@ -11,9 +12,12 @@ export class OrdersComponent implements OnInit {
 
   orders: Order[];
 
+  private serviceUrl = environment.serverHost + '/api/order';
+
   constructor(
-    private orderService: OrderService
+    private service: GlassServiceService<Order>
   ) {
+    this.service.setUrl(this.serviceUrl).setName('order');
   }
 
   ngOnInit() {
@@ -21,7 +25,7 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders(): void {
-    this.orderService.getOrders()
+    this.service.getItems()
       .subscribe(orders => this.orders = orders);
   }
 
@@ -36,7 +40,7 @@ export class OrdersComponent implements OnInit {
 
   delete(order: Order): void {
     this.orders = this.orders.filter(h => h !== order);
-    this.orderService.deleteOrder(order).subscribe();
+    this.service.deleteItem(order.id).subscribe();
   }
 
   print(order: Order): void {
