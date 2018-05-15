@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Reception} from './reception';
+import {Reception} from '../reception';
 import {AuthService} from './auth.service';
 
 

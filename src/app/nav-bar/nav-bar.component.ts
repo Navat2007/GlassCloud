@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ReceptionService} from '../reception.service';
+import {ReceptionService} from '../services/reception.service';
 import {Reception} from '../reception';
 import {Router} from '@angular/router';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',

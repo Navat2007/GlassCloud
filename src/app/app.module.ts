@@ -25,7 +25,7 @@ import {ProcessTypeComponent} from './process-type/process-type.component';
 import {UsersComponent} from './users/users.component';
 import {PermissionsComponent} from './permissions/permissions.component';
 import {LoginComponent} from './login/login.component';
-import {AuthService} from './auth.service';
+import {AuthService} from './services/auth.service';
 import {SelectReceptionComponent} from './select-reception/select-reception.component';
 import {AuthInterceptor} from './auth-interceptor';
 

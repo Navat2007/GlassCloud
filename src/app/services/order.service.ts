@@ -4,8 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-import {Order} from './order';
-import {environment} from '../environments/environment';
+import {Order} from '../order';
+import {environment} from '../../environments/environment';
 import {ReceptionService} from './reception.service';
 
 @Injectable({providedIn: 'root'})

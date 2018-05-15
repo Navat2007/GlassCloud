@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}),
