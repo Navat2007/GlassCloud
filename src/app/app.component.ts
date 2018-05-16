@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +9,19 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
 
   title = 'Glass cloud';
+  _isAuth = false;
 
-  constructor() {
+  constructor(
+    private as: AuthService,
+  ) {
 
   }
 
   ngOnInit() {
+    this.isAuth();
+  }
 
+  private isAuth() {
+    this.as.isAuth().subscribe(res => this._isAuth = res);
   }
 }
