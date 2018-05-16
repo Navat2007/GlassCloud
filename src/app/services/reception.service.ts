@@ -13,6 +13,7 @@ export class ReceptionService {
 
   private receptionUrl = environment.serverHost + '/api/receptionOfOrder';
   receptionSelected = false;
+  currentReception?: Reception | any;
 
   constructor(
     private http: HttpClient,
@@ -25,6 +26,7 @@ export class ReceptionService {
       .pipe(
         catchError(this.logger.handleError('getCurrentReception', []))
       )
+      .map(res => this.currentReception = res)
       .map(res => this.receptionSelected = !!res);
   }
 

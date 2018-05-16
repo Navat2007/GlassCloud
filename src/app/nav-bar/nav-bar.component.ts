@@ -13,7 +13,7 @@ export class NavBarComponent implements OnInit {
   currentReception?: Reception;
 
   constructor(
-    private receptionService: ReceptionService,
+    public receptionService: ReceptionService,
     private as: AuthService, private router: Router
   ) {
   }

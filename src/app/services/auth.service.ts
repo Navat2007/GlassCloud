@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
@@ -56,6 +56,9 @@ export class AuthService {
         console.log('logout');
         this._isAuth = false;
         this.receptionService.receptionSelected = false;
+        this.deleteCookie(this.XSRF_TOKEN);
+        this.deleteCookie(this.X_XSRF_TOKEN);
+        this.deleteCookie(this.COOKIE_AUTH);
         return this._isAuth;
       });
   }

@@ -57,8 +57,8 @@
     <!-- Links -->
 
     <ul class="navbar-nav nav-flex-icons">
-      <li class="nav-item" *ngIf="currentReception">
-        <a class="nav-link">Точка приема заказов: {{currentReception.name}}
+      <li class="nav-item" *ngIf="receptionService.currentReception">
+        <a class="nav-link">Точка приема заказов: {{receptionService.currentReception.name}}
         </a>
       </li>
       <li class="nav-item">
