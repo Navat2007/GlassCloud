@@ -28,3 +28,20 @@ button:disabled {
   color: #ccc;
   cursor: auto;
 }
+
+.card {
+  max-width: 900px;
+  margin: auto;
+}
+
+.card-body {
+  text-align: left;
+}
+
+.actions {
+  text-align: right;
+}
+
+.column1 {
+  width: 70px;
+}

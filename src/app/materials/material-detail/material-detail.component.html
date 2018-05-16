@@ -2,40 +2,96 @@
   <div class="card-header primary-color lighten-1 white-text">
     <h2>Материал: {{ material.type.name }}</h2>
   </div>
+
   <div class="card-body">
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="column1"></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Цвет</td>
+        <td *ngIf="disabled">{{material.color.name}}</td>
+        <td *ngIf="!disabled">
+          <select (change)="onChangeColor($event.target.value)" class="btn btn-primary dropdown-toggle waves-light">
+            <option value={{material.color.id}}>{{material.color.name}}</option>
+            <option *ngFor="let item of materialColors" value={{item.id}}>{{item.name}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Толщина</td>
+        <td *ngIf="disabled">{{material.depth}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="material.depth" class="card-text" [disabled]="disabled">
+        </td>
+      </tr>
+      <tr>
+        <td>Длина</td>
+        <td *ngIf="disabled">{{material.length}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="material.length" class="card-text" [disabled]="disabled">
+        </td>
+      </tr>
+      <tr>
+        <td>Ширина</td>
+        <td *ngIf="disabled">{{material.width}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="material.width" class="card-text" [disabled]="disabled">
+        </td>
+      </tr>
+      <tr>
+        <td>Цена</td>
+        <td *ngIf="disabled">{{material.price}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="material.price" class="card-text" [disabled]="disabled">
+        </td>
+      </tr>
+      <tr>
+        <td>Примечание</td>
+        <td *ngIf="disabled">{{material.desc}}</td>
+        <td *ngIf="!disabled">
+          <textarea [(ngModel)]="material.desc" class="card-text form-control"></textarea>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!--<ng-container *ngIf="disabled">-->
+      <!--<p class="card-text">Цвет: {{material.color.name}}</p>-->
+      <!--<p class="card-text">Толщина: {{material.depth}} мм</p>-->
+      <!--<p class="card-text">Длина: {{material.length}} мм</p>-->
+      <!--<p class="card-text">Ширина: {{material.width}} мм</p>-->
+      <!--&lt;!&ndash;<p class="card-text">Цена {{ material.price | number:'1.2.2'}} мм</p>&ndash;&gt;-->
+      <!--&lt;!&ndash;<p class="card-text">Цена {{ material.price | currency:'RUB'}} </p>&ndash;&gt;-->
+      <!--<p class="card-text">Цена: {{material.price }} руб</p>-->
+      <!--<p class="card-text" disabled>Примечание: {{material.desc }}</p>-->
+    <!--</ng-container>-->
+    <!--<ng-container *ngIf="!disabled">-->
+      <!--<select (change)="onChangeColor($event.target.value)" class="btn btn-primary dropdown-toggle waves-light">-->
+        <!--<option value={{material.color.id}}>{{material.color.name}}</option>-->
+        <!--<option *ngFor="let item of materialColors" value={{item.id}}>{{item.name}}</option>-->
+      <!--</select>-->
+      <!--<p class="card-text">Цвет <input [(ngModel)]="material.price" class="card-text" [disabled]="disabled"></p>-->
+      <!--<p class="card-text">Толщина <input [(ngModel)]="material.depth" class="card-text" [disabled]="disabled"> мм</p>-->
+      <!--<p class="card-text">Длина <input [(ngModel)]="material.length" class="card-text" [disabled]="disabled"> мм</p>-->
+      <!--<p class="card-text">Ширина <input [(ngModel)]="material.width" class="card-text" [disabled]="disabled"> мм</p>-->
+      <!--<p class="card-text">Цена <input [(ngModel)]="material.price" class="card-text" [disabled]="disabled"> руб.</p>-->
+      <!--<p class="card-text">Примечание <textarea [(ngModel)]="material.desc" class="card-text form-control"-->
+                                                <!--[disabled]="disabled"></textarea></p>-->
+    <!--</ng-container>-->
+
+  </div>
+  <div class="card-body actions">
     <!--<h4 class="card-title">Special title treatment</h4>-->
     <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
-    <a *ngIf="disabled" class="btn btn-green waves-light" mdbWavesEffect (click)="edit()">Редактироать</a>
+    <a *ngIf="disabled" class="btn btn-green waves-light" mdbWavesEffect (click)="edit()">Редактировать</a>
     <a *ngIf="!disabled" class="btn btn-green waves-light" mdbWavesEffect (click)="save()">Сохранить</a>
+    <a *ngIf="!disabled" class="btn btn-white waves-light" mdbWavesEffect (click)="cancel()">Отменить</a>
     <a *ngIf="disabled" class="btn btn-red waves-light" mdbWavesEffect (click)="delete()">Удалить</a>
     <a class="btn btn-deep-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
-  </div>
-  <div class="card-body">
-    <ng-container *ngIf="disabled">
-      <p class="card-text">Цвет: {{material.color.name}}</p>
-      <p class="card-text">Толщина: {{material.depth}} мм</p>
-      <p class="card-text">Длина: {{material.length}} мм</p>
-      <p class="card-text">Ширина: {{material.width}} мм</p>
-      <!--<p class="card-text">Цена {{ material.price | number:'1.2.2'}} мм</p>-->
-      <!--<p class="card-text">Цена {{ material.price | currency:'RUB'}} </p>-->
-      <p class="card-text">Цена: {{material.price }} руб</p>
-      <p class="card-text">Примечание:
-        <textarea class="card-text" disabled> {{material.desc }}</textarea>
-      </p>
-    </ng-container>
-    <ng-container *ngIf="!disabled">
-      <select (change)="onChangeColor($event.target.value)" class="btn btn-primary dropdown-toggle waves-light">
-        <option value={{material.color.id}}>{{material.color.name}}</option>
-        <option *ngFor="let item of materialColors" value={{item.id}}>{{item.name}}</option>
-      </select>
-      <p class="card-text">Цвет <input [(ngModel)]="material.price" class="card-text" [disabled]="disabled"></p>
-      <p class="card-text">Толщина <input [(ngModel)]="material.depth" class="card-text" [disabled]="disabled"> мм</p>
-      <p class="card-text">Длина <input [(ngModel)]="material.length" class="card-text" [disabled]="disabled"> мм</p>
-      <p class="card-text">Ширина <input [(ngModel)]="material.width" class="card-text" [disabled]="disabled"> мм</p>
-      <p class="card-text">Цена <input [(ngModel)]="material.price" class="card-text" [disabled]="disabled"> руб.</p>
-      <p class="card-text">Примечание <textarea [(ngModel)]="material.desc" class="card-text"
-                                                [disabled]="disabled"></textarea></p>
-    </ng-container>
-
   </div>
 </div>

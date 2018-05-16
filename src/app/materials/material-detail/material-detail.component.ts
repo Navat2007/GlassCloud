@@ -73,6 +73,11 @@ export class MaterialDetailComponent implements OnInit {
     this.getMaterial();
   }
 
+  cancel() {
+    this.disabled = true;
+    this.getMaterial();
+  }
+
   onChangeColor(colorId: number) {
     this.colorId = colorId;
   }
