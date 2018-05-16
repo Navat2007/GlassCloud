@@ -38,7 +38,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.service.updateItem(this.order)
+    this.service.updateItem(this.order, this.order.id)
       .subscribe(() => this.goBack());
   }
 

@@ -30,6 +30,7 @@ import {AuthInterceptor} from './auth-interceptor';
 import {AuthGuard} from './auth.guard';
 import {ReceptionGuard} from './reception.guard';
 import {LoginModule} from './login/login.module';
+import { MaterialDetailComponent } from './materials/material-detail/material-detail.component';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -69,7 +70,8 @@ const appRoutes: Routes = [
     UsersComponent,
     PermissionsComponent,
     // LoginComponent,
-    SelectReceptionComponent
+    SelectReceptionComponent,
+    MaterialDetailComponent
   ],
   providers: [
     // AuthService,

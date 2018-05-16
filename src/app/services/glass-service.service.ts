@@ -63,8 +63,10 @@ export class GlassServiceService<T> {
       );
   }
 
-  updateItem(item: T): Observable<any> {
-    return this.http.put(this.serviceUrl, item)
+  updateItem(item: T, id: number): Observable<any> {
+    const url = `${this.serviceUrl}/${id}`;
+
+    return this.http.put(url, item)
       .pipe(
         tap(_ => this.logging.log(`updated order ${item}`)),
         catchError(this.logging.handleError<any>('update ${name}'))

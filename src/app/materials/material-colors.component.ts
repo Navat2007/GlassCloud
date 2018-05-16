@@ -21,10 +21,10 @@ export class MaterialColorsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProcessTypes();
+    this.getMaterialColors();
   }
 
-  getProcessTypes(): void {
+  getMaterialColors(): void {
     this.service.getItems()
       .subscribe(items => this.materialColors = items);
   }
