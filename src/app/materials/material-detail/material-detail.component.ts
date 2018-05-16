@@ -70,7 +70,7 @@ export class MaterialDetailComponent implements OnInit {
     this.service.updateItem(this.material, this.material.id).subscribe();
       // .subscribe(() => this.goBack());
     this.disabled = true;
-    this.getMaterial();
+    // this.getMaterial();
   }
 
   cancel() {
@@ -80,5 +80,6 @@ export class MaterialDetailComponent implements OnInit {
 
   onChangeColor(colorId: number) {
     this.colorId = colorId;
+    // this.materialColors.filter(color => color.id === colorId)
   }
 }

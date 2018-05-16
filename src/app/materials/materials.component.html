@@ -2,7 +2,12 @@
 <table class="table table-hover">
   <thead class="blue-grey lighten-4">
   <tr>
-    <th>Тип</th>
+    <th>Тип
+      <!--<select (change)="onChangeType($event.target.value)" class="btn-primary btn dropdown-toggle waves-light">-->
+      <!--<option value='-1'>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+      <!--<option *ngFor="let item of getTypes()" value={{item}}>{{item}}</option>-->
+      <!--</select>-->
+    </th>
     <th>Толщина</th>
     <th>Длина</th>
     <th>Ширина</th>
@@ -12,6 +17,26 @@
     <!--<th></th>-->
     <!--<th></th>-->
   </tr>
+  <tr>
+    <td>
+      <select (change)="onChangeType($event.target.value)" class="btn-primary btn dropdown-toggle waves-light">
+        <option value='-1'>--------------</option>
+        <option *ngFor="let item of getTypes()" value={{item}}>{{item}}</option>
+      </select>
+    </td>
+    <td>
+      <select (change)="onChangeDepht($event.target.value)" class="btn-primary btn dropdown-toggle waves-light">
+        <option value='-1'>--------------</option>
+        <option *ngFor="let item of getDepths()" value={{item}}>{{item}}</option>
+      </select>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
   </thead>
   <tbody>
   <tr *ngFor="let item of materials" routerLink="/material/{{item.id}}">
@@ -23,12 +48,12 @@
     <td>{{item.price}}</td>
     <td>{{item.desc}}</td>
     <!--<td>-->
-      <!--<button class="delete" title="delete order"-->
-              <!--(click)="edit(item)">Edit</button>-->
+    <!--<button class="delete" title="delete order"-->
+    <!--(click)="edit(item)">Edit</button>-->
     <!--</td>-->
     <!--<td>-->
-      <!--<button class="delete" title="delete order"-->
-              <!--(click)="delete(item)">x</button>-->
+    <!--<button class="delete" title="delete order"-->
+    <!--(click)="delete(item)">x</button>-->
     <!--</td>-->
   </tr>
   </tbody>

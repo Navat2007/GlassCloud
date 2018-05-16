@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Material} from '../material';
+import {Material, MaterialType} from '../material';
 import {GlassServiceService} from '../services/glass-service.service';
 import {environment} from '../../environments/environment';
 
@@ -11,6 +11,8 @@ import {environment} from '../../environments/environment';
 export class MaterialsComponent implements OnInit {
 
   materials: Material[];
+  materialsOriginal: Material[];
+  materialTypes: MaterialType[];
 
   private serviceUrl = environment.serverHost + '/api/material';
 
@@ -20,13 +22,47 @@ export class MaterialsComponent implements OnInit {
     this.service.setUrl(this.serviceUrl).setName('material');
   }
 
-  ngOnInit() {
-    this.getProcessTypes();
+  getTypes(): string[] {
+    const res = this.materialsOriginal
+      .map(i => i.type.name);
+
+    return Array.from(new Set<string>(res).values());
   }
 
-  getProcessTypes(): void {
+  getDepths(): number[] {
+    const res = this.materialsOriginal
+      .map(i => i.depth);
+
+    return Array.from(new Set<number>(res).values());
+  }
+
+  ngOnInit() {
+    this.getMaterials();
+  }
+
+  getMaterials(): void {
     this.service.getItems()
-      .subscribe(items => this.materials = items);
+      .subscribe(items => {
+        this.materials = items;
+        this.materialsOriginal = items;
+        // this.getTypes();
+      });
+  }
+
+  onChangeType(type: string) {
+    if (type === '-1') {
+      this.materials = this.materialsOriginal;
+    } else {
+      this.materials = this.materialsOriginal.filter(i => i.type.name === type);
+    }
+  }
+
+  onChangeDepht(depth: string) {
+    if (depth === '-1') {
+      this.materials = this.materialsOriginal;
+    } else {
+      this.materials = this.materialsOriginal.filter(i => i.depth === +depth);
+    }
   }
 
   // add(name: string): void {
