@@ -23,28 +23,28 @@
         </td>
       </tr>
       <tr>
-        <td>Толщина</td>
+        <td>Толщина, мм</td>
         <td *ngIf="disabled">{{material.depth}}</td>
         <td *ngIf="!disabled">
           <input [(ngModel)]="material.depth" class="card-text" [disabled]="disabled">
         </td>
       </tr>
       <tr>
-        <td>Длина</td>
+        <td>Длина, мм</td>
         <td *ngIf="disabled">{{material.length}}</td>
         <td *ngIf="!disabled">
           <input [(ngModel)]="material.length" class="card-text" [disabled]="disabled">
         </td>
       </tr>
       <tr>
-        <td>Ширина</td>
+        <td>Ширина, мм</td>
         <td *ngIf="disabled">{{material.width}}</td>
         <td *ngIf="!disabled">
           <input [(ngModel)]="material.width" class="card-text" [disabled]="disabled">
         </td>
       </tr>
       <tr>
-        <td>Цена</td>
+        <td>Цена, руб.</td>
         <td *ngIf="disabled">{{material.price}}</td>
         <td *ngIf="!disabled">
           <input [(ngModel)]="material.price" class="card-text" [disabled]="disabled">

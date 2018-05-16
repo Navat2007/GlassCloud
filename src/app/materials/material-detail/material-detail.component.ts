@@ -67,8 +67,8 @@ export class MaterialDetailComponent implements OnInit {
   save(): void {
     console.log(this.material.price);
     this.material.color.id = this.colorId;
-    this.service.updateItem(this.material, this.material.id)
-      .subscribe(() => this.goBack());
+    this.service.updateItem(this.material, this.material.id).subscribe();
+      // .subscribe(() => this.goBack());
     this.disabled = true;
     this.getMaterial();
   }
