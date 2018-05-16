@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './services/auth.service';
+import {ReceptionService} from './services/reception.service';
 
 @Component({
   selector: 'app-root',
@@ -9,19 +10,28 @@ import {AuthService} from './services/auth.service';
 export class AppComponent implements OnInit {
 
   title = 'Glass cloud';
-  _isAuth = false;
 
   constructor(
-    private as: AuthService,
-  ) {
-
-  }
+    public authService: AuthService,
+    public receptionService: ReceptionService
+  ) {  }
 
   ngOnInit() {
-    this.isAuth();
+    this.receptionService.getCurrentReception().subscribe(res => console.log('reception = ' + res));
+    this.authService.isAuth().subscribe(res => console.log('as = ' + res));
   }
 
-  private isAuth() {
-    this.as.isAuth().subscribe(res => this._isAuth = res);
-  }
+  // private _isAuth() {
+  //   this.as._isAuth().subscribe(res => {
+  //     console.log('res = ' + res);
+  //     this._isAuth = res;
+  //   });
+  // }
+
+  // test() {
+  //   // this.receptionService.receptionSelected = !this.receptionService.receptionSelected;
+  //   // this.authService._isAuth = !this.authService._isAuth;
+  //   console.log('app component rec = ' + this.receptionService.receptionSelected);
+  //   console.log('app component as = ' + this.authService._isAuth);
+  // }
 }

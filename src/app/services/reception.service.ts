@@ -5,12 +5,14 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Reception} from '../reception';
 import {LoggingService} from './logging.service';
+import {environment} from '../../environments/environment';
 
 
 @Injectable({providedIn: 'root'})
-export class ReceptionService implements OnInit {
+export class ReceptionService {
 
-  private receptionUrl = 'http://localhost:8080/api/receptionOfOrder';
+  private receptionUrl = environment.serverHost + '/api/receptionOfOrder';
+  receptionSelected = false;
 
   constructor(
     private http: HttpClient,
@@ -18,14 +20,12 @@ export class ReceptionService implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-  }
-
   getCurrentReception(): Observable<any> {
     return this.http.get<any>(this.receptionUrl + '/current')
       .pipe(
         catchError(this.logger.handleError('getCurrentReception', []))
-      );
+      )
+      .map(res => this.receptionSelected = !!res);
   }
 
   getReceptions(): Observable<Reception[]> {

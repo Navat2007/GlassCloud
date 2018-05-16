@@ -29,6 +29,7 @@ import {SelectReceptionComponent} from './select-reception/select-reception.comp
 import {AuthInterceptor} from './auth-interceptor';
 import {AuthGuard} from './auth.guard';
 import {ReceptionGuard} from './reception.guard';
+import {LoginModule} from './login/login.module';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -47,6 +48,8 @@ const appRoutes: Routes = [
 
     HttpClientModule,
     HttpClientXsrfModule,
+
+    LoginModule,
   ],
   declarations: [
     AppComponent,
@@ -65,7 +68,7 @@ const appRoutes: Routes = [
     ProcessTypeComponent,
     UsersComponent,
     PermissionsComponent,
-    LoginComponent,
+    // LoginComponent,
     SelectReceptionComponent
   ],
   providers: [

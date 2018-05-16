@@ -13,8 +13,8 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({
       headers: request.headers
         .set('Content-Type', 'application/json')
-        .set('X-XSRF-TOKEN', this.as.getCookie('XSRF-TOKEN'))
-        .set('Authorization', this.as.getCookie('Authorization')),
+        .set(this.as.X_XSRF_TOKEN, this.as.getCookie(this.as.XSRF_TOKEN))
+        .set(this.as.COOKIE_AUTH, this.as.getCookie(this.as.COOKIE_AUTH)),
       withCredentials: true
     });
     console.log(request.headers);
@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        // if (err.status === 403) {
+        // if (err.status === 401) {
         //   document.location.href = '/login';
         // }
       }
