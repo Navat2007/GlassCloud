@@ -19,7 +19,6 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('init NavBarComponent');
     this.getCurrentReception();
   }
 

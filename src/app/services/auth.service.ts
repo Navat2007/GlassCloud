@@ -26,9 +26,7 @@ export class AuthService {
     private http: HttpClient,
     private logging: LoggingService,
     private receptionService: ReceptionService,
-  ) {
-    console.log('construct auth service');
-  }
+  ) {  }
 
   isAuth(): Observable<any> {
     return this.http.get(this.serviceUrl)

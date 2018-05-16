@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-    this.receptionService.getCurrentReception().subscribe(res => console.log('reception = ' + res));
-    this.authService.isAuth().subscribe(res => console.log('as = ' + res));
+    this.receptionService.getCurrentReception().subscribe();
+    this.authService.isAuth().subscribe();
   }
 
   // private _isAuth() {

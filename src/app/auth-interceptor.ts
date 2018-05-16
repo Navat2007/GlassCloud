@@ -19,14 +19,14 @@ export class AuthInterceptor implements HttpInterceptor {
       // .set(this.as.COOKIE_AUTH, this.as.getCookie(this.as.COOKIE_AUTH));
 
     if (xsrfToken) {
-      console.log('add xsrfToken');
-      console.log(xsrfToken);
+      // console.log('add xsrfToken');
+      // console.log(xsrfToken);
       headers = request.headers.set(this.as.X_XSRF_TOKEN, xsrfToken);
     }
 
     if (authToken) {
-      console.log('add authToken');
-      console.log(authToken);
+      // console.log('add authToken');
+      // console.log(authToken);
       headers = request.headers.set(this.as.COOKIE_AUTH, authToken);
     }
 
