@@ -4,20 +4,34 @@
   <tr>
     <th>Название</th>
     <th></th>
-    <th></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of materialColors" routerLink="/material-colors/{{item.id}}">
-    <td>{{item.name}}</td>
-    <td>
-      <button class="delete" title="delete order"
-              (click)="edit(item)">Edit</button>
+  <!--<tr *ngFor="let item of materialColors" routerLink="/material-colors/{{item.id}}">-->
+  <tr *ngFor="let item of materialColors">
+    <td *ngIf="!isEdit">{{item.name}}</td>
+    <td *ngIf="isEdit" class="input-group mb-3">
+      <!--<input [(ngModel)]="item.name" class="form-control">-->
+      <!--<div class="input-group mb-3">-->
+      <!--<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"-->
+             <!--aria-describedby="basic-addon2">-->
+      <input [(ngModel)]="item.name" class="form-control">
+      <div class="input-group-append">
+        <button class="btn btn-outline-green" type="button" title="Сохранить" (click)="save(item)">Save</button>
+        <button class="btn btn-outline-gray" type="button" title="Отменить изменения" (click)="cancel(item)">
+          Cancel
+        </button>
+      </div>
+      <!--</div>-->
     </td>
-    <td>
-      <button class="delete" title="delete order"
-              (click)="delete(item)">x</button>
+    <td *ngIf="!isEdit">
+      <button class="btn btn-outline-green" title="Редактировать" (click)="edit()">Edit</button>
+      <button *ngIf="!isEdit" class="btn btn-outline-red" title="Удалить"
+              (click)="delete(item); glass_service.id = material.id; glass_service.service = service">Delete
+      </button>
     </td>
   </tr>
   </tbody>
 </table>
+
+<app-delete-request #glass_service></app-delete-request>

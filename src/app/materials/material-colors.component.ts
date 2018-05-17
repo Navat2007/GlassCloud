@@ -11,6 +11,7 @@ import {GlassServiceService} from '../services/glass-service.service';
 export class MaterialColorsComponent implements OnInit {
 
   materialColors: MaterialColor[];
+  isEdit = false;
 
   private serviceUrl = environment.serverHost + '/api/material/color';
 
@@ -27,6 +28,23 @@ export class MaterialColorsComponent implements OnInit {
   getMaterialColors(): void {
     this.service.getItems()
       .subscribe(items => this.materialColors = items);
+  }
+
+  edit() {
+    this.isEdit = true;
+  }
+
+  save(item: MaterialColor) {
+    this.service.updateItem(item, item.id).subscribe(res => {
+      if (res) {
+        this.isEdit = false;
+      }
+    });
+  }
+
+  cancel() {
+    this.isEdit = false;
+    this.getMaterialColors();
   }
 
   // add(name: string): void {
