@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GlassServiceService} from '../services/glass-service.service';
 import {Location} from '@angular/common';
+import {MaterialColorService} from '../services/material-color.service';
+import {MaterialTypeService} from '../services/material-type.service';
 
 @Component({
   selector: 'app-delete-request',
@@ -10,12 +12,13 @@ import {Location} from '@angular/common';
 export class DeleteRequestComponent implements OnInit {
 
   id: number;
-  service?: GlassServiceService<any>;
+  service?: GlassServiceService<any> | MaterialColorService | MaterialTypeService;
   isGoBack = false;
 
   constructor(
     private location: Location,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
   }
@@ -23,8 +26,11 @@ export class DeleteRequestComponent implements OnInit {
   delete() {
     if (this.service !== null && this.service !== undefined) {
       this.service.deleteItem(this.id).subscribe(res => {
-        if (res && this.isGoBack) {
-          this.goBack();
+        if (res) {
+          this.service.update();
+          if (this.isGoBack) {
+            this.goBack();
+          }
         }
       });
     }

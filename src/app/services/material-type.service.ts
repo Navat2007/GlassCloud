@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {GlassServiceService} from './glass-service.service';
-import {MaterialType} from '../material';
+import {MaterialColor, MaterialType} from '../material';
 import {HttpClient} from '@angular/common/http';
 import {LoggingService} from './logging.service';
 import {environment} from '../../environments/environment';
@@ -14,6 +14,7 @@ export class MaterialTypeService {
   private serviceUrl = environment.serverHost + '/api/material/type';
 
   private service: GlassServiceService<MaterialType>;
+  materialTypes: MaterialType[];
 
   constructor(
     private http: HttpClient,
@@ -21,6 +22,11 @@ export class MaterialTypeService {
   ) {
     this.service = new GlassServiceService<MaterialType>(this.http, this.logging);
     this.service.setUrl(this.serviceUrl).setName('material-type');
+  }
+
+  update() {
+    this.getItems()
+      .subscribe(items => this.materialTypes = items);
   }
 
   getItems(): Observable<MaterialType[]> {

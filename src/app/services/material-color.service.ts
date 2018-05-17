@@ -5,7 +5,6 @@ import {MaterialColor} from '../material';
 import {HttpClient} from '@angular/common/http';
 import {LoggingService} from './logging.service';
 import {Observable} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +15,19 @@ export class MaterialColorService {
 
   private service: GlassServiceService<MaterialColor>;
 
+  materialColors: MaterialColor[];
+
   constructor(
     private http: HttpClient,
     private logging: LoggingService,
   ) {
     this.service = new GlassServiceService<MaterialColor>(this.http, this.logging);
     this.service.setUrl(this.serviceUrl).setName('material-color');
+  }
+
+  update() {
+    this.getItems()
+      .subscribe(items => this.materialColors = items);
   }
 
   getItems(): Observable<MaterialColor[]> {

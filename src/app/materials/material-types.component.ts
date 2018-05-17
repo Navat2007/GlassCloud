@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MaterialType} from '../material';
-import {GlassServiceService} from '../services/glass-service.service';
-import {environment} from '../../environments/environment';
 import {MaterialTypeService} from '../services/material-type.service';
 
 @Component({
@@ -11,7 +9,6 @@ import {MaterialTypeService} from '../services/material-type.service';
 })
 export class MaterialTypesComponent implements OnInit {
 
-  materialTypes: MaterialType[];
   isEdit = false;
   newItem?: MaterialType;
 
@@ -20,12 +17,7 @@ export class MaterialTypesComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-    this.getMaterialTypes();
-  }
-
-  getMaterialTypes(): void {
-    this.service.getItems()
-      .subscribe(items => this.materialTypes = items);
+    this.service.update();
   }
 
   edit() {
@@ -43,7 +35,7 @@ export class MaterialTypesComponent implements OnInit {
   saveNew() {
     this.service.addItem(this.newItem).subscribe(res => {
       if (res) {
-        this.getMaterialTypes();
+        this.service.update();
       }
     });
   }
@@ -54,6 +46,6 @@ export class MaterialTypesComponent implements OnInit {
 
   cancel() {
     this.isEdit = false;
-    this.getMaterialTypes();
+    this.service.update();
   }
 }

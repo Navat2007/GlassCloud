@@ -11,7 +11,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of materialTypes">
+  <tr *ngFor="let item of service.materialTypes">
     <td *ngIf="!isEdit">{{item.name}}</td>
     <td *ngIf="isEdit" class="input-group mb-3">
       <input [(ngModel)]="item.name" class="form-control">

@@ -11,7 +11,6 @@ import {MaterialColorService} from '../services/material-color.service';
 })
 export class MaterialColorsComponent implements OnInit {
 
-  materialColors: MaterialColor[];
   isEdit = false;
   newItem?: MaterialColor;
 
@@ -20,12 +19,7 @@ export class MaterialColorsComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-    this.getMaterialColors();
-  }
-
-  getMaterialColors(): void {
-    this.service.getItems()
-      .subscribe(items => this.materialColors = items);
+    this.service.update();
   }
 
   edit() {
@@ -43,7 +37,7 @@ export class MaterialColorsComponent implements OnInit {
   saveNew() {
     this.service.addItem(this.newItem).subscribe(res => {
       if (res) {
-        this.getMaterialColors();
+        this.service.update();
       }
     });
   }
@@ -54,7 +48,7 @@ export class MaterialColorsComponent implements OnInit {
 
   cancel() {
     this.isEdit = false;
-    this.getMaterialColors();
+    this.service.update();
   }
 
 }
