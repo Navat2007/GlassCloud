@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Material, MaterialType} from '../material';
-import {GlassServiceService} from '../services/glass-service.service';
+import {Material} from '../material';
 import {environment} from '../../environments/environment';
-import {Location} from '@angular/common';
-import {Router} from '@angular/router';
+import {MaterialService} from '../services/material.service';
+import {MaterialColorService} from '../services/material-color.service';
 
 @Component({
   selector: 'app-materials',
@@ -12,16 +11,18 @@ import {Router} from '@angular/router';
 })
 export class MaterialsComponent implements OnInit {
 
-  materials: Material[];
   materialsOriginal: Material[];
   newItem?: Material;
 
-  private serviceUrl = environment.serverHost + '/api/material';
-
   constructor(
-    private service: GlassServiceService<Material>,
-  ) {
-    this.service.setUrl(this.serviceUrl).setName('material');
+    public service: MaterialService,
+    public colorService: MaterialColorService
+  ) {  }
+
+  ngOnInit() {
+    this.service.update();
+    this.colorService.update();
+    this.materialsOriginal = this.service.materials;
   }
 
   getTypes(): string[] {
@@ -38,39 +39,26 @@ export class MaterialsComponent implements OnInit {
     return Array.from(new Set<number>(res).values());
   }
 
-  ngOnInit() {
-    this.getMaterials();
-  }
-
-  getMaterials(): void {
-    this.service.getItems()
-      .subscribe(items => {
-        this.materials = items;
-        this.materialsOriginal = items;
-        // this.getTypes();
-      });
-  }
-
   onChangeType(type: string) {
     if (type === '-1') {
-      this.materials = this.materialsOriginal;
+      this.service.materials = this.materialsOriginal;
     } else {
-      this.materials = this.materialsOriginal.filter(i => i.type.name === type);
+      this.service.materials = this.materialsOriginal.filter(i => i.type.name === type);
     }
   }
 
   onChangeDepht(depth: string) {
     if (depth === '-1') {
-      this.materials = this.materialsOriginal;
+      this.service.materials = this.materialsOriginal;
     } else {
-      this.materials = this.materialsOriginal.filter(i => i.depth === +depth);
+      this.service.materials = this.materialsOriginal.filter(i => i.depth === +depth);
     }
   }
 
   saveNew() {
     this.service.addItem(this.newItem).subscribe(res => {
       if (res) {
-        this.getMaterials();
+        this.service.update();
       }
     });
   }

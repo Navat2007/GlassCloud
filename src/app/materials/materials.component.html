@@ -29,13 +29,13 @@
   </tr>
   <tr class="collapse" id="collapseExample">
     <td></td>
-    <td>
+    <td *ngIf="materialsOriginal">
       <select (change)="onChangeType($event.target.value)" class="btn-primary btn dropdown-toggle waves-light">
         <option class="btn-lg btn" value='-1'>выбрать фильтр</option>
         <option class="btn-lg btn" *ngFor="let item of getTypes()" value={{item}}>{{item}}</option>
       </select>
     </td>
-    <td>
+    <td *ngIf="materialsOriginal">
       <select (change)="onChangeDepht($event.target.value)" class="btn-primary btn dropdown-toggle waves-light">
         <option class="btn-lg btn" value='-1'>выбрать фильтр</option>
         <option class="btn-lg btn" *ngFor="let item of getDepths()" value={{item}}>{{item}}</option>
@@ -50,7 +50,7 @@
 
   </thead>
   <tbody>
-  <tr *ngFor="let item of materials" routerLink="/material/{{item.id}}">
+  <tr *ngFor="let item of service.materials" routerLink="/material/{{item.id}}">
     <td></td>
     <td>{{item.type.name}}</td>
     <td>{{item.depth}}</td>
@@ -96,8 +96,8 @@
             <td>Цвет</td>
             <td>
               <select (change)="onChangeColor($event.target.value)" class="custom-select">
-                <option value={{material.color.id}}>{{material.color.name}}</option>
-                <option *ngFor="let item of materialColors" value={{item.id}}>{{item.name}}</option>
+                <option value={{newItem.color.id}}>{{newItem.color.name}}</option>
+                <option *ngFor="let item of colorService.materialColors" value={{item.id}}>{{item.name}}</option>
               </select>
             </td>
           </tr>
@@ -105,39 +105,39 @@
             <td>Тип</td>
             <td>
               <select (change)="onChangeColor($event.target.value)" class="custom-select">
-                <option value={{material.color.id}}>{{material.color.name}}</option>
-                <option *ngFor="let item of materialColors" value={{item.id}}>{{item.name}}</option>
+                <option value={{newItem.color.id}}>{{newItem.color.name}}</option>
+                <option *ngFor="let item of colorService.materialColors" value={{item.id}}>{{item.name}}</option>
               </select>
             </td>
           </tr>
           <tr>
             <td>Толщина, мм</td>
             <td>
-              <input [(ngModel)]="material.depth" class="form-control">
+              <input [(ngModel)]="newItem.depth" class="form-control">
             </td>
           </tr>
           <tr>
             <td>Длина, мм</td>
             <td>
-              <input [(ngModel)]="material.length" class="form-control">
+              <input [(ngModel)]="newItem.length" class="form-control">
             </td>
           </tr>
           <tr>
             <td>Ширина, мм</td>
             <td>
-              <input [(ngModel)]="material.width" class="form-control">
+              <input [(ngModel)]="newItem.width" class="form-control">
             </td>
           </tr>
           <tr>
             <td>Цена, руб.</td>
             <td>
-              <input [(ngModel)]="material.price" class="form-control">
+              <input [(ngModel)]="newItem.price" class="form-control">
             </td>
           </tr>
           <tr>
             <td>Примечание</td>
             <td>
-              <textarea [(ngModel)]="material.desc" class="form-control"></textarea>
+              <textarea [(ngModel)]="newItem.desc" class="form-control"></textarea>
             </td>
           </tr>
           </tbody>
