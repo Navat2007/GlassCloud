@@ -11,6 +11,7 @@ export class DeleteRequestComponent implements OnInit {
 
   id: number;
   service?: GlassServiceService<any>;
+  isGoBack = false;
 
   constructor(
     private location: Location,
@@ -20,9 +21,9 @@ export class DeleteRequestComponent implements OnInit {
   }
 
   delete() {
-    if (this.service !== null) {
+    if (this.service !== null && this.service !== undefined) {
       this.service.deleteItem(this.id).subscribe(res => {
-        if (res) {
+        if (res && this.isGoBack) {
           this.goBack();
         }
       });

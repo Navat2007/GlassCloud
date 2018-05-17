@@ -16,7 +16,7 @@ export class MaterialColorsComponent implements OnInit {
   private serviceUrl = environment.serverHost + '/api/material/color';
 
   constructor(
-    private service: GlassServiceService<MaterialColor>
+    public service: GlassServiceService<MaterialColor>
   ) {
     this.service.setUrl(this.serviceUrl).setName('material-color');
   }
@@ -55,10 +55,4 @@ export class MaterialColorsComponent implements OnInit {
   //       this.orders.push(order);
   //     });
   // }
-
-  // delete(material: Material): void {
-  //   this.materialColors = this.service.filter(h => h !== material);
-  //   this.service.deleteMaterialColor(material).subscribe();
-  // }
-
 }

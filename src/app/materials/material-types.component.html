@@ -8,16 +8,25 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of materialTypes" routerLink="/material-type/{{item.id}}">
-    <td>{{item.name}}</td>
-    <td>
-      <button class="delete" title="delete order"
-              (click)="edit(item)">Edit</button>
+  <tr *ngFor="let item of materialTypes">
+    <td *ngIf="!isEdit">{{item.name}}</td>
+    <td *ngIf="isEdit" class="input-group mb-3">
+      <input [(ngModel)]="item.name" class="form-control">
+      <div class="input-group-append">
+        <button class="btn btn-outline-green" type="button" title="Сохранить" (click)="save(item)">Save</button>
+        <button class="btn btn-outline-gray" type="button" title="Отменить изменения" (click)="cancel(item)">
+          Cancel
+        </button>
+      </div>
     </td>
-    <td>
-      <button class="delete" title="delete order"
-              (click)="delete(item)">x</button>
+    <td *ngIf="!isEdit">
+      <button class="btn btn-outline-green" title="Редактировать" (click)="edit()">Edit</button>
+      <button *ngIf="!isEdit" class="btn btn-outline-red" title="Удалить" data-toggle="modal" data-target="#deleteModal"
+              (click)="glass_service.id = item.id; glass_service.service = service">Delete
+      </button>
     </td>
   </tr>
   </tbody>
 </table>
+
+<app-delete-request #glass_service></app-delete-request>

@@ -13,6 +13,7 @@ export class ProcessTypeComponent implements OnInit {
   private serviceUrl = environment.serverHost + '/api/process/type';
 
   processTypes: ProcessType[];
+  isEdit = false;
 
   constructor(
     private service: GlassServiceService<ProcessType>
@@ -29,4 +30,20 @@ export class ProcessTypeComponent implements OnInit {
       .subscribe(items => this.processTypes = items);
   }
 
+  edit() {
+    this.isEdit = true;
+  }
+
+  save(item: ProcessType) {
+    this.service.updateItem(item, item.id).subscribe(res => {
+      if (res) {
+        this.isEdit = false;
+      }
+    });
+  }
+
+  cancel() {
+    this.isEdit = false;
+    this.getProcessTypes();
+  }
 }

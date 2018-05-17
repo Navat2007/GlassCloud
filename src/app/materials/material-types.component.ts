@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MaterialColor, MaterialType} from '../material';
+import {MaterialType} from '../material';
 import {GlassServiceService} from '../services/glass-service.service';
 import {environment} from '../../environments/environment';
 
@@ -11,22 +11,39 @@ import {environment} from '../../environments/environment';
 export class MaterialTypesComponent implements OnInit {
 
   materialTypes: MaterialType[];
+  isEdit = false;
 
   private serviceUrl = environment.serverHost + '/api/material/type';
 
   constructor(
-    private service: GlassServiceService<MaterialColor>
+    public service: GlassServiceService<MaterialType>
   ) {
     this.service.setUrl(this.serviceUrl).setName('material-type');
   }
 
   ngOnInit() {
-    this.getProcessTypes();
+    this.getMaterialTypes();
   }
 
-  getProcessTypes(): void {
+  getMaterialTypes(): void {
     this.service.getItems()
       .subscribe(items => this.materialTypes = items);
   }
 
+  edit() {
+    this.isEdit = true;
+  }
+
+  save(item: MaterialType) {
+    this.service.updateItem(item, item.id).subscribe(res => {
+      if (res) {
+        this.isEdit = false;
+      }
+    });
+  }
+
+  cancel() {
+    this.isEdit = false;
+    this.getMaterialTypes();
+  }
 }
