@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProcessType} from '../process';
 import {GlassServiceService} from '../services/glass-service.service';
-import {environment} from '../../environments/environment';
-import {MaterialType} from '../material';
+import {ProcessTypeService} from '../services/process-type.service';
 
 @Component({
   selector: 'app-process-type',
@@ -11,25 +10,15 @@ import {MaterialType} from '../material';
 })
 export class ProcessTypeComponent implements OnInit {
 
-  private serviceUrl = environment.serverHost + '/api/process/type';
-
-  processTypes: ProcessType[];
   isEdit = false;
   newItem?: ProcessType;
 
   constructor(
-    private service: GlassServiceService<ProcessType>
-  ) {
-    this.service.setUrl(this.serviceUrl).setName('process-type');
-  }
+    public service: ProcessTypeService
+  ) { }
 
   ngOnInit() {
-    this.getProcessTypes();
-  }
-
-  getProcessTypes(): void {
-    this.service.getItems()
-      .subscribe(items => this.processTypes = items);
+    this.service.update();
   }
 
   edit() {
@@ -47,7 +36,7 @@ export class ProcessTypeComponent implements OnInit {
   saveNew() {
     this.service.addItem(this.newItem).subscribe(res => {
       if (res) {
-        this.getProcessTypes();
+        this.service.update();
       }
     });
   }
@@ -58,6 +47,6 @@ export class ProcessTypeComponent implements OnInit {
 
   cancel() {
     this.isEdit = false;
-    this.getProcessTypes();
+    this.service.update();
   }
 }
