@@ -23,16 +23,13 @@ import {ProcessesComponent} from './processes/processes.component';
 import {ProcessTypeComponent} from './processes/process-type.component';
 import {UsersComponent} from './users/users.component';
 import {PermissionsComponent} from './permissions/permissions.component';
-import {LoginComponent} from './login/login.component';
-import {AuthService} from './services/auth.service';
 import {SelectReceptionComponent} from './select-reception/select-reception.component';
 import {AuthInterceptor} from './auth-interceptor';
 import {AuthGuard} from './auth.guard';
 import {ReceptionGuard} from './reception.guard';
 import {LoginModule} from './login/login.module';
-import { MaterialDetailComponent } from './materials/material-detail/material-detail.component';
-import { DeleteRequestComponent } from './delete-request/delete-request.component';
-import { OrderServiceComponent } from './order-service/order-service.component';
+import {MaterialDetailComponent} from './materials/material-detail/material-detail.component';
+import {DeleteRequestComponent} from './delete-request/delete-request.component';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
