@@ -1,10 +1,11 @@
 <!--<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar ie-nav"-->
-            <!--[containerInside]="false">-->
-  <!--<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">-->
-  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar intro-fixed-nav" [containerInside]="false">
+<!--[containerInside]="false">-->
+<!--<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">-->
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar intro-fixed-nav"
+            [containerInside]="false">
 
   <!-- Navbar brand -->
-  <logo><a class="navbar-brand" href="#">GlassCloud</a></logo>
+  <logo><a class="navbar-brand" routerLink="/order">GlassCloud</a></logo>
 
   <!-- Collapsible content -->
   <links>
@@ -26,23 +27,20 @@
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           Настройки<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <h5 class="dropdown-item waves-light submenu-caption" mdbWavesEffect><b>КАМПАНИИ</b></h5>
+          <h6 class="dropdown-item waves-light submenu-caption" mdbWavesEffect><b>КАМПАНИИ</b></h6>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="company">Список кампаний</a>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="reception">Точки приема заказов</a>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="client">Клиенты</a>
           <div class="divider dropdown-divider"></div>
-          <h5 class="dropdown-item waves-light submenu-caption" mdbWavesEffect><b>МАТЕРИАЛЫ</b></h5>
+          <h6 class="dropdown-item waves-light submenu-caption" mdbWavesEffect><b>МАТЕРИАЛЫ</b></h6>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="material">Список материалов</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="material-color">Справочник расцветок материалов</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="material-color">Справочник расцветок
+            материалов</a>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="material-type">Справочник типов материалов</a>
           <div class="divider dropdown-divider"></div>
-          <h5 class="dropdown-item waves-light submenu-caption" mdbWavesEffect><b>РАБОТЫ</b></h5>
+          <h6 class="dropdown-item waves-light submenu-caption" mdbWavesEffect><b>РАБОТЫ</b></h6>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="process">Список работ</a>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="process-type">Справочник типов работ</a>
-          <div class="divider dropdown-divider"></div>
-          <h5 class="dropdown-item waves-light submenu-caption" mdbWavesEffect><b>АДМИНКА</b></h5>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="user">Пользователи</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="permission">Разрешения</a>
         </div>
       </li>
       <li class="nav-item dropdown" dropdown>
@@ -52,9 +50,23 @@
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/order">Список заказов</a>
         </div>
       </li>
+      <li class="nav-item dropdown" dropdown *ngIf="userService.isAdmin">
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          Админка<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <!--<h5 class="dropdown-item waves-light submenu-caption" mdbWavesEffect><b>АДМИНКА</b></h5>-->
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="user">Пользователи</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="permission">Разрешения</a>
+        </div>
+      </li>
 
     </ul>
     <!-- Links -->
+    <ul class="navbar-nav nav-flex-icons">
+      <li class="nav-item" *ngIf="userService.isAdmin">
+        <a class="nav-link">Вы зашли как администратор </a>
+      </li>
+    </ul>
 
     <ul class="navbar-nav nav-flex-icons">
       <li class="nav-item" *ngIf="receptionService.currentReception">
@@ -75,15 +87,15 @@
     <!--</div>-->
     <!--</form>-->
     <!--<ul class="navbar-nav nav-flex-icons">-->
-      <!--<li class="nav-item waves-light" mdbWavesEffect>-->
-        <!--<a class="nav-link"><i class="fa fa-facebook"></i></a>-->
-      <!--</li>-->
-      <!--<li class="nav-item waves-light" mdbWavesEffect>-->
-        <!--<a class="nav-link"><i class="fa fa-twitter"></i></a>-->
-      <!--</li>-->
-      <!--<li class="nav-item waves-light" mdbWavesEffect>-->
-        <!--<a class="nav-link"><i class="fa fa-instagram"></i></a>-->
-      <!--</li>-->
+    <!--<li class="nav-item waves-light" mdbWavesEffect>-->
+    <!--<a class="nav-link"><i class="fa fa-facebook"></i></a>-->
+    <!--</li>-->
+    <!--<li class="nav-item waves-light" mdbWavesEffect>-->
+    <!--<a class="nav-link"><i class="fa fa-twitter"></i></a>-->
+    <!--</li>-->
+    <!--<li class="nav-item waves-light" mdbWavesEffect>-->
+    <!--<a class="nav-link"><i class="fa fa-instagram"></i></a>-->
+    <!--</li>-->
     <!--</ul>-->
   </links>
   <!-- Collapsible content -->
