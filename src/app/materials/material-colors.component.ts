@@ -12,6 +12,7 @@ export class MaterialColorsComponent implements OnInit {
 
   materialColors: MaterialColor[];
   isEdit = false;
+  newItem?: MaterialColor;
 
   private serviceUrl = environment.serverHost + '/api/material/color';
 
@@ -42,17 +43,20 @@ export class MaterialColorsComponent implements OnInit {
     });
   }
 
+  saveNew() {
+    this.service.addItem(this.newItem).subscribe(res => {
+      if (res) {
+        this.getMaterialColors();
+      }
+    });
+  }
+
   cancel() {
     this.isEdit = false;
     this.getMaterialColors();
   }
 
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.orderService.addOrder({ order } as Order)
-  //     .subscribe(order => {
-  //       this.orders.push(order);
-  //     });
-  // }
+  add(): void {
+    this.newItem = new MaterialColor();
+  }
 }
