@@ -31,6 +31,8 @@ import {AuthGuard} from './auth.guard';
 import {ReceptionGuard} from './reception.guard';
 import {LoginModule} from './login/login.module';
 import { MaterialDetailComponent } from './materials/material-detail/material-detail.component';
+import { DeleteRequestComponent } from './delete-request/delete-request.component';
+import { OrderServiceComponent } from './order-service/order-service.component';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -71,7 +73,8 @@ const appRoutes: Routes = [
     PermissionsComponent,
     // LoginComponent,
     SelectReceptionComponent,
-    MaterialDetailComponent
+    MaterialDetailComponent,
+    DeleteRequestComponent,
   ],
   providers: [
     // AuthService,

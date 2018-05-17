@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Order} from '../order';
 import {GlassServiceService} from '../services/glass-service.service';
 import {environment} from '../../environments/environment';
+import {OrderService} from '../services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -12,13 +13,9 @@ export class OrdersComponent implements OnInit {
 
   orders: Order[];
 
-  private serviceUrl = environment.serverHost + '/api/order';
-
   constructor(
-    private service: GlassServiceService<Order>
-  ) {
-    this.service.setUrl(this.serviceUrl).setName('order');
-  }
+    private service: OrderService
+  ) {  }
 
   ngOnInit() {
     this.getOrders();

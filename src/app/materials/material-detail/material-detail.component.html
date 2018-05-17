@@ -16,7 +16,7 @@
         <td>Цвет</td>
         <td *ngIf="disabled">{{material.color.name}}</td>
         <td *ngIf="!disabled">
-          <select (change)="onChangeColor($event.target.value)" class="btn btn-primary dropdown-toggle waves-light">
+          <select (change)="onChangeColor($event.target.value)" class="custom-select">
             <option value={{material.color.id}}>{{material.color.name}}</option>
             <option *ngFor="let item of materialColors" value={{item.id}}>{{item.name}}</option>
           </select>
@@ -68,29 +68,10 @@
     <a *ngIf="!disabled" class="btn btn-green waves-light" mdbWavesEffect (click)="save()">Сохранить</a>
     <a *ngIf="!disabled" class="btn btn-white waves-light" mdbWavesEffect (click)="cancel()">Отменить</a>
     <!--<a *ngIf="disabled" class="btn btn-red waves-light" mdbWavesEffect (click)="delete()">Удалить</a>-->
-    <a *ngIf="disabled" class="btn btn-red waves-light" data-toggle="modal" data-target="#deleteModal">Удалить</a>
+    <a *ngIf="disabled" class="btn btn-red waves-light" data-toggle="modal" data-target="#deleteModal"
+       (click)="glass_service.id = material.id; glass_service.service = service">Удалить</a>
     <a class="btn btn-deep-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title " id="exampleModalLabel">Внимание!</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body alert alert-danger">
-        Вы точно хотите удалить материал?
-      </div>
-      <div class="modal-footer">
-        <a type="button" class="btn btn-secondary waves-light" data-dismiss="modal">Отменить</a>
-        <a type="button" class="btn btn-red waves-light">Удалить</a>
-      </div>
-    </div>
-  </div>
-</div>
+<app-delete-request #glass_service></app-delete-request>

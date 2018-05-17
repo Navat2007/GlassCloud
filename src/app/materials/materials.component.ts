@@ -12,7 +12,6 @@ export class MaterialsComponent implements OnInit {
 
   materials: Material[];
   materialsOriginal: Material[];
-  materialTypes: MaterialType[];
 
   private serviceUrl = environment.serverHost + '/api/material';
 

@@ -1,0 +1,21 @@
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title " id="exampleModalLabel">Внимание!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body alert alert-danger">
+        Вы точно хотите удалить материал?
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="btn btn-secondary waves-light" data-dismiss="modal">Отменить</a>
+        <a type="button" class="btn btn-red waves-light" (click)="delete()" data-dismiss="modal">Удалить</a>
+      </div>
+    </div>
+  </div>
+</div>

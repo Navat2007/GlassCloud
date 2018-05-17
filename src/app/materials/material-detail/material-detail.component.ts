@@ -17,7 +17,7 @@ export class MaterialDetailComponent implements OnInit {
   disabled = true;
   materialColors: MaterialColor[] = [];
 
-  private colorService: GlassServiceService<MaterialColor>;
+  colorService: GlassServiceService<MaterialColor>;
 
   private colorId: number;
 
@@ -26,7 +26,7 @@ export class MaterialDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private service: GlassServiceService<Material>,
+    public service: GlassServiceService<Material>,
     // private colorService: GlassServiceService<MaterialColor>,
     private location: Location,
     private http: HttpClient,
