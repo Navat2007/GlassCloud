@@ -12,6 +12,7 @@ export class MaterialTypesComponent implements OnInit {
 
   materialTypes: MaterialType[];
   isEdit = false;
+  newItem?: MaterialType;
 
   private serviceUrl = environment.serverHost + '/api/material/type';
 
@@ -40,6 +41,18 @@ export class MaterialTypesComponent implements OnInit {
         this.isEdit = false;
       }
     });
+  }
+
+  saveNew() {
+    this.service.addItem(this.newItem).subscribe(res => {
+      if (res) {
+        this.getMaterialTypes();
+      }
+    });
+  }
+
+  add(): void {
+    this.newItem = new MaterialType();
   }
 
   cancel() {

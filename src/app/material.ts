@@ -15,7 +15,7 @@ export class MaterialColor {
   name: string;
 }
 
-export class MaterialType{
+export class MaterialType {
   id: number;
   name: string;
 }

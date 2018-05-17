@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Material, MaterialType} from '../material';
 import {GlassServiceService} from '../services/glass-service.service';
 import {environment} from '../../environments/environment';
+import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-materials',
@@ -12,11 +14,12 @@ export class MaterialsComponent implements OnInit {
 
   materials: Material[];
   materialsOriginal: Material[];
+  newItem?: Material;
 
   private serviceUrl = environment.serverHost + '/api/material';
 
   constructor(
-    private service: GlassServiceService<Material>
+    private service: GlassServiceService<Material>,
   ) {
     this.service.setUrl(this.serviceUrl).setName('material');
   }
@@ -64,17 +67,15 @@ export class MaterialsComponent implements OnInit {
     }
   }
 
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.orderService.addOrder({ order } as Order)
-  //     .subscribe(order => {
-  //       this.orders.push(order);
-  //     });
-  // }
+  saveNew() {
+    this.service.addItem(this.newItem).subscribe(res => {
+      if (res) {
+        this.getMaterials();
+      }
+    });
+  }
 
-  // delete(material: Material): void {
-  //   this.materials = this.materials.filter(h => h !== material);
-  //   this.materialService.deleteMaterial(material).subscribe();
-  // }
+  add(): void {
+    this.newItem = new Material();
+  }
 }

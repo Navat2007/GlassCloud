@@ -51,12 +51,13 @@ export class MaterialColorsComponent implements OnInit {
     });
   }
 
+  add(): void {
+    this.newItem = new MaterialColor();
+  }
+
   cancel() {
     this.isEdit = false;
     this.getMaterialColors();
   }
 
-  add(): void {
-    this.newItem = new MaterialColor();
-  }
 }
