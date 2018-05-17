@@ -1,5 +1,6 @@
 <h1>Цвета материалов</h1>
-<button class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal" (click)="add()">Новый</button>
+<button class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal" (click)="add()">Новый
+</button>
 <table class="table table-hover">
   <thead class="blue-grey lighten-4">
   <tr>
@@ -42,11 +43,23 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body alert">
-        <input *ngIf="newItem" [(ngModel)]="newItem.name" class="form-control">
+
+      <div class="modal-body">
+        <table class="table">
+          <tbody>
+          <tr>
+            <td>Цвет</td>
+            <td>
+              <input *ngIf="newItem" [(ngModel)]="newItem.name" class="form-control">
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
+
       <div class="modal-footer">
-        <a type="button" class="btn btn-outline-green waves-light" (click)="saveNew()" data-dismiss="modal">Сохранить</a>
+        <a type="button" class="btn btn-outline-green waves-light" (click)="saveNew()"
+           data-dismiss="modal">Сохранить</a>
         <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
       </div>
     </div>
