@@ -19,17 +19,19 @@ import {AuthGuard} from './auth.guard';
 import {ReceptionGuard} from './reception.guard';
 import {MaterialDetailComponent} from './materials/material-detail/material-detail.component';
 import {ProcessDetailComponent} from './processes/process-detail/process-detail.component';
+import {OrderItemDetailComponent} from './orders/order-item-detail/order-item-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'select-reception', component: SelectReceptionComponent, canActivate: [AuthGuard] },
+  { path: 'order/item/:id', component: OrderItemDetailComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'order/:id', component: OrderDetailComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'order', component: OrdersComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'company', component: CompaniesComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'reception', component: ReceptionsComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'client', component: ClientsComponent, canActivate: [AuthGuard, ReceptionGuard] },
-  { path: 'material', component: MaterialsComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'material/:id', component: MaterialDetailComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'material', component: MaterialsComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'material-color', component: MaterialColorsComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'material-type', component: MaterialTypesComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'process', component: ProcessesComponent, canActivate: [AuthGuard, ReceptionGuard] },

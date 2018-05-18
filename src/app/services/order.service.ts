@@ -5,6 +5,7 @@ import {Order} from '../order';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {LoggingService} from './logging.service';
+import {Process} from '../process';
 
 @Injectable({
   providedIn: 'root'

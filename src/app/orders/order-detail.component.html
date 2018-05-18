@@ -29,7 +29,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of order.items let num = 'index'" >
+      <tr *ngFor="let item of order.items let num = 'index'" routerLink="/order/item/{{item.id}}">
         <th scope="row">{{num + 1}}</th>
         <td>{{item.material.depth}} мм</td>
         <td>{{item.material.type.name}}</td>

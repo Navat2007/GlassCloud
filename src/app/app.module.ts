@@ -31,6 +31,7 @@ import {LoginModule} from './login/login.module';
 import {MaterialDetailComponent} from './materials/material-detail/material-detail.component';
 import {DeleteRequestComponent} from './delete-request/delete-request.component';
 import { ProcessDetailComponent } from './processes/process-detail/process-detail.component';
+import { OrderItemDetailComponent } from './orders/order-item-detail/order-item-detail.component';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
     MaterialDetailComponent,
     DeleteRequestComponent,
     ProcessDetailComponent,
+    OrderItemDetailComponent,
   ],
   providers: [
     // AuthService,
