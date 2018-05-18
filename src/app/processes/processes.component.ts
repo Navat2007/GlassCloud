@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Process} from '../process';
 import {GlassServiceService} from '../services/glass-service.service';
 import {environment} from '../../environments/environment';
+import {ProcessService} from '../services/process.service';
 
 @Component({
   selector: 'app-processes',
@@ -10,23 +11,14 @@ import {environment} from '../../environments/environment';
 })
 export class ProcessesComponent implements OnInit {
 
-  private serviceUrl = environment.serverHost + '/api/process';
-
-  processes: Process[];
-
   constructor(
-    private service: GlassServiceService<Process>
+    public service: ProcessService
   ) {
-    this.service.setUrl(this.serviceUrl).setName('process-type');
   }
 
   ngOnInit() {
-    this.getProcesses();
+    this.service.update();
   }
 
-  getProcesses(): void {
-    this.service.getItems()
-      .subscribe(items => this.processes = items);
-  }
 
 }

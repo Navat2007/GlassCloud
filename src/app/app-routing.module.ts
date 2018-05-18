@@ -18,6 +18,7 @@ import {SelectReceptionComponent} from './select-reception/select-reception.comp
 import {AuthGuard} from './auth.guard';
 import {ReceptionGuard} from './reception.guard';
 import {MaterialDetailComponent} from './materials/material-detail/material-detail.component';
+import {ProcessDetailComponent} from './processes/process-detail/process-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'material-color', component: MaterialColorsComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'material-type', component: MaterialTypesComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'process', component: ProcessesComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'process/:id', component: ProcessDetailComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'process-type', component: ProcessTypeComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'user', component: UsersComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'permission', component: PermissionsComponent, canActivate: [AuthGuard, ReceptionGuard] },

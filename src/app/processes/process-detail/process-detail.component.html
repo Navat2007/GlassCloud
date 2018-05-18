@@ -1,6 +1,6 @@
-<div class="card" *ngIf="material">
+<div class="card" *ngIf="processItem">
   <div class="card-header primary-color lighten-1 white-text">
-    <h2>Материал: {{ material.type.name }}</h2>
+    <h2>Работа: {{ processItem.type.name }}</h2>
   </div>
 
   <div class="card-body">
@@ -13,48 +13,34 @@
       </thead>
       <tbody>
       <tr>
-        <td>Цвет</td>
-        <td *ngIf="disabled">{{material.color.name}}</td>
+        <td>Толщина, мм</td>
+        <td *ngIf="disabled">{{processItem.depth}}</td>
         <td *ngIf="!disabled">
-          <select (change)="onChangeColor($event.target.value)" class="custom-select">
-            <option value={{material.color.id}}>{{material.color.name}}</option>
-            <option *ngFor="let item of colorService.materialColors" value={{item.id}}>{{item.name}}</option>
+          <input [(ngModel)]="processItem.depth" type="number" class="card-text">
+        </td>
+      </tr>
+      <tr>
+        <td>Тип</td>
+        <td *ngIf="disabled">{{processItem.type.name}}</td>
+        <td *ngIf="!disabled">
+          <select (change)="onChangeType($event.target.value)" class="custom-select">
+            <option value="{{processItem.type.id}}">{{processItem.type.name}}</option>
+            <option *ngFor="let item of processTypeService.processTypes" value={{item.id}}>{{item.name}}</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>Толщина, мм</td>
-        <td *ngIf="disabled">{{material.depth}}</td>
+        <td>Стоимость, руб.</td>
+        <td *ngIf="disabled">{{processItem.price}}</td>
         <td *ngIf="!disabled">
-          <input [(ngModel)]="material.depth" type="number" class="card-text">
-        </td>
-      </tr>
-      <tr>
-        <td>Длина, мм</td>
-        <td *ngIf="disabled">{{material.length}}</td>
-        <td *ngIf="!disabled">
-          <input [(ngModel)]="material.length" type="number"  class="card-text">
-        </td>
-      </tr>
-      <tr>
-        <td>Ширина, мм</td>
-        <td *ngIf="disabled">{{material.width}}</td>
-        <td *ngIf="!disabled">
-          <input [(ngModel)]="material.width" type="number"  class="card-text">
-        </td>
-      </tr>
-      <tr>
-        <td>Цена, руб.</td>
-        <td *ngIf="disabled">{{material.price}}</td>
-        <td *ngIf="!disabled">
-          <input [(ngModel)]="material.price" type="number"  class="card-text">
+          <input [(ngModel)]="processItem.price" type="number"  class="card-text">
         </td>
       </tr>
       <tr>
         <td>Примечание</td>
-        <td *ngIf="disabled">{{material.desc}}</td>
+        <td *ngIf="disabled">{{processItem.desc}}</td>
         <td *ngIf="!disabled">
-          <textarea [(ngModel)]="material.desc" class="card-text form-control"></textarea>
+          <textarea [(ngModel)]="processItem.desc" class="card-text form-control"></textarea>
         </td>
       </tr>
       </tbody>
@@ -69,7 +55,7 @@
     <a *ngIf="!disabled" class="btn btn-outline-gray waves-light" mdbWavesEffect (click)="cancel()">Отменить</a>
     <!--<a *ngIf="disabled" class="btn btn-red waves-light" mdbWavesEffect (click)="delete()">Удалить</a>-->
     <a *ngIf="disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteModal"
-       (click)="glass_service.id = material.id; glass_service.service = service; glass_service.isGoBack = true">Удалить</a>
+       (click)="glass_service.id = processItem.id; glass_service.service = service; glass_service.isGoBack = true">Удалить</a>
     <a class="btn btn-outline-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
   </div>
 </div>

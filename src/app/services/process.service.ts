@@ -34,6 +34,10 @@ export class ProcessService {
     return this.service.getItems();
   }
 
+  getItem(id: number): Observable<Process> {
+    return this.service.getItem(id);
+  }
+
   deleteItem(id: number): Observable<Process> {
     return this.service.deleteItem(id);
   }

@@ -4,6 +4,10 @@ import {Location} from '@angular/common';
 import {MaterialColorService} from '../services/material-color.service';
 import {MaterialTypeService} from '../services/material-type.service';
 import {ProcessTypeService} from '../services/process-type.service';
+import {MaterialService} from '../services/material.service';
+import {OrderService} from '../services/order.service';
+import {ProcessService} from '../services/process.service';
+import {ReceptionService} from '../services/reception.service';
 
 @Component({
   selector: 'app-delete-request',
@@ -13,7 +17,9 @@ import {ProcessTypeService} from '../services/process-type.service';
 export class DeleteRequestComponent implements OnInit {
 
   id: number;
-  service?: GlassServiceService<any> | MaterialColorService | MaterialTypeService | ProcessTypeService;
+  service?: GlassServiceService<any> | MaterialColorService | MaterialTypeService | MaterialService
+    | ProcessService | ProcessTypeService;
+  // | ReceptionService | OrderService;
   isGoBack = false;
 
   constructor(

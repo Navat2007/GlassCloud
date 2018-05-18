@@ -6,6 +6,8 @@ import {GlassServiceService} from '../../services/glass-service.service';
 import {Material, MaterialColor} from '../../material';
 import {LoggingService} from '../../services/logging.service';
 import {HttpClient} from '@angular/common/http';
+import {MaterialService} from '../../services/material.service';
+import {MaterialColorService} from '../../services/material-color.service';
 
 @Component({
   selector: 'app-material-detail',
@@ -15,36 +17,20 @@ import {HttpClient} from '@angular/common/http';
 export class MaterialDetailComponent implements OnInit {
   @Input() material: Material;
   disabled = true;
-  materialColors: MaterialColor[] = [];
-
-  colorService: GlassServiceService<MaterialColor>;
 
   private colorId: number;
 
-  private serviceUrl = environment.serverHost + '/api/material';
-  private colorServiceUrl = environment.serverHost + '/api/material/color';
-
   constructor(
-    private route: ActivatedRoute,
-    public service: GlassServiceService<Material>,
-    // private colorService: GlassServiceService<MaterialColor>,
+    public service: MaterialService,
+    public colorService: MaterialColorService,
     private location: Location,
-    private http: HttpClient,
-    private logging: LoggingService,
+    private route: ActivatedRoute,
   ) {
-    this.service.setUrl(this.serviceUrl).setName('material-detail');
-    this.colorService = new GlassServiceService<MaterialColor>(this.http, this.logging);
-    this.colorService.setUrl(this.colorServiceUrl).setName('material-detail-color');
   }
 
   ngOnInit() {
     this.getMaterial();
-    this.getMaterialColors();
-  }
-
-  getMaterialColors(): void {
-    this.colorService.getItems()
-      .subscribe(items => this.materialColors = items);
+    this.colorService.update();
   }
 
   getMaterial(): void {
@@ -67,10 +53,10 @@ export class MaterialDetailComponent implements OnInit {
   save(): void {
     console.log(this.material.price);
     this.material.color.id = this.colorId;
-    this.service.updateItem(this.material, this.material.id).subscribe();
+    this.service.updateItem(this.material, this.material.id)
+      .subscribe(res => this.material = res);
       // .subscribe(() => this.goBack());
     this.disabled = true;
-    // this.getMaterial();
   }
 
   cancel() {

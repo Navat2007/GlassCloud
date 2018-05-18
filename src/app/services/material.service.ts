@@ -33,6 +33,10 @@ export class MaterialService {
     return this.service.getItems();
   }
 
+  getItem(id: number): Observable<Material> {
+    return this.service.getItem(id);
+  }
+
   deleteItem(id: number): Observable<Material> {
     return this.service.deleteItem(id);
   }

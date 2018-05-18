@@ -30,6 +30,7 @@ import {ReceptionGuard} from './reception.guard';
 import {LoginModule} from './login/login.module';
 import {MaterialDetailComponent} from './materials/material-detail/material-detail.component';
 import {DeleteRequestComponent} from './delete-request/delete-request.component';
+import { ProcessDetailComponent } from './processes/process-detail/process-detail.component';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -72,6 +73,7 @@ const appRoutes: Routes = [
     SelectReceptionComponent,
     MaterialDetailComponent,
     DeleteRequestComponent,
+    ProcessDetailComponent,
   ],
   providers: [
     // AuthService,
