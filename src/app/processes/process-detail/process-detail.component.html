@@ -14,8 +14,8 @@
       <tbody>
       <tr>
         <td>Толщина, мм</td>
-        <td *ngIf="disabled">{{processItem.depth}}</td>
-        <td *ngIf="!disabled">
+        <td *ngIf="processItem.material.length !== 0 || disabled">{{processItem.depth}}</td>
+        <td *ngIf="processItem.material.length === 0 && !disabled">
           <input [(ngModel)]="processItem.depth" type="number" class="card-text">
         </td>
       </tr>
@@ -52,7 +52,7 @@
     <div class="card-body-header lighten-1 black-text">
       <h5>Список материалов</h5>
       <button *ngIf="!disabled"
-        class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal" (click)="newMaterial()">
+        class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">
         Новый
       </button>
     </div>
@@ -112,6 +112,8 @@
             <td>Материал</td>
             <td>
               <select (change)="onChangeMaterial($event.target.value)" class="custom-select">
+                <option *ngIf="isEmptyMaterialsList">Нет работ для материала с шириной {{processItem.depth}}</option>
+                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">Ваберите материал</option>
                 <option *ngFor="let item of getMaterialsByDepth()"
                         value={{item.id}}>{{item.type.name + ' : ' + item.depth + ' мм'}}
                 </option>
@@ -123,7 +125,7 @@
       </div>
 
       <div class="modal-footer">
-        <a type="button" class="btn btn-outline-green waves-light" (click)="addMaterial()"
+        <a *ngIf="!isEmptyMaterialsList" type="button" class="btn btn-outline-green waves-light" (click)="addMaterial()"
            data-dismiss="modal">Добавить</a>
         <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
       </div>

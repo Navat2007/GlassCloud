@@ -1,4 +1,7 @@
 <h1>Работы</h1>
+<button
+  class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal" (click)="add()">Новая
+</button>
 <table class="table table-hover">
   <thead class="blue-grey lighten-4">
   <tr>
@@ -34,3 +37,63 @@
   </tr>
   </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" *ngIf="newItem">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title " id="exampleModalLabel">Новый тип работы</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th class="column1"></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Толщина, мм</td>
+            <td>
+              <input [(ngModel)]="newItem.depth" type="number" class="card-text">
+            </td>
+          </tr>
+          <tr>
+            <td>Тип</td>
+            <td>
+              <select (change)="onChangeProcessType($event.target.value)" class="custom-select">
+                <option *ngFor="let item of processTypeService.processTypes" value={{item.id}}>{{item.name}}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Стоимость, руб.</td>
+            <td>
+              <input [(ngModel)]="newItem.price" type="number" class="card-text">
+            </td>
+          </tr>
+          <tr>
+            <td>Примечание</td>
+            <td>
+              <textarea [(ngModel)]="newItem.desc" class="card-text form-control"></textarea>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <a type="button" class="btn btn-outline-green waves-light" (click)="saveNew()"
+           data-dismiss="modal">Сохранить</a>
+        <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
+      </div>
+    </div>
+  </div>
+</div>

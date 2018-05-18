@@ -47,11 +47,12 @@ export class MaterialsComponent implements OnInit {
     }
   }
 
-  onChangeDepht(depth: string) {
-    if (depth === '-1') {
+  onChangeDepht(depth: number) {
+    depth = +depth;
+    if (depth === -1) {
       this.service.materials = this.materialsOriginal;
     } else {
-      this.service.materials = this.materialsOriginal.filter(i => i.depth === +depth);
+      this.service.materials = this.materialsOriginal.filter(i => i.depth === depth);
     }
   }
 

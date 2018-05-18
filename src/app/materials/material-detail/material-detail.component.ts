@@ -65,7 +65,7 @@ export class MaterialDetailComponent implements OnInit {
   }
 
   onChangeColor(colorId: number) {
-    this.colorId = colorId;
+    this.colorId = +colorId;
     // this.materialColors.filter(color => color.id === colorId)
   }
 }

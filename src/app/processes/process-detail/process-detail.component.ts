@@ -16,10 +16,11 @@ export class ProcessDetailComponent implements OnInit {
 
   @Input() processItem: Process;
   disabled = true;
+  isEmptyMaterialsList = false;
+  idSelectedMaterial?: number;
 
   private typeId: number;
   private materialForAdd?: Material;
-  private isMaterialForAdd = false;
 
   constructor(
     public service: ProcessService,
@@ -37,7 +38,12 @@ export class ProcessDetailComponent implements OnInit {
   }
 
   getMaterialsByDepth(): Material[] {
-    return this.materialService.materials.filter(i => i.depth === this.processItem.depth);
+    let list: Material[] = [];
+    if (this.materialService.materials) {
+      list = this.materialService.materials.filter(i => i.depth === this.processItem.depth);
+    }
+    this.isEmptyMaterialsList = list.length === 0;
+    return list;
   }
 
   getItem(): void {
@@ -70,27 +76,32 @@ export class ProcessDetailComponent implements OnInit {
   }
 
   onChangeType(typeId: number) {
-    this.typeId = typeId;
+    this.typeId = +typeId;
     // this.materialColors.filter(color => color.id === colorId)
   }
 
   onChangeMaterial(id: number) {
-    this.isMaterialForAdd = true;
+    id = +id;
+    if (id === -1) {
+      return;
+    }
+    this.idSelectedMaterial = +id;
     this.materialService.getItem(id)
       .subscribe(res => this.materialForAdd = res);
   }
 
   deleteMaterial(id: number) {
+    // this.materialService.getItem(id)
+    //   .subscribe(item => this.processItem.material.delete(item));
     this.processItem.material = this.processItem.material.filter(item => item.id !== id);
   }
 
   addMaterial() {
-    if (this.isMaterialForAdd) {
-      this.processItem.material.push(this.materialForAdd);
+    if (this.idSelectedMaterial) {
+      const materials = this.processItem.material.filter(item => item.id === this.idSelectedMaterial);
+      if (materials.length === 0) {
+        this.processItem.material.push(this.materialForAdd);
+      }
     }
-  }
-
-  newMaterial() {
-    this.isMaterialForAdd = false;
   }
 }
