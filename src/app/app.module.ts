@@ -13,7 +13,7 @@ import {OrderDetailComponent} from './orders/order-detail.component';
 import {AppRoutingModule} from './app-routing.module';
 import {OrdersComponent} from './orders/orders.component';
 import {CompaniesComponent} from './companies/companies.component';
-import {CompanyDetailsComponent} from './company-details/company-details.component';
+import {CompanyDetailsComponent} from './companies/company-details/company-details.component';
 import {ReceptionsComponent} from './receptions/receptions.component';
 import {ClientsComponent} from './clients/clients.component';
 import {MaterialsComponent} from './materials/materials.component';
