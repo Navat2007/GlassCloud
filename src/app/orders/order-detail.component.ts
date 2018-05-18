@@ -12,6 +12,7 @@ import {GlassServiceService} from '../services/glass-service.service';
 })
 export class OrderDetailComponent implements OnInit {
   @Input() order: Order;
+  disabled = true;
 
   private serviceUrl = environment.serverHost + '/api/order';
 
