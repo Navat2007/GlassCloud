@@ -18,6 +18,7 @@ export class ProcessDetailComponent implements OnInit {
   disabled = true;
   isEmptyMaterialsList = false;
   idSelectedMaterial?: number;
+  materialsByDepth: Material[] = [];
 
   private typeId: number;
   private materialForAdd?: Material;
@@ -37,10 +38,23 @@ export class ProcessDetailComponent implements OnInit {
     this.materialService.update();
   }
 
+  update() {
+    this.materialsByDepth = this.getMaterialsByDepth();
+  }
+
   getMaterialsByDepth(): Material[] {
     let list: Material[] = [];
     if (this.materialService.materials) {
-      list = this.materialService.materials.filter(i => i.depth === this.processItem.depth);
+      list = this.materialService.materials
+        .filter(i => i.depth === this.processItem.depth)
+        .filter(item => {
+          for (let j = 0; j < this.processItem.material.length; j++) {
+            if (this.processItem.material[j].id === item.id) {
+              return false;
+            }
+          }
+          return true;
+        });
     }
     this.isEmptyMaterialsList = list.length === 0;
     return list;
@@ -103,5 +117,6 @@ export class ProcessDetailComponent implements OnInit {
         this.processItem.material.push(this.materialForAdd);
       }
     }
+    this.idSelectedMaterial = undefined;
   }
 }

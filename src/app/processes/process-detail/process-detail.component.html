@@ -51,8 +51,8 @@
   <div class="card-body">
     <div class="card-body-header lighten-1 black-text">
       <h5>Список материалов</h5>
-      <button *ngIf="!disabled"
-        class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">
+      <button *ngIf="!disabled" (click)="update()"
+              class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">
         Новый
       </button>
     </div>
@@ -67,7 +67,7 @@
       <tbody>
       <tr *ngFor="let item of processItem.material let num = 'index'">
         <th scope="row">{{num + 1}}</th>
-        <td>{{item.type.name}}</td>
+        <td>{{item.type.name + ' : ' + item.depth + ' мм'}}</td>
         <td class="input-group-append">
           <button class="btn btn-outline-red waves-light" *ngIf="!disabled"
                   (click)="deleteMaterial(item.id)">Убрать
@@ -112,9 +112,11 @@
             <td>Материал</td>
             <td>
               <select (change)="onChangeMaterial($event.target.value)" class="custom-select">
-                <option *ngIf="isEmptyMaterialsList">Нет работ для материала с шириной {{processItem.depth}}</option>
-                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">Ваберите материал</option>
-                <option *ngFor="let item of getMaterialsByDepth()"
+                <option *ngIf="isEmptyMaterialsList" value="-1">Нет материалов с шириной {{processItem.depth}}</option>
+                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">
+                  Ваберите материал
+                </option>
+                <option *ngFor="let item of materialsByDepth"
                         value={{item.id}}>{{item.type.name + ' : ' + item.depth + ' мм'}}
                 </option>
               </select>
@@ -125,7 +127,7 @@
       </div>
 
       <div class="modal-footer">
-        <a *ngIf="!isEmptyMaterialsList" type="button" class="btn btn-outline-green waves-light" (click)="addMaterial()"
+        <a type="button" class="btn btn-outline-green waves-light" (click)="addMaterial()"
            data-dismiss="modal">Добавить</a>
         <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
       </div>

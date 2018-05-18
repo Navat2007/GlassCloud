@@ -21,7 +21,7 @@
     <td>
       <table class="table table-hover">
         <tr *ngFor="let material of item.material">
-          <td>{{material.type.name}}</td>
+          <td>{{material.type.name + ' : ' + material.depth + ' мм'}}</td>
         </tr>
       </table>
     </td>
@@ -69,6 +69,9 @@
             <td>Тип</td>
             <td>
               <select (change)="onChangeProcessType($event.target.value)" class="custom-select">
+                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">
+                  Ваберите тип работы
+                </option>
                 <option *ngFor="let item of processTypeService.processTypes" value={{item.id}}>{{item.name}}</option>
               </select>
             </td>
