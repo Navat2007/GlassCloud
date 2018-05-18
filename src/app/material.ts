@@ -5,7 +5,7 @@ export class Material {
   width: number;
   price: number;
   desc: string;
-  name: string;
+  // name: string;
   color: MaterialColor;
   type: MaterialType;
 }

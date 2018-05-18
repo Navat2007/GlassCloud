@@ -70,7 +70,7 @@
     <!--<a *ngIf="disabled" class="btn btn-red waves-light" mdbWavesEffect (click)="delete()">Удалить</a>-->
     <a *ngIf="disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteModal"
        (click)="glass_service.id = material.id; glass_service.service = service; glass_service.isGoBack = true">Удалить</a>
-    <a class="btn btn-outline-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
+    <a *ngIf="disabled" class="btn btn-outline-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
   </div>
 </div>
 

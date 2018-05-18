@@ -21,6 +21,10 @@ input {
   text-align: left;
 }
 
+.card-body-header {
+  text-align: center;
+}
+
 .actions {
   text-align: right;
 }
