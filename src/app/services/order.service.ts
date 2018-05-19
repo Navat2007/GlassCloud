@@ -5,7 +5,6 @@ import {Order} from '../order';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {LoggingService} from './logging.service';
-import {Process} from '../process';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,19 @@ export class OrderService {
     return this.service.getItems();
   }
 
+  getItem(id: number): Observable<Order> {
+    return this.service.getItem(id);
+  }
+
   deleteItem(id: number): Observable<Order> {
     return this.service.deleteItem(id);
+  }
+
+  addItem(item: Order): Observable<Order> {
+    return this.service.addItem(item);
+  }
+
+  updateItem(item: Order, id: number): Observable<any> {
+    return this.service.updateItem(item, id);
   }
 }

@@ -1,9 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import {Order} from '../order';
+import {Order, OrderItem} from '../order';
 import {environment} from '../../environments/environment';
 import {GlassServiceService} from '../services/glass-service.service';
+import {Material} from '../material';
+import {MaterialService} from '../services/material.service';
+import {OrderService} from '../services/order.service';
+import {OrderItemService} from '../services/order-item.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -13,19 +17,24 @@ import {GlassServiceService} from '../services/glass-service.service';
 export class OrderDetailComponent implements OnInit {
   @Input() order: Order;
   disabled = true;
-
-  private serviceUrl = environment.serverHost + '/api/order';
+  newItem?: OrderItem;
+  depth?: number;
+  materialsByDepth: Material[] = [];
+  isEmptyMaterialsList = false;
+  idSelectedMaterial?: number;
 
   constructor(
+    public materialService: MaterialService,
     private route: ActivatedRoute,
-    private service: GlassServiceService<Order>,
+    private service: OrderService,
+    // private orderItemService: OrderItemService,
     private location: Location
   ) {
-    this.service.setUrl(this.serviceUrl).setName('order-item');
   }
 
   ngOnInit() {
     this.getOrder();
+    this.materialService.update();
   }
 
   getOrder(): void {
@@ -34,13 +43,87 @@ export class OrderDetailComponent implements OnInit {
       .subscribe(order => this.order = order);
   }
 
+  update() {
+    console.log('update');
+    this.materialsByDepth = this.getMaterialsByDepth();
+  }
+
+  getMaterialsByDepth(): Material[] {
+    let list: Material[] = [];
+    if (this.materialService.materials) {
+      list = this.materialService.materials
+        .filter(i => i.depth === +this.depth)
+        .filter(item => {
+          for (let j = 0; j < this.newItem.material.length; j++) {
+            if (this.newItem.material[j].id === item.id) {
+              return false;
+            }
+          }
+          return true;
+        });
+    }
+    this.isEmptyMaterialsList = list.length === 0;
+    return list;
+  }
+
+  onChangeMaterial(id: number) {
+    id = +id;
+    if (id === -1) {
+      return;
+    }
+    this.idSelectedMaterial = +id;
+    this.materialService.getItem(id)
+      .subscribe(res => this.newItem.material = res);
+  }
+
   goBack(): void {
     this.location.back();
   }
 
+  init() {
+    this.idSelectedMaterial = null;
+    this.depth = null;
+  }
+
+  add() {
+    this.init();
+    this.newItem = new OrderItem();
+    this.newItem.material = new Material();
+    this.newItem.process = [];
+  }
+
+  addItem() {
+    if (!this.order.items) {
+      this.order.items = [];
+    }
+
+    this.newItem.summa = 110;
+    this.newItem.processSum = 110;
+    this.newItem.perimeter = 110;
+    this.newItem.area = 110;
+    this.newItem.number = this.order.items.length + 1;
+
+
+    this.order.items.push(this.newItem);
+  }
+
   save(): void {
     this.service.updateItem(this.order, this.order.id)
-      .subscribe(() => this.goBack());
+      .subscribe(res => {
+        if (res) {
+          this.init();
+          this.disabled = true;
+        }
+      });
+  }
+
+  edit(): void {
+    this.disabled = false;
+  }
+
+  cancel() {
+    this.disabled = true;
+    this.getOrder();
   }
 
 }

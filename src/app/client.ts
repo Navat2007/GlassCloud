@@ -7,7 +7,12 @@ export class Client {
   email: string;
   desc: string;
   discount: number;
-  type: string;
+  type: ClientType;
+}
+
+export class ClientType {
+  id: number;
+  name: string;
 }
 
 

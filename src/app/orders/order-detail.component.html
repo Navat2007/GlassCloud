@@ -2,13 +2,49 @@
   <div class="card-header primary-color lighten-1 white-text">
     <h2>Заказ {{ order.number }}</h2>
   </div>
-  <!--<div class="card-body">-->
-    <!--<h4 class="card-title">Special title treatment</h4>-->
-    <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
-    <!--<a class="btn btn-deep-orange waves-light" mdbWavesEffect>Редактироать</a>-->
-    <!--<a class="btn btn-deep-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>-->
-  <!--</div>-->
   <div class="card-body">
+    <!--<h4 class="card-title">{{order}}</h4>-->
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="column1"></th>
+        <th></th>
+        <th class="column1"></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Клиент</td>
+        <td>{{order.client.name}}</td>
+
+        <td>Точка приема заказов</td>
+        <td>{{order.receptionOfOrder.name}}</td>
+      </tr>
+      <tr>
+        <td>Сумма, руб</td>
+        <td>{{order.summa}}</td>
+
+        <td>Сумма со скидкой, руб.</td>
+        <td>{{order.discountSum}}</td>
+      </tr>
+      <tr>
+        <td>Описание</td>
+        <td *ngIf="disabled">{{order.desc}}</td>
+        <td *ngIf="!disabled" colspan="3">
+          <textarea [(ngModel)]="order.desc" class="card-text form-control"></textarea>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-body">
+    <h5>Состав заказа</h5>
+    <button *ngIf="!disabled" (click)="add(); update()"
+            class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">
+      Новый
+    </button>
+
     <table class="table table-hover">
       <thead class="blue-grey lighten-4">
       <tr>
@@ -49,12 +85,12 @@
         <td>{{item.summa}} руб</td>
         <td>{{item.desc}}</td>
         <!--<td>-->
-          <!--<button class="delete" title="delete order"-->
-                  <!--(click)="edit(item)">Edit</button>-->
+        <!--<button class="delete" title="delete order"-->
+        <!--(click)="edit(item)">Edit</button>-->
         <!--</td>-->
         <!--<td>-->
-          <!--<button class="delete" title="delete order"-->
-                  <!--(click)="delete(item)">x</button>-->
+        <!--<button class="delete" title="delete order"-->
+        <!--(click)="delete(item)">x</button>-->
         <!--</td>-->
       </tr>
       </tbody>
@@ -66,7 +102,91 @@
     <a *ngIf="!disabled" class="btn btn-outline-green waves-light" mdbWavesEffect (click)="save()">Сохранить</a>
     <a *ngIf="!disabled" class="btn btn-outline-gray waves-light" mdbWavesEffect (click)="cancel()">Отменить</a>
     <a *ngIf="disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteModal"
-       (click)="glass_service.id = processItem.id; glass_service.service = service; glass_service.isGoBack = true">Удалить</a>
+       (click)="glass_service.id = order.id; glass_service.service = service; glass_service.isGoBack = false">Удалить</a>
     <a *ngIf="disabled" class="btn btn-outline-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
+  </div>
+</div>
+
+<app-delete-request #glass_service></app-delete-request>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" *ngIf="newItem">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title " id="exampleModalLabel">Добавить материал в заказ</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td>Толщина материала, мм</td>
+            <td *ngIf="idSelectedMaterial">{{depth}}</td>
+            <td *ngIf="!idSelectedMaterial">
+              <input [(ngModel)]="depth" type="number" class="card-text" (input)="update()">
+            </td>
+
+            <td>Количество, шт.</td>
+            <td>
+              <input [(ngModel)]="newItem.count" type="number" class="card-text">
+            </td>
+          </tr>
+          <tr>
+            <td>Материал</td>
+            <td colspan="3">
+              <select (change)="onChangeMaterial($event.target.value)" class="custom-select">
+                <option *ngIf="isEmptyMaterialsList" value="-1">Нет материалов с шириной {{depth}}</option>
+                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">
+                  Ваберите материал
+                </option>
+                <option *ngFor="let item of materialsByDepth"
+                        value={{item.id}}>{{item.type.name + ' : ' + item.depth + ' мм'}}
+                </option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Длина, мм</td>
+            <td>
+              <input [(ngModel)]="newItem.length" type="number" class="card-text">
+            </td>
+
+            <td>Ширина, мм</td>
+            <td>
+              <input [(ngModel)]="newItem.width" type="number" class="card-text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>Описание</td>
+            <td colspan="3">
+              <textarea [(ngModel)]="newItem.desc" class="card-text form-control"></textarea>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <a type="button" class="btn btn-outline-green waves-light" (click)="addItem()"
+           data-dismiss="modal">Добавить</a>
+        <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
+      </div>
+    </div>
   </div>
 </div>

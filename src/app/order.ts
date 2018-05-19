@@ -24,7 +24,7 @@ export class Order {
 export class OrderItem {
   id: number;
   desc: string;
-  number: string;
+  number: number;
   length: number;
   width: number;
   count: number;

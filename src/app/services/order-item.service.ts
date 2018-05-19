@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {LoggingService} from './logging.service';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import {Order, OrderItem} from '../order';
+import {OrderItem} from '../order';
 import {GlassServiceService} from './glass-service.service';
 import {HttpClient} from '@angular/common/http';
 
@@ -32,5 +32,13 @@ export class OrderItemService {
 
   deleteItem(id: number): Observable<OrderItem> {
     return this.service.deleteItem(id);
+  }
+
+  addItem(item: OrderItem): Observable<OrderItem> {
+    return this.service.addItem(item);
+  }
+
+  updateItem(item: OrderItem, id: number): Observable<any> {
+    return this.service.updateItem(item, id);
   }
 }
