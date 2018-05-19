@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Material} from '../material';
+import {Material, MaterialColor, MaterialType} from '../material';
 import {environment} from '../../environments/environment';
 import {MaterialService} from '../services/material.service';
 import {MaterialColorService} from '../services/material-color.service';
+import {MaterialTypeService} from '../services/material-type.service';
 
 @Component({
   selector: 'app-materials',
@@ -16,12 +17,14 @@ export class MaterialsComponent implements OnInit {
 
   constructor(
     public service: MaterialService,
-    public colorService: MaterialColorService
+    public colorService: MaterialColorService,
+    public typeService: MaterialTypeService,
   ) {  }
 
   ngOnInit() {
     this.service.update();
     this.colorService.update();
+    this.typeService.update();
     this.materialsOriginal = this.service.materials;
   }
 
@@ -66,5 +69,7 @@ export class MaterialsComponent implements OnInit {
 
   add(): void {
     this.newItem = new Material();
+    this.newItem.color = new MaterialColor();
+    this.newItem.type = new MaterialType();
   }
 }
