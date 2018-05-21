@@ -67,12 +67,21 @@
         </td>
       </tr>
       <tr>
-        <td>Обработка</td>
+        <td>Обработка
+          <button *ngIf="!disabled" (click)="updateProcess()"
+                  class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">
+            Новый
+          </button>
+        </td>
         <td colspan="3">
           <table class="table">
             <tbody>
             <tr *ngFor="let process of orderItem.process">
-              <td>{{process.type.name}}</td>
+              <td>{{process.type.name + ' : ' + process.depth + ' мм.'}}</td>
+              <td>
+                <a *ngIf="!disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteProcessModal"
+                   (click)="deleteProcess(process.id)">Удалить</a>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -83,39 +92,9 @@
 
   </div>
 
-  <!--<div class="card-body">-->
-  <!--<div class="card-body-header lighten-1 black-text">-->
-  <!--<h5>Список материалов</h5>-->
-  <!--<button *ngIf="!disabled" (click)="update()"-->
-  <!--class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">-->
-  <!--Новый-->
-  <!--</button>-->
-  <!--</div>-->
-  <!--<table class="table table-hover">-->
-  <!--<thead class="blue-grey lighten-4">-->
-  <!--<tr>-->
-  <!--<th>N</th>-->
-  <!--<th>Тип материала</th>-->
-  <!--<th></th>-->
-  <!--</tr>-->
-  <!--</thead>-->
-  <!--<tbody>-->
-  <!--<tr *ngFor="let item of processItem.material let num = 'index'">-->
-  <!--<th scope="row">{{num + 1}}</th>-->
-  <!--<td>{{item.type.name + ' : ' + item.depth + ' мм'}}</td>-->
-  <!--<td class="input-group-append">-->
-  <!--<button class="btn btn-outline-red waves-light" *ngIf="!disabled"-->
-  <!--(click)="deleteMaterial(item.id)">Убрать-->
-  <!--</button>-->
-  <!--</td>-->
-  <!--</tr>-->
-  <!--</tbody>-->
-  <!--</table>-->
-  <!--</div>-->
-
   <div class="card-body actions">
     <!--<h4 class="card-title">Special title treatment</h4>-->
-    <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+    <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.  p>-->
     <a *ngIf="disabled" class="btn btn-outline-green waves-light" mdbWavesEffect (click)="edit()">Редактировать</a>
     <a *ngIf="!disabled" class="btn btn-outline-green waves-light" mdbWavesEffect (click)="save()">Сохранить</a>
     <a *ngIf="!disabled" class="btn btn-outline-gray waves-light" mdbWavesEffect (click)="cancel()">Отменить</a>
@@ -127,3 +106,46 @@
 </div>
 
 <app-delete-request #glass_service></app-delete-request>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title " id="exampleModalLabel">Добавить обработку</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <table class="table">
+
+          <tbody>
+          <tr>
+            <td>Работа</td>
+            <td>
+              <select (change)="onChangeProcess($event.target.value)" class="custom-select">
+                <option *ngIf="isEmptyProcessList" value="-1">Нет работ для такого материала</option>
+                <option selected *ngIf="!isEmptyProcessList && !idSelectedProcess" value="-1">
+                  Ваберите работу
+                </option>
+                <option *ngFor="let item of processByMaterial"
+                        value={{item.id}}>{{item.type.name + ' : ' + item.depth + ' мм'}}
+                </option>
+              </select>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <a type="button" class="btn btn-outline-green waves-light" (click)="addProcess()"
+           data-dismiss="modal">Добавить</a>
+        <a type="button" class="btn btn-outline-gray waves-light" (click)="cancelAddItem()" data-dismiss="modal">Отменить</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -89,8 +89,8 @@
         <!--(click)="edit(item)">Edit</button>-->
         <!--</td>-->
         <!--<td>-->
-        <!--<button class="delete" title="delete order"-->
-        <!--(click)="delete(item)">x</button>-->
+          <!--<a *ngIf="disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteModal"-->
+             <!--(click)="glass_service.id = item.id; glass_service.service = orderItemService; glass_service.isGoBack = false">Удалить</a>-->
         <!--</td>-->
       </tr>
       </tbody>
@@ -102,7 +102,7 @@
     <a *ngIf="!disabled" class="btn btn-outline-green waves-light" mdbWavesEffect (click)="save()">Сохранить</a>
     <a *ngIf="!disabled" class="btn btn-outline-gray waves-light" mdbWavesEffect (click)="cancel()">Отменить</a>
     <a *ngIf="disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteModal"
-       (click)="glass_service.id = order.id; glass_service.service = service; glass_service.isGoBack = false">Удалить</a>
+       (click)="glass_service.id = order.id; glass_service.service = service; glass_service.isGoBack = true">Удалить</a>
     <a *ngIf="disabled" class="btn btn-outline-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
   </div>
 </div>

@@ -22,6 +22,10 @@ export class OrderService {
     this.service.setUrl(this.serviceUrl).setName('order');
   }
 
+  update() {
+
+  }
+
   getItems(): Observable<Order[]> {
     return this.service.getItems();
   }

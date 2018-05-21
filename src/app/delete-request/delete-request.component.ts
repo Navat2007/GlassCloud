@@ -8,6 +8,7 @@ import {MaterialService} from '../services/material.service';
 import {OrderService} from '../services/order.service';
 import {ProcessService} from '../services/process.service';
 import {ReceptionService} from '../services/reception.service';
+import {OrderItemService} from '../services/order-item.service';
 
 @Component({
   selector: 'app-delete-request',
@@ -18,7 +19,7 @@ export class DeleteRequestComponent implements OnInit {
 
   id: number;
   service?: GlassServiceService<any> | MaterialColorService | MaterialTypeService | MaterialService
-    | ProcessService | ProcessTypeService;
+    | ProcessService | ProcessTypeService | OrderService | OrderItemService;
   // | ReceptionService | OrderService;
   isGoBack = false;
 

@@ -24,6 +24,9 @@ export class OrderItemDetailComponent implements OnInit {
   isEmptyMaterialsList = false;
   idSelectedMaterial?: number;
 
+  isEmptyProcessList = false;
+  idSelectedProcess?: number;
+
   constructor(
     public service: OrderItemService,
     public materialService: MaterialService,
@@ -37,8 +40,6 @@ export class OrderItemDetailComponent implements OnInit {
     this.getItem();
     this.materialService.update();
     this.processService.update();
-    this.depth = this.orderItem.material.depth;
-    // this.idSelectedMaterial = this.orderItem.process
     this.update();
   }
 
@@ -49,6 +50,10 @@ export class OrderItemDetailComponent implements OnInit {
 
   update() {
     this.materialsByDepth = this.getMaterialsByDepth();
+  }
+
+  updateProcess() {
+    this.idSelectedProcess = null;
     this.processByMaterial = this.getProcessByMaterial();
   }
 
@@ -56,9 +61,16 @@ export class OrderItemDetailComponent implements OnInit {
     let list: Process[] = [];
     if (this.processService.processes) {
       list = this.processService.processes
-
+        .filter(process => {
+          for (let j = 0; j < this.orderItem.process.length; j++) {
+            if (this.orderItem.process[j].id === process.id) {
+              return false;
+            }
+          }
+          return true;
+        });
     }
-
+    this.isEmptyProcessList = list.length === 0;
     return list;
   }
 
@@ -85,7 +97,7 @@ export class OrderItemDetailComponent implements OnInit {
     this.service.getItem(id)
       .subscribe(item => {
         this.orderItem = item;
-        // this.typeId = this.orderItem.type.id;
+        this.depth = this.orderItem.material.depth;
       });
   }
 
@@ -110,5 +122,36 @@ export class OrderItemDetailComponent implements OnInit {
   cancel() {
     this.disabled = true;
     this.getItem();
+  }
+
+  cancelAddItem() {
+    this.isEmptyMaterialsList = false;
+    this.idSelectedMaterial = null;
+
+    this.isEmptyProcessList = false;
+    this.idSelectedProcess = null;
+  }
+
+  onChangeProcess(id: number) {
+    id = +id;
+    if (id === -1) {
+      return;
+    }
+    this.idSelectedProcess = +id;
+  }
+
+  addProcess() {
+    if (this.idSelectedProcess === null) {
+      return;
+    }
+
+    this.processService.getItem(this.idSelectedProcess)
+      .subscribe(item => this.orderItem.process.push(item));
+  }
+
+  deleteProcess(id: number) {
+    id = +id;
+    this.orderItem.process = this.orderItem.process
+      .filter(i => i.id !== id);
   }
 }

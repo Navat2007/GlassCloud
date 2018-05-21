@@ -5,6 +5,7 @@ import {Order, OrderItem} from '../order';
 import {Material} from '../material';
 import {MaterialService} from '../services/material.service';
 import {OrderService} from '../services/order.service';
+import {OrderItemService} from '../services/order-item.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -22,9 +23,9 @@ export class OrderDetailComponent implements OnInit {
 
   constructor(
     public materialService: MaterialService,
+    public orderItemService: OrderItemService,
     private route: ActivatedRoute,
     private service: OrderService,
-    // private orderItemService: OrderItemService,
     private location: Location
   ) {
   }
