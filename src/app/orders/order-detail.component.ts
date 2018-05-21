@@ -2,12 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {Order, OrderItem} from '../order';
-import {environment} from '../../environments/environment';
-import {GlassServiceService} from '../services/glass-service.service';
 import {Material} from '../material';
 import {MaterialService} from '../services/material.service';
 import {OrderService} from '../services/order.service';
-import {OrderItemService} from '../services/order-item.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -35,6 +32,7 @@ export class OrderDetailComponent implements OnInit {
   ngOnInit() {
     this.getOrder();
     this.materialService.update();
+    this.update();
   }
 
   getOrder(): void {
@@ -44,7 +42,6 @@ export class OrderDetailComponent implements OnInit {
   }
 
   update() {
-    console.log('update');
     this.materialsByDepth = this.getMaterialsByDepth();
   }
 

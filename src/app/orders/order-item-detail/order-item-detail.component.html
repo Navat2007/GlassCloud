@@ -7,40 +7,75 @@
     <table class="table">
       <thead>
       <tr>
-        <th class="column1"></th>
+        <th></th>
+        <th></th>
+        <th></th>
         <th></th>
       </tr>
       </thead>
+
       <tbody>
-      <!--<tr>-->
-        <!--<td>Толщина, мм</td>-->
-        <!--<td *ngIf="orderItem.material.length !== 0 || disabled">{{processItem.depth}}</td>-->
-        <!--<td *ngIf="orderItem.material.length === 0 && !disabled">-->
-          <!--<input [(ngModel)]="orderItem.depth" type="number" class="card-text">-->
+      <tr>
+        <td>Толщина материала, мм</td>
+        <td>{{orderItem.material.depth}}</td>
+        <!--<td *ngIf="idSelectedMaterial">{{depth}}</td>-->
+        <!--<td *ngIf="!idSelectedMaterial">-->
+          <!--<input [(ngModel)]="depth" type="number" class="card-text">-->
         <!--</td>-->
-      <!--</tr>-->
-      <!--<tr>-->
-        <!--<td>Тип</td>-->
-        <!--<td *ngIf="disabled">{{processItem.type.name}}</td>-->
-        <!--<td *ngIf="!disabled">-->
-          <!--<select (change)="onChangeType($event.target.value)" class="custom-select">-->
-            <!--<option value="{{processItem.type.id}}">{{processItem.type.name}}</option>-->
-            <!--<option *ngFor="let item of processTypeService.processTypes" value={{item.id}}>{{item.name}}</option>-->
+
+        <td>Количество, шт.</td>
+        <td *ngIf="disabled">{{orderItem.count}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="orderItem.count" type="number" class="card-text">
+        </td>
+      </tr>
+      <tr>
+        <td>Материал</td>
+        <!--<td colspan="3">-->
+        <td>{{orderItem.material.type.name}}</td>
+          <!--<select (change)="onChangeMaterial($event.target.value)" class="custom-select">-->
+            <!--<option *ngIf="isEmptyMaterialsList" value="-1">Нет материалов с шириной {{depth}}</option>-->
+            <!--<option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">-->
+              <!--Ваберите материал-->
+            <!--</option>-->
+            <!--<option *ngFor="let item of orderItem.process"-->
+                    <!--value={{item.id}}>{{item.type.name + ' : ' + item.depth + ' мм'}}-->
+            <!--</option>-->
           <!--</select>-->
         <!--</td>-->
-      <!--</tr>-->
-      <!--<tr>-->
-        <!--<td>Стоимость, руб.</td>-->
-        <!--<td *ngIf="disabled">{{orderItem.price}}</td>-->
-        <!--<td *ngIf="!disabled">-->
-          <!--<input [(ngModel)]="orderItem.price" type="number" class="card-text">-->
-        <!--</td>-->
-      <!--</tr>-->
+      </tr>
+
       <tr>
-        <td>Примечание</td>
-        <td *ngIf="disabled">{{orderItem.desc}}</td>
+        <td>Длина, мм</td>
+        <td *ngIf="disabled">{{orderItem.length}}</td>
         <td *ngIf="!disabled">
+          <input [(ngModel)]="orderItem.length" type="number" class="card-text">
+        </td>
+
+        <td>Ширина, мм</td>
+        <td *ngIf="disabled">{{orderItem.width}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="orderItem.width" type="number" class="card-text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>Описание</td>
+        <td *ngIf="disabled" colspan="3">{{orderItem.desc}}</td>
+        <td colspan="3" *ngIf="!disabled">
           <textarea [(ngModel)]="orderItem.desc" class="card-text form-control"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td>Обработка</td>
+        <td colspan="3">
+          <table class="table">
+            <tbody>
+            <tr *ngFor="let process of orderItem.process">
+              <td>{{process.type.name}}</td>
+            </tr>
+            </tbody>
+          </table>
         </td>
       </tr>
       </tbody>
@@ -49,33 +84,33 @@
   </div>
 
   <!--<div class="card-body">-->
-    <!--<div class="card-body-header lighten-1 black-text">-->
-      <!--<h5>Список материалов</h5>-->
-      <!--<button *ngIf="!disabled" (click)="update()"-->
-              <!--class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">-->
-        <!--Новый-->
-      <!--</button>-->
-    <!--</div>-->
-    <!--<table class="table table-hover">-->
-      <!--<thead class="blue-grey lighten-4">-->
-      <!--<tr>-->
-        <!--<th>N</th>-->
-        <!--<th>Тип материала</th>-->
-        <!--<th></th>-->
-      <!--</tr>-->
-      <!--</thead>-->
-      <!--<tbody>-->
-      <!--<tr *ngFor="let item of processItem.material let num = 'index'">-->
-        <!--<th scope="row">{{num + 1}}</th>-->
-        <!--<td>{{item.type.name + ' : ' + item.depth + ' мм'}}</td>-->
-        <!--<td class="input-group-append">-->
-          <!--<button class="btn btn-outline-red waves-light" *ngIf="!disabled"-->
-                  <!--(click)="deleteMaterial(item.id)">Убрать-->
-          <!--</button>-->
-        <!--</td>-->
-      <!--</tr>-->
-      <!--</tbody>-->
-    <!--</table>-->
+  <!--<div class="card-body-header lighten-1 black-text">-->
+  <!--<h5>Список материалов</h5>-->
+  <!--<button *ngIf="!disabled" (click)="update()"-->
+  <!--class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">-->
+  <!--Новый-->
+  <!--</button>-->
+  <!--</div>-->
+  <!--<table class="table table-hover">-->
+  <!--<thead class="blue-grey lighten-4">-->
+  <!--<tr>-->
+  <!--<th>N</th>-->
+  <!--<th>Тип материала</th>-->
+  <!--<th></th>-->
+  <!--</tr>-->
+  <!--</thead>-->
+  <!--<tbody>-->
+  <!--<tr *ngFor="let item of processItem.material let num = 'index'">-->
+  <!--<th scope="row">{{num + 1}}</th>-->
+  <!--<td>{{item.type.name + ' : ' + item.depth + ' мм'}}</td>-->
+  <!--<td class="input-group-append">-->
+  <!--<button class="btn btn-outline-red waves-light" *ngIf="!disabled"-->
+  <!--(click)="deleteMaterial(item.id)">Убрать-->
+  <!--</button>-->
+  <!--</td>-->
+  <!--</tr>-->
+  <!--</tbody>-->
+  <!--</table>-->
   <!--</div>-->
 
   <div class="card-body actions">
@@ -92,45 +127,3 @@
 </div>
 
 <app-delete-request #glass_service></app-delete-request>
-
-<!-- Modal -->
-<!--<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
-     <!--aria-hidden="true">-->
-  <!--<div class="modal-dialog" role="document">-->
-    <!--<div class="modal-content">-->
-      <!--<div class="modal-header">-->
-        <!--<h3 class="modal-title " id="exampleModalLabel">Добавить материал в обработку</h3>-->
-        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-          <!--<span aria-hidden="true">&times;</span>-->
-        <!--</button>-->
-      <!--</div>-->
-
-      <!--<div class="modal-body">-->
-        <!--<table class="table">-->
-          <!--<tbody>-->
-          <!--<tr>-->
-            <!--<td>Материал</td>-->
-            <!--<td>-->
-              <!--<select (change)="onChangeMaterial($event.target.value)" class="custom-select">-->
-                <!--<option *ngIf="isEmptyMaterialsList" value="-1">Нет материалов с шириной {{processItem.depth}}</option>-->
-                <!--<option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">-->
-                  <!--Ваберите материал-->
-                <!--</option>-->
-                <!--<option *ngFor="let item of materialsByDepth"-->
-                        <!--value={{item.id}}>{{item.type.name + ' : ' + item.depth + ' мм'}}-->
-                <!--</option>-->
-              <!--</select>-->
-            <!--</td>-->
-          <!--</tr>-->
-          <!--</tbody>-->
-        <!--</table>-->
-      <!--</div>-->
-
-      <!--<div class="modal-footer">-->
-        <!--<a type="button" class="btn btn-outline-green waves-light" (click)="addMaterial()"-->
-           <!--data-dismiss="modal">Добавить</a>-->
-        <!--<a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
