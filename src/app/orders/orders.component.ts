@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Order} from '../order';
 import {OrderService} from '../services/order.service';
 import {ClientService} from '../services/client.service';
-import {Observable, Observer} from 'rxjs';
 import {Client} from '../client';
 
 @Component({
@@ -12,14 +11,9 @@ import {Client} from '../client';
 })
 export class OrdersComponent implements OnInit {
 
-  phoneNumber?: number;
   orders: Order[];
   newOrder?: Order;
-  clientId: number;
-
-  private value: any = ['Athens'];
-  private _disabledV = '0';
-  private disabled = false;
+  client?: any;
 
   constructor(
     private service: OrderService,
@@ -43,14 +37,17 @@ export class OrdersComponent implements OnInit {
     return item.name.toLocaleLowerCase().indexOf(term) > -1 || item.phone.toLocaleLowerCase().indexOf(term) > -1;
   }
 
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.orderService.addOrder({ order } as Order)
-  //     .subscribe(order => {
-  //       this.orders.push(order);
-  //     });
-  // }
+  onChange(event) {
+    if (event !== undefined) {
+      this.newOrder.client = event;
+      this.newOrder.discount = event.discount;
+    }
+  }
+
+  addOrder() {
+    this.service.addItem(this.newOrder)
+      .subscribe(res => this.getOrders());
+  }
 
   delete(order: Order): void {
     this.orders = this.orders.filter(h => h !== order);
@@ -62,16 +59,8 @@ export class OrdersComponent implements OnInit {
   }
 
   add(): void {
+    this.client = null;
     this.newOrder = new Order();
-  }
-
-  updatePhoneNumber() {
-
-  }
-
-  public refreshValue(value: any): void {
-    console.log('refresh ', value);
-    this.value = value;
   }
 
   public selected(value: any): void {

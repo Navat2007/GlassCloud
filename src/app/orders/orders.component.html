@@ -81,35 +81,41 @@
               <!--<input [(ngModel)]="phoneNumber" type="number" class="card-text" (input)="updatePhoneNumber()">-->
               <ng-select [items]="clientService.clients"
                          bindLabel="phone"
-                         [loading]="people2Loading"
+                         [loading]="false"
+                         [(ngModel)]="client"
+                         placeholder="Введите номер телефона или имя"
+                         bindValue="name"
+                         (change)="onChange($event)"
                          [searchFn]="customSearchFn">
                 <ng-template ng-option-tmp let-item="item">
                   {{item.name}} <br/>
                   <small>{{item.phone}}</small>
                 </ng-template>
               </ng-select>
-              {{clientId}}
+
             </td>
           </tr>
           <tr>
             <td>Заказчик</td>
-            <td colspan="3">
-              <select (change)="onChangeClient($event.target.value)" class="custom-select">
-                <option *ngIf="isEmptyMaterialsList" value="-1">Нет заказчиков с телефоном {{phoneNumber}}</option>
-                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">
-                  Ваберите заказчика
-                </option>
-                <option *ngFor="let item of clientService.clients"
-                        value={{item.id}}>{{item.name + ' : ' + item.phone}}
-                </option>
-              </select>
+            <td>
+              {{client}}
+            <!--<td colspan="3">-->
+            <!--<select (change)="onChangeClient($event.target.value)" class="custom-select">-->
+              <!--<option *ngIf="isEmptyMaterialsList" value="-1">Нет заказчиков с телефоном {{phoneNumber}}</option>-->
+              <!--<option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">-->
+              <!--Ваберите заказчика-->
+              <!--</option>-->
+              <!--<option *ngFor="let item of clientService.clients"-->
+              <!--value={{item.id}}>{{item.name + ' : ' + item.phone}}-->
+              <!--</option>-->
+              <!--</select>-->
             </td>
           </tr>
 
           <tr>
-            <td>Скидка</td>
-            <td>
-              <input [(ngModel)]="newOrder.discount" type="number" class="card-text" (input)="update()">
+            <td>Скидка, %</td>
+            <td *ngIf="newOrder.discount">
+              <input [(ngModel)]="newOrder.discount" type="number" class="card-text">
             </td>
           </tr>
           <tr>
@@ -123,7 +129,7 @@
       </div>
 
       <div class="modal-footer">
-        <a type="button" class="btn btn-outline-green waves-light" (click)="addItem()"
+        <a type="button" class="btn btn-outline-green waves-light" (click)="addOrder()"
            data-dismiss="modal">Добавить</a>
         <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
       </div>
