@@ -1,4 +1,8 @@
 <h1>Клиенты</h1>
+<button (click)="add()"
+        class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">
+  Новый
+</button>
 <table class="table table-hover">
   <thead class="blue-grey lighten-4">
   <tr>
@@ -35,3 +39,94 @@
   </tr>
   </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" *ngIf="newClient">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title " id="exampleModalLabel">Новый клиент</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td>Юр.лицо / Физ.лицо</td>
+            <td>
+              <select (change)="onChangeType($event.target.value)" class="custom-select">
+                <option selected *ngIf="!idSelectedType" value="-1">
+                  Ваберите тип клиента
+                </option>
+                <option *ngFor="let item of service.clientTypes"
+                        value={{item.id}}>{{item.name}}
+                </option>
+              </select>
+            </td>
+            <td>Скидка, %</td>
+            <td>
+              <input [(ngModel)]="newClient.discount" type="number" class="card-text">
+            </td>
+          </tr>
+          <tr>
+            <td>ФИО</td>
+            <td colspan="3">
+              <input [(ngModel)]="newClient.name" class="card-text fio">
+            </td>
+          </tr>
+
+          <tr>
+            <td>ИНН</td>
+            <td>
+              <input [(ngModel)]="newClient.inn" class="card-text">
+            </td>
+
+            <td>Расчетный счет</td>
+            <td>
+              <input [(ngModel)]="newClient.account" class="card-text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>Номер телефона</td>
+            <td>
+              <input [(ngModel)]="newClient.phone" class="card-text">
+            </td>
+
+            <td>Email</td>
+            <td>
+              <input [(ngModel)]="newClient.email" type="email" class="card-text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>Комментарий</td>
+            <td colspan="3">
+              <textarea [(ngModel)]="newClient.desc" class="card-text form-control"></textarea>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <a type="button" class="btn btn-outline-green waves-light" (click)="addClient()"
+           data-dismiss="modal">Добавить</a>
+        <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
+      </div>
+    </div>
+  </div>
+</div>

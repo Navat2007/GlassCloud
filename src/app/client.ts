@@ -8,6 +8,8 @@ export class Client {
   desc: string;
   discount: number;
   type: ClientType;
+  creationDate: Date;
+  updateDate: Date;
 }
 
 export class ClientType {

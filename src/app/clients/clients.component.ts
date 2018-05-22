@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Client} from '../client';
-import {environment} from '../../environments/environment';
-import {GlassServiceService} from '../services/glass-service.service';
+import {Client, ClientType} from '../client';
 import {ClientService} from '../services/client.service';
 
 @Component({
@@ -11,6 +9,9 @@ import {ClientService} from '../services/client.service';
 })
 export class ClientsComponent implements OnInit {
 
+  newClient?: Client;
+  idSelectedType?: number;
+
   constructor(
     public service: ClientService,
   ) {
@@ -18,8 +19,25 @@ export class ClientsComponent implements OnInit {
 
   ngOnInit() {
     this.service.update();
+    this.service.updateTypes();
   }
 
+  add(): void {
+    this.idSelectedType = null;
+    this.newClient = new Client();
+    this.newClient.discount = 0;
+  }
 
+  addClient() {
+    this.newClient.type = new ClientType();
+    this.newClient.type.id = this.idSelectedType;
 
+    this.service.addItem(this.newClient)
+      .subscribe(res => this.service.update());
+  }
+
+  onChangeType(id: number) {
+    id = +id;
+    this.idSelectedType = id;
+  }
 }

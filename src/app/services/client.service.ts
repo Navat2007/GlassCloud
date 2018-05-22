@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {Client} from '../client';
+import {Client, ClientType} from '../client';
 import {GlassServiceService} from './glass-service.service';
 import {LoggingService} from './logging.service';
 import {HttpClient} from '@angular/common/http';
@@ -15,6 +15,7 @@ export class ClientService {
   private service: GlassServiceService<Client>;
 
   clients: Client[];
+  clientTypes: ClientType[];
 
   constructor(
     private http: HttpClient,
@@ -29,6 +30,11 @@ export class ClientService {
       .subscribe(items => {
         this.clients = items;
       });
+  }
+
+  updateTypes() {
+    this.getClientTypes()
+      .subscribe(items => this.clientTypes = items);
   }
 
   getItems(): Observable<Client[]> {
@@ -49,5 +55,9 @@ export class ClientService {
 
   updateItem(item: Client, id: number): Observable<any> {
     return this.service.updateItem(item, id);
+  }
+
+  getClientTypes(): Observable<ClientType[]> {
+    return this.http.get<ClientType[]>(this.serviceUrl + '/type');
   }
 }
