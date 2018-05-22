@@ -78,11 +78,11 @@
           <tr>
             <td>Номер телефона заказчика</td>
             <td>
-              <!--<input [(ngModel)]="phoneNumber" type="number" class="card-text" (input)="updatePhoneNumber()">-->
               <ng-select [items]="clientService.clients"
                          bindLabel="phone"
                          [loading]="false"
                          [(ngModel)]="client"
+                         [dropdownPosition]="'no'"
                          placeholder="Введите номер телефона или имя"
                          bindValue="name"
                          (change)="onChange($event)"
@@ -92,23 +92,12 @@
                   <small>{{item.phone}}</small>
                 </ng-template>
               </ng-select>
-
             </td>
           </tr>
           <tr>
             <td>Заказчик</td>
             <td>
               {{client}}
-            <!--<td colspan="3">-->
-            <!--<select (change)="onChangeClient($event.target.value)" class="custom-select">-->
-              <!--<option *ngIf="isEmptyMaterialsList" value="-1">Нет заказчиков с телефоном {{phoneNumber}}</option>-->
-              <!--<option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">-->
-              <!--Ваберите заказчика-->
-              <!--</option>-->
-              <!--<option *ngFor="let item of clientService.clients"-->
-              <!--value={{item.id}}>{{item.name + ' : ' + item.phone}}-->
-              <!--</option>-->
-              <!--</select>-->
             </td>
           </tr>
 
