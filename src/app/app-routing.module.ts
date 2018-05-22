@@ -20,6 +20,7 @@ import {ReceptionGuard} from './reception.guard';
 import {MaterialDetailComponent} from './materials/material-detail/material-detail.component';
 import {ProcessDetailComponent} from './processes/process-detail/process-detail.component';
 import {OrderItemDetailComponent} from './orders/order-item-detail/order-item-detail.component';
+import {ClientDetailComponent} from './clients/client-detail/client-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'order', component: OrdersComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'company', component: CompaniesComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'reception', component: ReceptionsComponent, canActivate: [AuthGuard, ReceptionGuard] },
+  { path: 'client/:id', component: ClientDetailComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'client', component: ClientsComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'material/:id', component: MaterialDetailComponent, canActivate: [AuthGuard, ReceptionGuard] },
   { path: 'material', component: MaterialsComponent, canActivate: [AuthGuard, ReceptionGuard] },

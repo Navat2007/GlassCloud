@@ -1,0 +1,96 @@
+<div class="card" *ngIf="client">
+  <div class="card-header primary-color lighten-1 white-text">
+    <h2>Клиент: {{ client.name }}</h2>
+  </div>
+
+  <div class="card-body">
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+        <td>Юр.лицо / Физ.лицо</td>
+        <td *ngIf="disabled">{{client.type.name}}</td>
+        <td *ngIf="!disabled">
+          <select (change)="onChangeType($event.target.value)" class="custom-select">
+            <option selected *ngIf="!idSelectedType" value="-1">
+              Ваберите тип клиента
+            </option>
+            <option *ngFor="let item of service.clientTypes"
+                    value={{item.id}}>{{item.name}}
+            </option>
+          </select>
+        </td>
+        <td>Скидка, %</td>
+        <td *ngIf="disabled">{{client.discount}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="client.discount" type="number" class="card-text">
+        </td>
+      </tr>
+      <tr>
+        <td *ngIf="!disabled">ФИО</td>
+        <td *ngIf="!disabled" colspan="3">
+          <input [(ngModel)]="client.name" class="card-text fio">
+        </td>
+      </tr>
+
+      <tr>
+        <td>ИНН</td>
+        <td *ngIf="disabled">{{client.inn}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="client.inn" class="card-text">
+        </td>
+
+        <td>Расчетный счет</td>
+        <td *ngIf="disabled">{{client.account}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="client.account" class="card-text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>Номер телефона</td>
+        <td *ngIf="disabled">{{client.phone}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="client.phone" class="card-text">
+        </td>
+
+        <td>Email</td>
+        <td *ngIf="disabled">{{client.email}}</td>
+        <td *ngIf="!disabled">
+          <input [(ngModel)]="client.email" type="email" class="card-text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>Комментарий</td>
+        <td *ngIf="disabled" colspan="3">{{client.desc}}</td>
+        <td *ngIf="!disabled" colspan="3">
+          <textarea [(ngModel)]="client.desc" class="card-text form-control"></textarea>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="card-body actions">
+    <!--<h4 class="card-title">Special title treatment</h4>-->
+    <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+    <a *ngIf="disabled" class="btn btn-outline-green waves-light" mdbWavesEffect (click)="edit()">Редактировать</a>
+    <a *ngIf="!disabled" class="btn btn-outline-green waves-light" mdbWavesEffect (click)="save()">Сохранить</a>
+    <a *ngIf="!disabled" class="btn btn-outline-gray waves-light" mdbWavesEffect (click)="cancel()">Отменить</a>
+    <a *ngIf="disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteModal"
+       (click)="glass_service.id = client.id; glass_service.service = service; glass_service.isGoBack = true">Удалить</a>
+    <a *ngIf="disabled" class="btn btn-outline-orange waves-light" mdbWavesEffect (click)="goBack()">Назад</a>
+  </div>
+</div>
+
+<app-delete-request #glass_service></app-delete-request>

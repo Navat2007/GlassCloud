@@ -1,11 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {environment} from '../../../environments/environment';
 import {ActivatedRoute} from '@angular/router';
-import {GlassServiceService} from '../../services/glass-service.service';
-import {Material, MaterialColor} from '../../material';
-import {LoggingService} from '../../services/logging.service';
-import {HttpClient} from '@angular/common/http';
+import {Material} from '../../material';
 import {MaterialService} from '../../services/material.service';
 import {MaterialColorService} from '../../services/material-color.service';
 

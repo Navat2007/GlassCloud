@@ -33,6 +33,7 @@ import {MaterialDetailComponent} from './materials/material-detail/material-deta
 import {DeleteRequestComponent} from './delete-request/delete-request.component';
 import {ProcessDetailComponent} from './processes/process-detail/process-detail.component';
 import {OrderItemDetailComponent} from './orders/order-item-detail/order-item-detail.component';
+import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -78,6 +79,7 @@ const appRoutes: Routes = [
     DeleteRequestComponent,
     ProcessDetailComponent,
     OrderItemDetailComponent,
+    ClientDetailComponent,
   ],
   providers: [
     // AuthService,
