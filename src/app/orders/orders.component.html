@@ -1,4 +1,8 @@
 <h1>Заказы</h1>
+<button (click)="add()"
+        class="btn btn-outline-blue" type="button" data-toggle="modal" data-target="#addModal">
+  Новый
+</button>
 <table class="table table-hover">
   <thead class="blue-grey lighten-4">
   <tr>
@@ -26,22 +30,103 @@
     <td>{{item.summa}}</td>
     <td>{{item.discountSum}}</td>
     <!--<td>-->
-      <!--<a routerLink="/order/{{item.id}}">-->
-        <!--<span class="badge">{{item.id}}</span> {{item.name}}-->
-      <!--</a>-->
+    <!--<a routerLink="/order/{{item.id}}">-->
+    <!--<span class="badge">{{item.id}}</span> {{item.name}}-->
+    <!--</a>-->
     <!--</td>-->
     <!--<td>-->
-      <!--<button class="delete" title="delete order"-->
-              <!--(click)="print(item)">Print</button>-->
+    <!--<button class="delete" title="delete order"-->
+    <!--(click)="print(item)">Print</button>-->
     <!--</td>-->
     <!--<td>-->
-      <!--<button class="delete" title="delete order"-->
-              <!--(click)="edit(item)">Edit</button>-->
+    <!--<button class="delete" title="delete order"-->
+    <!--(click)="edit(item)">Edit</button>-->
     <!--</td>-->
     <!--<td>-->
-      <!--<button class="delete" title="delete order"-->
-              <!--(click)="delete(item)">x</button>-->
+    <!--<button class="delete" title="delete order"-->
+    <!--(click)="delete(item)">x</button>-->
     <!--</td>-->
   </tr>
   </tbody>
 </table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" *ngIf="newOrder">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title " id="exampleModalLabel">Новый заказ</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td>Номер телефона заказчика</td>
+            <td>
+              <!--<input [(ngModel)]="phoneNumber" type="number" class="card-text" (input)="updatePhoneNumber()">-->
+              <ng-select [items]="clientService.clients"
+                         bindLabel="phone"
+                         [loading]="people2Loading"
+                         [searchFn]="customSearchFn">
+                <ng-template ng-option-tmp let-item="item">
+                  {{item.name}} <br/>
+                  <small>{{item.phone}}</small>
+                </ng-template>
+              </ng-select>
+              {{clientId}}
+            </td>
+          </tr>
+          <tr>
+            <td>Заказчик</td>
+            <td colspan="3">
+              <select (change)="onChangeClient($event.target.value)" class="custom-select">
+                <option *ngIf="isEmptyMaterialsList" value="-1">Нет заказчиков с телефоном {{phoneNumber}}</option>
+                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">
+                  Ваберите заказчика
+                </option>
+                <option *ngFor="let item of clientService.clients"
+                        value={{item.id}}>{{item.name + ' : ' + item.phone}}
+                </option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Скидка</td>
+            <td>
+              <input [(ngModel)]="newOrder.discount" type="number" class="card-text" (input)="update()">
+            </td>
+          </tr>
+          <tr>
+            <td>Описание</td>
+            <td colspan="3">
+              <textarea [(ngModel)]="newOrder.desc" class="card-text form-control"></textarea>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <a type="button" class="btn btn-outline-green waves-light" (click)="addItem()"
+           data-dismiss="modal">Добавить</a>
+        <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
+      </div>
+    </div>
+  </div>
+</div>

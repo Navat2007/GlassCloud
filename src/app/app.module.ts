@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import {AppComponent} from './app.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
@@ -30,8 +31,8 @@ import {ReceptionGuard} from './reception.guard';
 import {LoginModule} from './login/login.module';
 import {MaterialDetailComponent} from './materials/material-detail/material-detail.component';
 import {DeleteRequestComponent} from './delete-request/delete-request.component';
-import { ProcessDetailComponent } from './processes/process-detail/process-detail.component';
-import { OrderItemDetailComponent } from './orders/order-item-detail/order-item-detail.component';
+import {ProcessDetailComponent} from './processes/process-detail/process-detail.component';
+import {OrderItemDetailComponent} from './orders/order-item-detail/order-item-detail.component';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     HttpClientXsrfModule,
 
     LoginModule,
+    NgSelectModule,
   ],
   declarations: [
     AppComponent,

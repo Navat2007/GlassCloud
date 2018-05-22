@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Client} from '../client';
 import {environment} from '../../environments/environment';
 import {GlassServiceService} from '../services/glass-service.service';
+import {ClientService} from '../services/client.service';
 
 @Component({
   selector: 'app-clients',
@@ -10,23 +11,15 @@ import {GlassServiceService} from '../services/glass-service.service';
 })
 export class ClientsComponent implements OnInit {
 
-  private serviceUrl = environment.serverHost + '/api/client';
-
-  clients: Client[];
-
   constructor(
-    private service: GlassServiceService<Client>
+    public service: ClientService,
   ) {
-    this.service.setUrl(this.serviceUrl).setName('client');
   }
 
   ngOnInit() {
-    this.getProcessTypes();
+    this.service.update();
   }
 
-  getProcessTypes(): void {
-    this.service.getItems()
-      .subscribe(items => this.clients = items);
-  }
+
 
 }
