@@ -9,8 +9,8 @@ export class Order {
   number: string;
   desc: string;
   accountNumber: string;
-  discount: string;
-  discountSum: string;
+  discount: number;
+  discountSum: number;
   count: number;
   summa: number;
   area: number;

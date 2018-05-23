@@ -24,11 +24,11 @@ export class AuthInterceptor implements HttpInterceptor {
       headers = request.headers.set(this.as.X_XSRF_TOKEN, xsrfToken);
     }
 
-    if (authToken) {
-      // console.log('add authToken');
-      // console.log(authToken);
-      headers = request.headers.set(this.as.COOKIE_AUTH, authToken);
-    }
+    // if (authToken) {
+    //   // console.log('add authToken');
+    //   // console.log(authToken);
+    //   headers = request.headers.set(this.as.COOKIE_AUTH, authToken);
+    // }
 
     request = request.clone({
       headers: headers,

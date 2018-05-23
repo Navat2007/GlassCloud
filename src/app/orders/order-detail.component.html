@@ -89,8 +89,8 @@
         <!--(click)="edit(item)">Edit</button>-->
         <!--</td>-->
         <!--<td>-->
-          <!--<a *ngIf="disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteModal"-->
-             <!--(click)="glass_service.id = item.id; glass_service.service = orderItemService; glass_service.isGoBack = false">Удалить</a>-->
+        <!--<a *ngIf="disabled" class="btn btn-outline-red waves-light" data-toggle="modal" data-target="#deleteModal"-->
+        <!--(click)="glass_service.id = item.id; glass_service.service = orderItemService; glass_service.isGoBack = false">Удалить</a>-->
         <!--</td>-->
       </tr>
       </tbody>
@@ -137,12 +137,26 @@
             <td>Толщина материала, мм</td>
             <td *ngIf="idSelectedMaterial">{{depth}}</td>
             <td *ngIf="!idSelectedMaterial">
-              <input [(ngModel)]="depth" type="number" class="card-text" (input)="update()">
+              <input [(ngModel)]="depth" type="number" class="card-text" (input)="update()"
+                     required #materialDepth="ngModel">
+              <div *ngIf="materialDepth.invalid && (materialDepth.dirty || materialDepth.touched)"
+                   class="alert alert-danger">
+                <div *ngIf="materialDepth.errors.required">
+                  Это поле обязательное
+                </div>
+              </div>
             </td>
 
             <td>Количество, шт.</td>
             <td>
-              <input [(ngModel)]="newItem.count" type="number" class="card-text">
+              <input [(ngModel)]="newItem.count" type="number" class="card-text"
+                     required #count="ngModel">
+              <div *ngIf="count.invalid && (count.dirty || count.touched)"
+                   class="alert alert-danger">
+                <div *ngIf="count.errors.required">
+                  Это поле обязательное
+                </div>
+              </div>
             </td>
           </tr>
           <tr>
@@ -163,12 +177,26 @@
           <tr>
             <td>Длина, мм</td>
             <td>
-              <input [(ngModel)]="newItem.length" type="number" class="card-text">
+              <input [(ngModel)]="newItem.length" type="number" class="card-text"
+                     required #length="ngModel">
+              <div *ngIf="length.invalid && (length.dirty || length.touched)"
+                   class="alert alert-danger">
+                <div *ngIf="length.errors.required">
+                  Это поле обязательное
+                </div>
+              </div>
             </td>
 
             <td>Ширина, мм</td>
             <td>
-              <input [(ngModel)]="newItem.width" type="number" class="card-text">
+              <input [(ngModel)]="newItem.width" type="number" class="card-text"
+                     required #width="ngModel">
+              <div *ngIf="width.invalid && (width.dirty || width.touched)"
+                   class="alert alert-danger">
+                <div *ngIf="width.errors.required">
+                  Это поле обязательное
+                </div>
+              </div>
             </td>
           </tr>
 
@@ -184,7 +212,9 @@
 
       <div class="modal-footer">
         <a type="button" class="btn btn-outline-green waves-light" (click)="addItem()"
-           data-dismiss="modal">Добавить</a>
+           data-dismiss="modal"
+           *ngIf="!count.invalid && !length.invalid && !width.invalid"
+        >Добавить</a>
         <a type="button" class="btn btn-outline-gray waves-light" data-dismiss="modal">Отменить</a>
       </div>
     </div>

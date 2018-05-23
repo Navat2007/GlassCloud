@@ -95,14 +95,39 @@ export class OrderDetailComponent implements OnInit {
       this.order.items = [];
     }
 
-    this.newItem.summa = 110;
-    this.newItem.processSum = 110;
-    this.newItem.perimeter = 110;
-    this.newItem.area = 110;
     this.newItem.number = this.order.items.length + 1;
 
-
     this.order.items.push(this.newItem);
+
+    this.recalculate();
+  }
+
+  private recalculate() {
+    this.newItem.perimeter = (this.newItem.length * this.newItem.width) * 2 * (this.newItem.count / 1000);
+
+    let area = (this.newItem.length * this.newItem.width) / 1000000;
+    if (area < (0.0625 * this.newItem.count)) {
+      area = 0.0625 * this.newItem.count;
+    } else {
+      area = area * this.newItem.count;
+    }
+    const summa = area * this.newItem.material.price;
+    this.newItem.area = area;
+
+    let processSum = 0;
+    this.newItem.process.forEach(process => {
+      processSum += this.newItem.perimeter * process.price;
+    });
+
+    this.newItem.processSum = processSum;
+
+    this.newItem.summa = summa + processSum;
+
+    this.order.summa = 0;
+    this.order.items.forEach(item => {
+      this.order.summa += item.summa;
+    });
+    this.order.discountSum = this.order.summa - (this.order.summa * this.order.discount / 100.0);
   }
 
   save(): void {
