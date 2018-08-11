@@ -25,7 +25,7 @@ export class SelectReceptionComponent implements OnInit {
       .subscribe(json => {
         this.receptions = json.data;
         if (this.receptions.length > 0) {
-          this.receptionId = json[0].id;
+          this.receptionId = json.data[0].id;
         }
       });
   }

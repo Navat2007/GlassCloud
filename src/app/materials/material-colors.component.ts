@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MaterialColor} from '../material';
-import {environment} from '../../environments/environment';
-import {GlassServiceService} from '../services/glass-service.service';
 import {MaterialColorService} from '../services/material-color.service';
 
 @Component({
