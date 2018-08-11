@@ -7,7 +7,7 @@ export class Order {
   id: string;
   name: string;
   number: string;
-  desc: string;
+  description: string;
   accountNumber: string;
   discount: number;
   discountSum: number;

@@ -27,7 +27,7 @@ export class ReceptionsComponent implements OnInit {
 
   getProcessTypes(): void {
     this.service.getItems()
-      .subscribe(json => this.receptions = json.data);
+      .subscribe(json => this.receptions = json.data.sort((a, b) => a.name < b.name ? -1 : 1));
   }
 
   delete(reception: Reception): void {

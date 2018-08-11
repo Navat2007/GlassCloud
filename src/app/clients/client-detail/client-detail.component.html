@@ -72,9 +72,9 @@
 
       <tr>
         <td>Комментарий</td>
-        <td *ngIf="disabled" colspan="3">{{client.desc}}</td>
+        <td *ngIf="disabled" colspan="3">{{client.description}}</td>
         <td *ngIf="!disabled" colspan="3">
-          <textarea [(ngModel)]="client.desc" class="card-text form-control"></textarea>
+          <textarea [(ngModel)]="client.description" class="card-text form-control"></textarea>
         </td>
       </tr>
       </tbody>

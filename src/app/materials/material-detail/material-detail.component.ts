@@ -50,7 +50,7 @@ export class MaterialDetailComponent implements OnInit {
     console.log(this.material.price);
     this.material.color.id = this.colorId;
     this.service.updateItem(this.material, this.material.id)
-      .subscribe(res => this.material = res);
+      .subscribe(json => this.material = json.data);
       // .subscribe(() => this.goBack());
     this.disabled = true;
   }

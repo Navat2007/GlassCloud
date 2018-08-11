@@ -28,7 +28,7 @@ export class MaterialColorService {
 
   update() {
     this.getItems()
-      .subscribe(json => this.materialColors = json.data);
+      .subscribe(json => this.materialColors = json.data.sort((a, b) => a.name < b.name ? -1 : 1));
   }
 
   getItems(): Observable<JsonItemResponse<MaterialColor[]>> {

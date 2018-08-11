@@ -5,7 +5,7 @@ export class Client {
   account: string;
   phone: string;
   email: string;
-  desc: string;
+  description: string;
   discount: number;
   type: ClientType;
   creationDate: Date;

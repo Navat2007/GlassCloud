@@ -27,7 +27,7 @@ export class MaterialTypeService {
 
   update() {
     this.getItems()
-      .subscribe(json => this.materialTypes = json.data);
+      .subscribe(json => this.materialTypes = json.data.sort((a, b) => a.name < b.name ? -1 : 1));
   }
 
   getItems(): Observable<JsonItemResponse<MaterialType[]>> {

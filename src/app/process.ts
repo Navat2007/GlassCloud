@@ -4,7 +4,7 @@ export class Process {
   id: string;
   depth: number;
   price: number;
-  desc: string;
+  description: string;
   type: ProcessType;
   material: Material[];
 }
@@ -12,5 +12,5 @@ export class Process {
 export class ProcessType {
   id: string;
   name: string;
-  desc: string;
+  description: string;
 }

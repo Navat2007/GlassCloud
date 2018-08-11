@@ -38,9 +38,9 @@
       </tr>
       <tr>
         <td>Примечание</td>
-        <td *ngIf="disabled">{{processItem.desc}}</td>
+        <td *ngIf="disabled">{{processItem.description}}</td>
         <td *ngIf="!disabled">
-          <textarea [(ngModel)]="processItem.desc" class="card-text form-control"></textarea>
+          <textarea [(ngModel)]="processItem.description" class="card-text form-control"></textarea>
         </td>
       </tr>
       </tbody>

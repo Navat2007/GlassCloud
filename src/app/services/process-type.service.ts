@@ -28,7 +28,7 @@ export class ProcessTypeService {
 
   update() {
     this.getItems()
-      .subscribe(json => this.processTypes = json.data);
+      .subscribe(json => this.processTypes = json.data.sort((a, b) => a.name < b.name ? -1 : 1));
   }
 
   getItems(): Observable<JsonItemResponse<ProcessType[]>> {

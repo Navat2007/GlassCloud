@@ -30,9 +30,9 @@
       </tr>
       <tr>
         <td>Описание</td>
-        <td *ngIf="disabled">{{order.desc}}</td>
+        <td *ngIf="disabled">{{order.description}}</td>
         <td *ngIf="!disabled" colspan="3">
-          <textarea [(ngModel)]="order.desc" class="card-text form-control"></textarea>
+          <textarea [(ngModel)]="order.description" class="card-text form-control"></textarea>
         </td>
       </tr>
       </tbody>

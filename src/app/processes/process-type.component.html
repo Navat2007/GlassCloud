@@ -14,12 +14,12 @@
   <tbody>
   <tr *ngFor="let item of service.processTypes">
     <td *ngIf="!isEdit">{{item.name}}</td>
-    <td *ngIf="!isEdit">{{item.desc}}</td>
+    <td *ngIf="!isEdit">{{item.description}}</td>
     <td *ngIf="isEdit">
       <input [(ngModel)]="item.name" class="form-control">
     </td>
     <td *ngIf="isEdit">
-      <textarea [(ngModel)]="item.desc" class="card-text form-control"></textarea>
+      <textarea [(ngModel)]="item.description" class="card-text form-control"></textarea>
     </td>
     <td *ngIf="isEdit" class="input-group mb-3">
       <div class="input-group-append">
@@ -65,7 +65,7 @@
           <tr>
             <td>Описание</td>
             <td>
-              <textarea *ngIf="newItem" [(ngModel)]="newItem.desc" class="form-control"></textarea>
+              <textarea *ngIf="newItem" [(ngModel)]="newItem.description" class="form-control"></textarea>
             </td>
           </tr>
           </tbody>

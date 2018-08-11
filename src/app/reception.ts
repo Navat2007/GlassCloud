@@ -4,7 +4,7 @@ export class Reception {
   id: string;
   name: string;
   orderNumPrefix: string;
-  desc: string;
+  description: string;
   address: string;
   company: Company;
   phone: string;
