@@ -29,8 +29,7 @@ export class ClientsComponent implements OnInit {
   }
 
   addClient() {
-    this.newClient.type = new ClientType();
-    this.newClient.type.id = this.idSelectedType;
+    this.newClient.type = this.service.getById(this.idSelectedType);
 
     this.service.addItem(this.newClient)
       .subscribe(res => this.service.update());

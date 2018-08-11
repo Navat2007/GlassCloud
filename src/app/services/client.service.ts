@@ -61,4 +61,8 @@ export class ClientService {
   getClientTypes(): Observable<JsonItemResponse<ClientType[]>> {
     return this.http.get<JsonItemResponse<ClientType[]>>(this.serviceUrl + '/type');
   }
+
+  getById(typeId: string) {
+    return this.clientTypes.find(c => c.id === typeId);
+  }
 }
