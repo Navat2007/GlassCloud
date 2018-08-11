@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Material, MaterialColor, MaterialType} from '../material';
-import {environment} from '../../environments/environment';
+import {Material} from '../material';
 import {MaterialService} from '../services/material.service';
 import {MaterialColorService} from '../services/material-color.service';
 import {MaterialTypeService} from '../services/material-type.service';
