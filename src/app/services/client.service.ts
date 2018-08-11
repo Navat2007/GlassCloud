@@ -42,11 +42,11 @@ export class ClientService {
     return this.service.getItems();
   }
 
-  getItem(id: number): Observable<JsonItemResponse<Client>> {
+  getItem(id: string): Observable<JsonItemResponse<Client>> {
     return this.service.getItem(id);
   }
 
-  deleteItem(id: number): Observable<JsonItemResponse<Client>> {
+  deleteItem(id: string): Observable<JsonItemResponse<Client>> {
     return this.service.deleteItem(id);
   }
 
@@ -54,7 +54,7 @@ export class ClientService {
     return this.service.addItem(item);
   }
 
-  updateItem(item: Client, id: number): Observable<any> {
+  updateItem(item: Client, id: string): Observable<any> {
     return this.service.updateItem(item, id);
   }
 

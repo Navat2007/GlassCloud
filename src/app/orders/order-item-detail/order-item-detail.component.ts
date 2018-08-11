@@ -25,7 +25,7 @@ export class OrderItemDetailComponent implements OnInit {
   idSelectedMaterial?: number;
 
   isEmptyProcessList = false;
-  idSelectedProcess?: number;
+  idSelectedProcess?: string;
 
   constructor(
     public service: OrderItemService,
@@ -93,7 +93,7 @@ export class OrderItemDetailComponent implements OnInit {
   }
 
   getItem(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
       .subscribe(json => {
         this.orderItem = json.data;
@@ -132,12 +132,11 @@ export class OrderItemDetailComponent implements OnInit {
     this.idSelectedProcess = null;
   }
 
-  onChangeProcess(id: number) {
-    id = +id;
-    if (id === -1) {
+  onChangeProcess(id: string) {
+    if (id === '-1') {
       return;
     }
-    this.idSelectedProcess = +id;
+    this.idSelectedProcess = id;
   }
 
   addProcess() {
@@ -149,8 +148,7 @@ export class OrderItemDetailComponent implements OnInit {
       .subscribe(json => this.orderItem.process.push(json.data));
   }
 
-  deleteProcess(id: number) {
-    id = +id;
+  deleteProcess(id: string) {
     this.orderItem.process = this.orderItem.process
       .filter(i => i.id !== id);
   }

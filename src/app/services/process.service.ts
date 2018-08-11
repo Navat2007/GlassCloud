@@ -35,11 +35,11 @@ export class ProcessService {
     return this.service.getItems();
   }
 
-  getItem(id: number): Observable<JsonItemResponse<Process>> {
+  getItem(id: string): Observable<JsonItemResponse<Process>> {
     return this.service.getItem(id);
   }
 
-  deleteItem(id: number): Observable<JsonItemResponse<Process>> {
+  deleteItem(id: string): Observable<JsonItemResponse<Process>> {
     return this.service.deleteItem(id);
   }
 
@@ -47,7 +47,7 @@ export class ProcessService {
     return this.service.addItem(item);
   }
 
-  updateItem(item: Process, id: number): Observable<any> {
+  updateItem(item: Process, id: string): Observable<any> {
     return this.service.updateItem(item, id);
   }
 }

@@ -36,7 +36,7 @@ export class GlassServiceService<T, K> {
       );
   }
 
-  getItem(id: number): Observable<T> {
+  getItem(id: string): Observable<T> {
     const url = `${this.serviceUrl}/${id}`;
     return this.http.get<T>(url)
       .pipe(
@@ -53,7 +53,7 @@ export class GlassServiceService<T, K> {
       );
   }
 
-  deleteItem(id: number): Observable<T> {
+  deleteItem(id: string): Observable<T> {
     const url = `${this.serviceUrl}/${id}`;
 
     return this.http.delete<T>(url)
@@ -63,7 +63,7 @@ export class GlassServiceService<T, K> {
       );
   }
 
-  updateItem(item: K, id: number): Observable<T> {
+  updateItem(item: K, id: string): Observable<T> {
     const url = `${this.serviceUrl}/${id}`;
 
     return this.http.put(url, item)

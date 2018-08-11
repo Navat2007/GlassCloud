@@ -1,7 +1,7 @@
 import {Material} from './material';
 
 export class Process {
-  id: number;
+  id: string;
   depth: number;
   price: number;
   desc: string;
@@ -10,7 +10,7 @@ export class Process {
 }
 
 export class ProcessType {
-  id: number;
+  id: string;
   name: string;
   desc: string;
 }

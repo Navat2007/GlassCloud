@@ -6,7 +6,6 @@ import {GlassServiceService} from './glass-service.service';
 import {Material} from '../material';
 import {Observable} from 'rxjs';
 import {JsonItemResponse} from './jsonItem';
-import {Client} from '../client';
 
 @Injectable({
   providedIn: 'root'
@@ -35,11 +34,11 @@ export class MaterialService {
     return this.service.getItems();
   }
 
-  getItem(id: number): Observable<JsonItemResponse<Material>> {
+  getItem(id: string): Observable<JsonItemResponse<Material>> {
     return this.service.getItem(id);
   }
 
-  deleteItem(id: number): Observable<JsonItemResponse<Material>> {
+  deleteItem(id: string): Observable<JsonItemResponse<Material>> {
     return this.service.deleteItem(id);
   }
 
@@ -47,7 +46,7 @@ export class MaterialService {
     return this.service.addItem(item);
   }
 
-  updateItem(item: Material, id: number): Observable<any> {
+  updateItem(item: Material, id: string): Observable<any> {
     return this.service.updateItem(item, id);
   }
 }

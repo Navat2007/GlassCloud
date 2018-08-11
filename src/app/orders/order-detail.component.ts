@@ -37,7 +37,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   getOrder(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
       .subscribe(json => this.order = json.data);
   }
@@ -64,9 +64,8 @@ export class OrderDetailComponent implements OnInit {
     return list;
   }
 
-  onChangeMaterial(id: number) {
-    id = +id;
-    if (id === -1) {
+  onChangeMaterial(id: string) {
+    if (id === '-1') {
       return;
     }
     this.idSelectedMaterial = +id;

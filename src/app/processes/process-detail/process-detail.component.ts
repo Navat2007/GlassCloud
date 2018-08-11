@@ -17,10 +17,10 @@ export class ProcessDetailComponent implements OnInit {
   @Input() processItem: Process;
   disabled = true;
   isEmptyMaterialsList = false;
-  idSelectedMaterial?: number;
+  idSelectedMaterial?: string;
   materialsByDepth: Material[] = [];
 
-  private typeId: number;
+  private typeId: string;
   private materialForAdd?: Material;
 
   constructor(
@@ -61,7 +61,7 @@ export class ProcessDetailComponent implements OnInit {
   }
 
   getItem(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
       .subscribe(json => {
         this.processItem = json.data;
@@ -89,22 +89,21 @@ export class ProcessDetailComponent implements OnInit {
     this.getItem();
   }
 
-  onChangeType(typeId: number) {
-    this.typeId = +typeId;
+  onChangeType(typeId: string) {
+    this.typeId = typeId;
     // this.materialColors.filter(color => color.id === colorId)
   }
 
-  onChangeMaterial(id: number) {
-    id = +id;
-    if (id === -1) {
+  onChangeMaterial(id: string) {
+    if (id === '-1') {
       return;
     }
-    this.idSelectedMaterial = +id;
+    this.idSelectedMaterial = id;
     this.materialService.getItem(id)
       .subscribe(json => this.materialForAdd = json.data);
   }
 
-  deleteMaterial(id: number) {
+  deleteMaterial(id: string) {
     // this.materialService.getItem(id)
     //   .subscribe(item => this.processItem.material.delete(item));
     this.processItem.material = this.processItem.material.filter(item => item.id !== id);

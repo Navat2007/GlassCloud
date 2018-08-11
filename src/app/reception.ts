@@ -1,7 +1,7 @@
 import {Company} from './company';
 
 export class Reception {
-  id: number;
+  id: string;
   name: string;
   orderNumPrefix: string;
   desc: string;

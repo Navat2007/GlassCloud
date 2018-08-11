@@ -4,7 +4,7 @@ import {Material} from './material';
 import {Process} from './process';
 
 export class Order {
-  id: number;
+  id: string;
   name: string;
   number: string;
   desc: string;
@@ -22,7 +22,7 @@ export class Order {
 }
 
 export class OrderItem {
-  id: number;
+  id: string;
   desc: string;
   number: number;
   length: number;

@@ -34,7 +34,7 @@ export class MaterialTypeService {
     return this.service.getItems();
   }
 
-  deleteItem(id: number): Observable<JsonItemResponse<MaterialType>> {
+  deleteItem(id: string): Observable<JsonItemResponse<MaterialType>> {
     return this.service.deleteItem(id);
   }
 
@@ -42,7 +42,15 @@ export class MaterialTypeService {
     return this.service.addItem(item);
   }
 
-  updateItem(item: MaterialType, id: number): Observable<any> {
+  updateItem(item: MaterialType, id: string): Observable<any> {
     return this.service.updateItem(item, id);
+  }
+
+  getById(typeId: string) {
+      return this.materialTypes.find(e => e.id === typeId);
+  }
+
+  getFirst() {
+    return this.materialTypes[0];
   }
 }

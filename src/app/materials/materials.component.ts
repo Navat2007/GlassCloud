@@ -69,7 +69,15 @@ export class MaterialsComponent implements OnInit {
 
   add(): void {
     this.newItem = new Material();
-    this.newItem.color = new MaterialColor();
-    this.newItem.type = new MaterialType();
+    this.newItem.color = this.colorService.getFirst();
+    this.newItem.type = this.typeService.getFirst();
+  }
+
+  changeColor(colorId: string) {
+    this.newItem.color = this.colorService.getById(colorId);
+  }
+
+  changeType(typeId: string) {
+    this.newItem.type = this.typeService.getById(typeId);
   }
 }

@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Process, ProcessType} from '../process';
-import {GlassServiceService} from '../services/glass-service.service';
-import {environment} from '../../environments/environment';
 import {ProcessService} from '../services/process.service';
 import {ProcessTypeService} from '../services/process-type.service';
 
@@ -13,7 +11,7 @@ import {ProcessTypeService} from '../services/process-type.service';
 export class ProcessesComponent implements OnInit {
 
   newItem?: Process;
-  typeId?: number;
+  typeId?: string;
   isValid = false;
 
   constructor(
@@ -27,8 +25,8 @@ export class ProcessesComponent implements OnInit {
     this.processTypeService.update();
   }
 
-  onChangeProcessType(id: number) {
-    this.typeId = +id;
+  onChangeProcessType(id: string) {
+    this.typeId = id;
     // this.materialColors.filter(color => color.id === colorId)
   }
 

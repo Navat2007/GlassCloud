@@ -16,10 +16,10 @@ import {OrderItemService} from '../services/order-item.service';
 })
 export class DeleteRequestComponent implements OnInit {
 
-  id: number;
+  id: string;
   service?: GlassServiceService<any, any> | MaterialColorService | MaterialTypeService | MaterialService
     | ProcessService | ProcessTypeService | OrderService | OrderItemService;
-  // | ReceptionService | OrderService;
+  // | ReceptionService | OrderService  | GlassServiceService<any, any>;
   isGoBack = false;
 
   constructor(

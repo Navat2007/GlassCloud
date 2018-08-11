@@ -10,7 +10,7 @@ import {ClientService} from '../services/client.service';
 export class ClientsComponent implements OnInit {
 
   newClient?: Client;
-  idSelectedType?: number;
+  idSelectedType?: string;
 
   constructor(
     public service: ClientService,
@@ -36,8 +36,7 @@ export class ClientsComponent implements OnInit {
       .subscribe(res => this.service.update());
   }
 
-  onChangeType(id: number) {
-    id = +id;
+  onChangeType(id: string) {
     this.idSelectedType = id;
   }
 }

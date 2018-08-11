@@ -31,11 +31,11 @@ export class OrderService {
     return this.service.getItems();
   }
 
-  getItem(id: number): Observable<JsonItemResponse<Order>> {
+  getItem(id: string): Observable<JsonItemResponse<Order>> {
     return this.service.getItem(id);
   }
 
-  deleteItem(id: number): Observable<JsonItemResponse<Order>> {
+  deleteItem(id: string): Observable<JsonItemResponse<Order>> {
     return this.service.deleteItem(id);
   }
 
@@ -43,7 +43,7 @@ export class OrderService {
     return this.service.addItem(item);
   }
 
-  updateItem(item: Order, id: number): Observable<any> {
+  updateItem(item: Order, id: string): Observable<any> {
     return this.service.updateItem(item, id);
   }
 }

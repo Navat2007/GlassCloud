@@ -35,7 +35,7 @@ export class MaterialColorService {
     return this.service.getItems();
   }
 
-  deleteItem(id: number): Observable<JsonItemResponse<MaterialColor>> {
+  deleteItem(id: string): Observable<JsonItemResponse<MaterialColor>> {
     return this.service.deleteItem(id);
   }
 
@@ -44,7 +44,15 @@ export class MaterialColorService {
     return this.service.addItem(item);
   }
 
-  updateItem(item: MaterialColor, id: number): Observable<any> {
+  updateItem(item: MaterialColor, id: string): Observable<any> {
     return this.service.updateItem(item, id);
+  }
+
+  getById(colorId: string) {
+    return this.materialColors.find(e => e.id === colorId);
+  }
+
+  getFirst() {
+    return this.materialColors[0];
   }
 }

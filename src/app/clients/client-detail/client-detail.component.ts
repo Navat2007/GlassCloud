@@ -13,7 +13,7 @@ export class ClientDetailComponent implements OnInit {
 
   @Input() client: Client;
   disabled = true;
-  clientTypeId?: number;
+  clientTypeId?: string;
 
   constructor(
     public service: ClientService,
@@ -27,7 +27,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   getClient(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
       .subscribe(json => {
         this.client = json.data;

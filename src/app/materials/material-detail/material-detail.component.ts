@@ -14,7 +14,7 @@ export class MaterialDetailComponent implements OnInit {
   @Input() material: Material;
   disabled = true;
 
-  private colorId: number;
+  private colorId: string;
 
   constructor(
     public service: MaterialService,
@@ -30,7 +30,7 @@ export class MaterialDetailComponent implements OnInit {
   }
 
   getMaterial(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
       .subscribe(json => {
         this.material = json.data;
@@ -60,8 +60,7 @@ export class MaterialDetailComponent implements OnInit {
     this.getMaterial();
   }
 
-  onChangeColor(colorId: number) {
-    this.colorId = +colorId;
-    // this.materialColors.filter(color => color.id === colorId)
+  onChangeColor(colorId: string) {
+    this.colorId = colorId;
   }
 }

@@ -38,7 +38,7 @@ export class ReceptionService {
       );
   }
 
-  selectReception(id: number): Observable<boolean[]> {
+  selectReception(id: string): Observable<boolean[]> {
     return this.http.post<boolean[]>(this.receptionUrl + '/select/' + id, '')
       .pipe(
         catchError(this.logger.handleError(' select Reception', []))

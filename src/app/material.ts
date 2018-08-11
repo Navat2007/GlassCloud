@@ -1,21 +1,20 @@
 export class Material {
-  id: number;
+  id: string;
   depth: number;
   length: number;
   width: number;
   price: number;
-  desc: string;
-  // name: string;
+  description: string;
   color: MaterialColor;
   type: MaterialType;
 }
 
 export class MaterialColor {
-  id: number;
+  id: string;
   name: string;
 }
 
 export class MaterialType {
-  id: number;
+  id: string;
   name: string;
 }

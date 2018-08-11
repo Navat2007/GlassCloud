@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class SelectReceptionComponent implements OnInit {
 
   receptions: Reception[];
-  private receptionId: number;
+  private receptionId: string;
 
   constructor(private service: ReceptionService, private router: Router, ) {
   }
@@ -38,7 +38,7 @@ export class SelectReceptionComponent implements OnInit {
     }
   }
 
-  onChange(receptionId: number) {
+  onChange(receptionId: string) {
     console.log(receptionId);
     this.receptionId = receptionId;
   }

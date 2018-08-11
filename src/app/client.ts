@@ -1,5 +1,5 @@
 export class Client {
-  id: number;
+  id: string;
   name: string;
   inn: string;
   account: string;
@@ -13,7 +13,7 @@ export class Client {
 }
 
 export class ClientType {
-  id: number;
+  id: string;
   name: string;
 }
 
