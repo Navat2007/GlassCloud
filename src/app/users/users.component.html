@@ -5,27 +5,33 @@
     <th>ФИО</th>
     <th>login</th>
     <th>email</th>
-    <!--<th>Роль</th>-->
-    <th>Статус</th>
+    <th>Роль</th>
+    <th>Телефон</th>
+    <th>Разблокирован</th>
+    <th>Комментарий</th>
     <th></th>
     <th></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of users" routerLink="/process/{{item.id}}">
+  <tr *ngFor="let item of service.users" routerLink="/process/{{item.id}}">
     <td>{{item.name}}</td>
     <td>{{item.login}}</td>
     <td>{{item.email}}</td>
-    <!--<td>{{item.role}}</td>-->
-    <td>{{item.status}}</td>
+    <td>{{item.role}}</td>
+    <td>{{item.phone}}</td>
     <td>
-      <button class="delete" title="delete order"
-              (click)="edit(item)">Edit</button>
+      <input type="checkbox" [(ngModel)]="item.enabled" disabled>
     </td>
-    <td>
-      <button class="delete" title="delete order"
-              (click)="delete(item)">x</button>
-    </td>
+    <td>{{item.comment}}</td>
+    <!--<td>-->
+      <!--<button class="delete" title="delete order"-->
+              <!--(click)="edit(item)">Edit</button>-->
+    <!--</td>-->
+    <!--<td>-->
+      <!--<button class="delete" title="delete order"-->
+              <!--(click)="delete(item)">x</button>-->
+    <!--</td>-->
   </tr>
   </tbody>
 </table>

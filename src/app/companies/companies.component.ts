@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Company} from '../company';
-import {companies} from '../mock-dtos';
 
 @Component({
   selector: 'app-companies',
@@ -12,7 +11,7 @@ export class CompaniesComponent implements OnInit {
   companies: Company[];
 
   constructor() {
-    this.companies = companies;
+    // this.companies = companies;
   }
 
   ngOnInit() {
