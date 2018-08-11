@@ -1,5 +1,3 @@
-import {Reception} from './reception';
-import {Client} from './client';
 import {Material} from './material';
 import {Process} from './process';
 
@@ -24,7 +22,7 @@ export class Order {
 
 export class OrderItem {
   id: string;
-  desc: string;
+  description: string;
   number: number;
   length: number;
   width: number;
@@ -35,4 +33,6 @@ export class OrderItem {
   summa: number;
   material: Material;
   process: Process[];
+  orderId: string;
+  materialId: string;
 }

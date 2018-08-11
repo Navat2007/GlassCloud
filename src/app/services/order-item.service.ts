@@ -27,8 +27,8 @@ export class OrderItemService {
 
   }
 
-  getItems(): Observable<JsonItemResponse<OrderItem[]>> {
-    return this.service.getItems();
+  getItems(orderId: string): Observable<JsonItemResponse<OrderItem[]>> {
+    return this.service.getItemsById(orderId);
   }
 
   getItem(id: string): Observable<JsonItemResponse<OrderItem>> {

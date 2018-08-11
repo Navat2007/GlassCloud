@@ -36,6 +36,14 @@ export class GlassServiceService<T, K> {
       );
   }
 
+  getItemsById(id: string): Observable<any> {
+    return this.http.get<T>(this.serviceUrl + '/' + id)
+      .pipe(
+        tap(orders => this.logging.log(`fetched ${name}` + orders)),
+        catchError(this.logging.handleError('get ${name}'))
+      );
+  }
+
   getItem(id: string): Observable<T> {
     const url = `${this.serviceUrl}/${id}`;
     return this.http.get<T>(url)

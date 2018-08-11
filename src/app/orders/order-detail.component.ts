@@ -25,7 +25,7 @@ export class OrderDetailComponent implements OnInit {
     public materialService: MaterialService,
     public orderItemService: OrderItemService,
     private route: ActivatedRoute,
-    private service: OrderService,
+    public service: OrderService,
     private location: Location
   ) {
   }
@@ -39,7 +39,16 @@ export class OrderDetailComponent implements OnInit {
   getOrder(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
-      .subscribe(json => this.order = json.data);
+      .subscribe(json => {
+        this.order = json.data;
+        this.getOrderItems();
+      });
+  }
+
+  getOrderItems(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.orderItemService.getItems(id)
+      .subscribe(json => this.order.items = json.data);
   }
 
   update() {
@@ -70,7 +79,10 @@ export class OrderDetailComponent implements OnInit {
     }
     this.idSelectedMaterial = +id;
     this.materialService.getItem(id)
-      .subscribe(json => this.newItem.material = json.data);
+      .subscribe(json => {
+        this.newItem.material = json.data;
+        this.newItem.materialId = json.data.id;
+      });
   }
 
   goBack(): void {
@@ -85,6 +97,7 @@ export class OrderDetailComponent implements OnInit {
   add() {
     this.init();
     this.newItem = new OrderItem();
+    this.newItem.orderId = this.order.id;
     this.newItem.material = new Material();
     this.newItem.process = [];
   }
