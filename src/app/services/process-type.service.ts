@@ -46,4 +46,8 @@ export class ProcessTypeService {
   updateItem(item: ProcessType, id: string): Observable<any> {
     return this.service.updateItem(item, id);
   }
+
+  getById(typeId: string) {
+    return this.processTypes.find(e => e.id === typeId);
+  }
 }

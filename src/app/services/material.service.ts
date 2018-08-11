@@ -25,6 +25,10 @@ export class MaterialService {
     this.service.setUrl(this.serviceUrl).setName('material');
   }
 
+  getMaterialsByDepth(depth: number): Material[] {
+    return this.materials.filter(e => e.depth === +depth);
+  }
+
   update() {
     this.getItems()
       .subscribe(json => this.materials = json.data.sort((a, b) => a.type.name < b.type.name ? -1 : 1));
@@ -48,5 +52,9 @@ export class MaterialService {
 
   updateItem(item: Material, id: string): Observable<any> {
     return this.service.updateItem(item, id);
+  }
+
+  getById(materialId: string) {
+    return this.materials.find(e => e.id === materialId);
   }
 }

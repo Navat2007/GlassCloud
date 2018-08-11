@@ -65,7 +65,8 @@
           <tr>
             <td>Толщина, мм</td>
             <td>
-              <input [(ngModel)]="newItem.depth" type="number" class="card-text">
+              <input [(ngModel)]="newItem.depth" type="number" class="card-text" *ngIf="selectedMaterials.size == 0">
+              <input [(ngModel)]="newItem.depth" type="number" class="card-text" *ngIf="selectedMaterials.size > 0" disabled>
             </td>
             <td>Стоимость, руб.</td>
             <td>
@@ -84,6 +85,34 @@
             </td>
             <td></td>
             <td></td>
+          </tr>
+          <tr *ngIf="newItem.depth > 0">
+            <td>Материал</td>
+            <td>
+              <select (change)="onChangeMaterial($event.target.value)" class="custom-select">
+                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">
+                  Ваберите материал
+                </option>
+                <option *ngFor="let item of getMaterials(newItem.depth)" value={{item.id}}>
+                  {{item.type.name}} : {{item.color.name}} : {{item.depth}}
+                </option>
+              </select>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr *ngIf="selectedMaterials.size > 0">
+            <td colspan="4">
+            <table class="table">
+              <tr *ngFor="let item of selectedMaterials">
+                <td>{{item.type.name}} : {{item.color.name}} : {{item.depth}}</td>
+                <td>
+                  <a type="button" class="btn-sm btn-outline-danger waves-light" (click)="removeMaterial(item.id)"
+                     data-dismiss="modal">x</a>
+                </td>
+              </tr>
+            </table>
+            </td>
           </tr>
           <tr>
             <td>Примечание</td>
