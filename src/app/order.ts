@@ -5,7 +5,6 @@ import {Process} from './process';
 
 export class Order {
   id: string;
-  name: string;
   number: string;
   description: string;
   accountNumber: string;
@@ -15,9 +14,11 @@ export class Order {
   summa: number;
   area: number;
   perimeter: number;
-  updateDate: string;
-  receptionOfOrder: Reception;
-  client: Client;
+  lastUpdated: string;
+  reception: string;
+  receptionId: string;
+  clientName: string;
+  clientId: string;
   items: OrderItem[];
 }
 

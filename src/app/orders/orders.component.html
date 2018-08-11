@@ -16,16 +16,15 @@
     <th>Сумма со скидкой</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let item of orders" routerLink="/order/{{item.id}}">
     <th scope="row">{{item.number}}</th>
-    <td>{{item.updateDate}}</td>
+    <td>{{item.lastUpdated | date: 'yyyy.dd.MM HH:ss'}}</td>
     <td>{{item.description}}</td>
-    <td>{{item.client.name}}</td>
-    <td>{{item.receptionOfOrder.name}}</td>
+    <td>{{item.clientName}}</td>
+    <td>{{item.reception}}</td>
     <td>{{item.discount}}</td>
     <td>{{item.summa}}</td>
     <td>{{item.discountSum}}</td>
