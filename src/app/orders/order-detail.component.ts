@@ -39,7 +39,7 @@ export class OrderDetailComponent implements OnInit {
   getOrder(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
-      .subscribe(order => this.order = order);
+      .subscribe(json => this.order = json.data);
   }
 
   update() {
@@ -71,7 +71,7 @@ export class OrderDetailComponent implements OnInit {
     }
     this.idSelectedMaterial = +id;
     this.materialService.getItem(id)
-      .subscribe(res => this.newItem.material = res);
+      .subscribe(json => this.newItem.material = json.data);
   }
 
   goBack(): void {

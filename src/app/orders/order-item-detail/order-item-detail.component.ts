@@ -95,8 +95,8 @@ export class OrderItemDetailComponent implements OnInit {
   getItem(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
-      .subscribe(item => {
-        this.orderItem = item;
+      .subscribe(json => {
+        this.orderItem = json.data;
         this.depth = this.orderItem.material.depth;
       });
   }
@@ -146,7 +146,7 @@ export class OrderItemDetailComponent implements OnInit {
     }
 
     this.processService.getItem(this.idSelectedProcess)
-      .subscribe(item => this.orderItem.process.push(item));
+      .subscribe(json => this.orderItem.process.push(json.data));
   }
 
   deleteProcess(id: number) {

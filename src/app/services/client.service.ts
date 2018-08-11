@@ -5,6 +5,7 @@ import {GlassServiceService} from './glass-service.service';
 import {LoggingService} from './logging.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {JsonItemResponse} from './jsonItem';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import {Observable} from 'rxjs';
 export class ClientService {
 
   private serviceUrl = environment.serverHost + '/api/client';
-  private service: GlassServiceService<Client>;
+  private service: GlassServiceService<JsonItemResponse<Client>, Client>;
 
   clients: Client[];
   clientTypes: ClientType[];
@@ -21,35 +22,35 @@ export class ClientService {
     private http: HttpClient,
     private logging: LoggingService,
   ) {
-    this.service = new GlassServiceService<Client>(this.http, this.logging);
+    this.service = new GlassServiceService<JsonItemResponse<Client>, Client>(this.http, this.logging);
     this.service.setUrl(this.serviceUrl).setName('client');
   }
 
   update() {
     this.getItems()
-      .subscribe(items => {
-        this.clients = items;
+      .subscribe(json => {
+        this.clients = json.data;
       });
   }
 
   updateTypes() {
     this.getClientTypes()
-      .subscribe(items => this.clientTypes = items);
+      .subscribe(json => this.clientTypes = json.data);
   }
 
-  getItems(): Observable<Client[]> {
+  getItems(): Observable<JsonItemResponse<Client[]>> {
     return this.service.getItems();
   }
 
-  getItem(id: number): Observable<Client> {
+  getItem(id: number): Observable<JsonItemResponse<Client>> {
     return this.service.getItem(id);
   }
 
-  deleteItem(id: number): Observable<Client> {
+  deleteItem(id: number): Observable<JsonItemResponse<Client>> {
     return this.service.deleteItem(id);
   }
 
-  addItem(item: Client): Observable<Client> {
+  addItem(item: Client): Observable<JsonItemResponse<Client>> {
     return this.service.addItem(item);
   }
 
@@ -57,7 +58,7 @@ export class ClientService {
     return this.service.updateItem(item, id);
   }
 
-  getClientTypes(): Observable<ClientType[]> {
-    return this.http.get<ClientType[]>(this.serviceUrl + '/type');
+  getClientTypes(): Observable<JsonItemResponse<ClientType[]>> {
+    return this.http.get<JsonItemResponse<ClientType[]>>(this.serviceUrl + '/type');
   }
 }

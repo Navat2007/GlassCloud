@@ -28,7 +28,7 @@ export class OrdersComponent implements OnInit {
 
   getOrders(): void {
     this.service.getItems()
-      .subscribe(orders => this.orders = orders);
+      .subscribe(json => this.orders = json.data);
   }
 
   customSearchFn(term: string, item: Client) {

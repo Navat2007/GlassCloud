@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ProcessType} from '../process';
-import {GlassServiceService} from '../services/glass-service.service';
 import {ProcessTypeService} from '../services/process-type.service';
 
 @Component({

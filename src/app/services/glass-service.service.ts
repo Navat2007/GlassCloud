@@ -7,7 +7,7 @@ import {LoggingService} from './logging.service';
 @Injectable({
   providedIn: 'root'
 })
-export class GlassServiceService<T> {
+export class GlassServiceService<T, K> {
 
   private serviceUrl;
   private name = '';
@@ -18,18 +18,18 @@ export class GlassServiceService<T> {
   ) {
   }
 
-  setUrl(url: string): GlassServiceService<T> {
+  setUrl(url: string): GlassServiceService<T, K> {
     this.serviceUrl = url;
     return this;
   }
 
-  setName(name: string): GlassServiceService<T> {
+  setName(name: string): GlassServiceService<T, K> {
     this.name = name;
     return this;
   }
 
-  getItems(): Observable<T[]> {
-    return this.http.get<T[]>(this.serviceUrl)
+  getItems(): Observable<any> {
+    return this.http.get<T>(this.serviceUrl)
       .pipe(
         tap(orders => this.logging.log(`fetched ${name}` + orders)),
         catchError(this.logging.handleError('get ${name}'))
@@ -45,11 +45,11 @@ export class GlassServiceService<T> {
       );
   }
 
-  addItem(item: T): Observable<T> {
-    return this.http.post<T>(this.serviceUrl, item)
+  addItem(item: K): Observable<T> {
+    return this.http.post<K>(this.serviceUrl, item)
       .pipe(
-        tap((_: T) => this.logging.log(`added ${name} w/ ${item}`)),
-        catchError(this.logging.handleError<T>('add ${name}'))
+        tap(_ => this.logging.log(`added ${name} w/ ${item}`)),
+        catchError(this.logging.handleError<any>('add ${name}'))
       );
   }
 
@@ -63,7 +63,7 @@ export class GlassServiceService<T> {
       );
   }
 
-  updateItem(item: T, id: number): Observable<any> {
+  updateItem(item: K, id: number): Observable<T> {
     const url = `${this.serviceUrl}/${id}`;
 
     return this.http.put(url, item)

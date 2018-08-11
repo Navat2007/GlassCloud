@@ -6,6 +6,7 @@ import {catchError} from 'rxjs/operators';
 import {Reception} from '../reception';
 import {LoggingService} from './logging.service';
 import {environment} from '../../environments/environment';
+import {JsonItemResponse} from './jsonItem';
 
 
 @Injectable({providedIn: 'root'})
@@ -30,8 +31,8 @@ export class ReceptionService {
       .map(res => this.receptionSelected = !!res);
   }
 
-  getReceptions(): Observable<Reception[]> {
-    return this.http.get<Reception[]>(this.receptionUrl)
+  getReceptions(): Observable<JsonItemResponse<Reception[]>> {
+    return this.http.get<any>(this.receptionUrl)
       .pipe(
         catchError(this.logger.handleError('getReceptions', []))
       );

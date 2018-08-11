@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Reception} from '../reception';
 import {environment} from '../../environments/environment';
 import {GlassServiceService} from '../services/glass-service.service';
+import {JsonItemResponse} from '../services/jsonItem';
 
 @Component({
   selector: 'app-receptions',
@@ -15,7 +16,7 @@ export class ReceptionsComponent implements OnInit {
   receptions: Reception[];
 
   constructor(
-    private service: GlassServiceService<Reception>
+    private service: GlassServiceService<JsonItemResponse<Reception>, Reception>
   ) {
     this.service.setUrl(this.serviceUrl).setName('receptionOfOrder');
   }
@@ -26,7 +27,7 @@ export class ReceptionsComponent implements OnInit {
 
   getProcessTypes(): void {
     this.service.getItems()
-      .subscribe(items => this.receptions = items);
+      .subscribe(json => this.receptions = json.data);
   }
 
   delete(reception: Reception): void {

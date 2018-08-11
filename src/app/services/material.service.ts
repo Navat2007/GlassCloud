@@ -5,6 +5,8 @@ import {environment} from '../../environments/environment';
 import {GlassServiceService} from './glass-service.service';
 import {Material} from '../material';
 import {Observable} from 'rxjs';
+import {JsonItemResponse} from './jsonItem';
+import {Client} from '../client';
 
 @Injectable({
   providedIn: 'root'
@@ -13,35 +15,35 @@ export class MaterialService {
 
   private serviceUrl = environment.serverHost + '/api/material';
 
-  private service: GlassServiceService<Material>;
+  private service: GlassServiceService<JsonItemResponse<Material>, Material>;
   materials: Material[];
 
   constructor(
     private http: HttpClient,
     private logging: LoggingService,
   ) {
-    this.service = new GlassServiceService<Material>(this.http, this.logging);
+    this.service = new GlassServiceService<JsonItemResponse<Material>, Material>(this.http, this.logging);
     this.service.setUrl(this.serviceUrl).setName('material');
   }
 
   update() {
     this.getItems()
-      .subscribe(items => this.materials = items);
+      .subscribe(json => this.materials = json.data);
   }
 
-  getItems(): Observable<Material[]> {
+  getItems(): Observable<JsonItemResponse<Material[]>> {
     return this.service.getItems();
   }
 
-  getItem(id: number): Observable<Material> {
+  getItem(id: number): Observable<JsonItemResponse<Material>> {
     return this.service.getItem(id);
   }
 
-  deleteItem(id: number): Observable<Material> {
+  deleteItem(id: number): Observable<JsonItemResponse<Material>> {
     return this.service.deleteItem(id);
   }
 
-  addItem(item: Material): Observable<Material> {
+  addItem(item: Material): Observable<JsonItemResponse<Material>> {
     return this.service.addItem(item);
   }
 

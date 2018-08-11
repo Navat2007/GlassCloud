@@ -63,8 +63,8 @@ export class ProcessDetailComponent implements OnInit {
   getItem(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
-      .subscribe(item => {
-        this.processItem = item;
+      .subscribe(json => {
+        this.processItem = json.data;
         this.typeId = this.processItem.type.id;
       });
   }
@@ -101,7 +101,7 @@ export class ProcessDetailComponent implements OnInit {
     }
     this.idSelectedMaterial = +id;
     this.materialService.getItem(id)
-      .subscribe(res => this.materialForAdd = res);
+      .subscribe(json => this.materialForAdd = json.data);
   }
 
   deleteMaterial(id: number) {

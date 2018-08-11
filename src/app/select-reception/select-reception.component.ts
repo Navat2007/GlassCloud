@@ -22,10 +22,10 @@ export class SelectReceptionComponent implements OnInit {
 
   getReceptions() {
     this.service.getReceptions()
-      .subscribe(receptions => {
-        this.receptions = receptions;
-        if (receptions.length > 0) {
-          this.receptionId = receptions[0].id;
+      .subscribe(json => {
+        this.receptions = json.data;
+        if (this.receptions.length > 0) {
+          this.receptionId = json[0].id;
         }
       });
   }

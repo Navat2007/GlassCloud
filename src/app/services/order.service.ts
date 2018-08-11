@@ -5,6 +5,7 @@ import {Order} from '../order';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {LoggingService} from './logging.service';
+import {JsonItemResponse} from './jsonItem';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,13 @@ import {LoggingService} from './logging.service';
 export class OrderService {
 
   private serviceUrl = environment.serverHost + '/api/order';
-  private service: GlassServiceService<Order>;
+  private service: GlassServiceService<JsonItemResponse<Order>, Order>;
 
   constructor(
     private http: HttpClient,
     private logging: LoggingService,
   ) {
-    this.service = new GlassServiceService<Order>(this.http, this.logging);
+    this.service = new GlassServiceService<JsonItemResponse<Order>, Order>(this.http, this.logging);
     this.service.setUrl(this.serviceUrl).setName('order');
   }
 
@@ -26,19 +27,19 @@ export class OrderService {
 
   }
 
-  getItems(): Observable<Order[]> {
+  getItems(): Observable<JsonItemResponse<Order[]>> {
     return this.service.getItems();
   }
 
-  getItem(id: number): Observable<Order> {
+  getItem(id: number): Observable<JsonItemResponse<Order>> {
     return this.service.getItem(id);
   }
 
-  deleteItem(id: number): Observable<Order> {
+  deleteItem(id: number): Observable<JsonItemResponse<Order>> {
     return this.service.deleteItem(id);
   }
 
-  addItem(item: Order): Observable<Order> {
+  addItem(item: Order): Observable<JsonItemResponse<Order>> {
     return this.service.addItem(item);
   }
 

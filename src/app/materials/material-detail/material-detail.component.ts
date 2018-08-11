@@ -32,8 +32,8 @@ export class MaterialDetailComponent implements OnInit {
   getMaterial(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
-      .subscribe(material => {
-        this.material = material;
+      .subscribe(json => {
+        this.material = json.data;
         this.colorId = this.material.color.id;
       });
   }
