@@ -21,7 +21,7 @@
     <td>
       <table class="table table-hover">
         <tr *ngFor="let material of item.material">
-          <td>{{material.type.name + ' : ' + material.depth + ' мм'}}</td>
+          <td>{{material.type.name}} : {{material.color.name}} : {{material.depth}} мм</td>
         </tr>
       </table>
     </td>
@@ -66,7 +66,8 @@
             <td>Толщина, мм</td>
             <td>
               <input [(ngModel)]="newItem.depth" type="number" class="card-text" *ngIf="selectedMaterials.size == 0">
-              <input [(ngModel)]="newItem.depth" type="number" class="card-text" *ngIf="selectedMaterials.size > 0" disabled>
+              <input [(ngModel)]="newItem.depth" type="number" class="card-text" *ngIf="selectedMaterials.size > 0"
+                     disabled>
             </td>
             <td>Стоимость, руб.</td>
             <td>
@@ -103,15 +104,17 @@
           </tr>
           <tr *ngIf="selectedMaterials.size > 0">
             <td colspan="4">
-            <table class="table">
-              <tr *ngFor="let item of selectedMaterials">
-                <td>{{item.type.name}} : {{item.color.name}} : {{item.depth}}</td>
-                <td>
-                  <a type="button" class="btn-sm btn-outline-danger waves-light" (click)="removeMaterial(item.id)"
-                     data-dismiss="modal">x</a>
-                </td>
-              </tr>
-            </table>
+              <div class="scroll-table">
+                <table class="table-sm">
+                  <tr *ngFor="let item of selectedMaterials">
+                    <td colspan="2">{{item.type.name}} : {{item.color.name}} : {{item.depth}}</td>
+                    <td>
+                      <a type="button" class="btn-sm btn-outline-danger waves-light" (click)="removeMaterial(item.id)"
+                         data-dismiss="modal">x</a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </td>
           </tr>
           <tr>

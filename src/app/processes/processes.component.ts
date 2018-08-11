@@ -50,6 +50,8 @@ export class ProcessesComponent implements OnInit {
   }
 
   add(): void {
+    this.typeId = null;
+    this.selectedMaterials.clear();
     this.newItem = new Process();
   }
 
