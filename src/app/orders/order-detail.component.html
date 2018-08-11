@@ -173,7 +173,20 @@
               </select>
             </td>
           </tr>
-
+          <tr *ngIf="idSelectedMaterial != null">
+            <td>Обработка</td>
+            <td colspan="3">
+              <select (change)="onChangeMaterial($event.target.value)" class="custom-select">
+                <option *ngIf="isEmptyMaterialsList" value="-1">Нет материалов с шириной {{depth}}</option>
+                <option selected *ngIf="!isEmptyMaterialsList && !idSelectedMaterial" value="-1">
+                  Ваберите обработку
+                </option>
+                <option *ngFor="let item of materialsByDepth"
+                        value={{item.id}}>{{item.type.name + ' : ' + item.depth + ' мм'}}
+                </option>
+              </select>
+            </td>
+          </tr>
           <tr>
             <td>Длина, мм</td>
             <td>
