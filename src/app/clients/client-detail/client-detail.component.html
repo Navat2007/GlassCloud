@@ -21,9 +21,7 @@
         <td *ngIf="disabled">{{client.type.name}}</td>
         <td *ngIf="!disabled">
           <select (change)="onChangeType($event.target.value)" class="custom-select">
-            <option selected *ngIf="!idSelectedType" value="-1">
-              Ваберите тип клиента
-            </option>
+            <option value="{{client.type.id}}">{{client.type.name}}</option>
             <option *ngFor="let item of service.clientTypes"
                     value={{item.id}}>{{item.name}}
             </option>
@@ -46,7 +44,7 @@
         <td>ИНН</td>
         <td *ngIf="disabled">{{client.inn}}</td>
         <td *ngIf="!disabled">
-          <input [(ngModel)]="client.inn" class="card-text">
+          <input [(ngModel)]="client.inn" class="card-text" type="number">
         </td>
 
         <td>Расчетный счет</td>

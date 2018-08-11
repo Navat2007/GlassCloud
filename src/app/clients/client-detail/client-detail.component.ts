@@ -24,6 +24,7 @@ export class ClientDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getClient();
+    this.service.updateTypes();
   }
 
   getClient(): void {
@@ -44,14 +45,18 @@ export class ClientDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.client.type.id = this.clientTypeId;
+    this.client.type = this.service.getById(this.clientTypeId);
     this.service.updateItem(this.client, this.client.id)
-      .subscribe(res => this.client = res);
+      .subscribe(json => this.client = json.data);
     this.disabled = true;
   }
 
   cancel() {
     this.disabled = true;
     this.getClient();
+  }
+
+  onChangeType(id: string) {
+    this.clientTypeId = id;
   }
 }
