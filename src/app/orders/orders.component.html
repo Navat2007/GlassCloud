@@ -26,8 +26,8 @@
     <td>{{item.clientName}}</td>
     <td>{{item.reception}}</td>
     <td>{{item.discount}}</td>
-    <td>{{item.summa}}</td>
-    <td>{{item.discountSum}}</td>
+    <td>{{item.summa | number:'1.1-2'}} руб.</td>
+    <td>{{item.discountSum | number:'1.1-2'}} руб.</td>
     <!--<td>-->
     <!--<a routerLink="/order/{{item.id}}">-->
     <!--<span class="badge">{{item.id}}</span> {{item.name}}-->

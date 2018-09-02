@@ -16,10 +16,10 @@
       </tr>
       <tr>
         <td>Сумма, руб</td>
-        <td>{{order.summa}}</td>
+        <td>{{order.summa | number:'1.1-2'}}</td>
 
         <td>Сумма со скидкой, руб.</td>
-        <td>{{order.discountSum}}</td>
+        <td>{{order.discountSum | number:'1.1-2'}}</td>
       </tr>
       <tr>
         <td>Описание</td>
@@ -90,8 +90,8 @@
           </table>
         </td>
         <td>{{item.count}}</td>
-        <td>{{item.material.price}} руб.</td>
-        <td>{{item.summa}} руб</td>
+        <td>{{item.material.price | number:'1.1-2'}} руб.</td>
+        <td>{{item.summa | number:'1.1-2'}} руб</td>
         <td>{{item.description}}</td>
         <!--<td>-->
         <!--<button class="delete" title="delete order"-->
