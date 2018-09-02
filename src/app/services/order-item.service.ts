@@ -12,15 +12,21 @@ import {JsonItemResponse} from './jsonItem';
 })
 export class OrderItemService {
 
-  private serviceUrl = environment.serverHost + '/api/order/items';
-  private service: GlassServiceService<JsonItemResponse<OrderItem>, OrderItem>;
+  private serviceItemsUrl = environment.serverHost + '/api/order/items';
+  private serviceItems: GlassServiceService<JsonItemResponse<OrderItem>, OrderItem>;
+
+  private serviceItemUrl = environment.serverHost + '/api/order/item';
+  private serviceItem: GlassServiceService<JsonItemResponse<OrderItem>, OrderItem>;
 
   constructor(
     private http: HttpClient,
     private logging: LoggingService,
   ) {
-    this.service = new GlassServiceService<JsonItemResponse<OrderItem>, OrderItem>(this.http, this.logging);
-    this.service.setUrl(this.serviceUrl).setName('order-item');
+    this.serviceItems = new GlassServiceService<JsonItemResponse<OrderItem>, OrderItem>(this.http, this.logging);
+    this.serviceItems.setUrl(this.serviceItemsUrl).setName('order-items');
+
+    this.serviceItem = new GlassServiceService<JsonItemResponse<OrderItem>, OrderItem>(this.http, this.logging);
+    this.serviceItem.setUrl(this.serviceItemUrl).setName('order-item');
   }
 
   update() {
@@ -28,22 +34,22 @@ export class OrderItemService {
   }
 
   getItems(orderId: string): Observable<JsonItemResponse<OrderItem[]>> {
-    return this.service.getItemsById(orderId);
+    return this.serviceItems.getItemsById(orderId);
   }
 
   getItem(id: string): Observable<JsonItemResponse<OrderItem>> {
-    return this.service.getItem(id);
+    return this.serviceItem.getItem(id);
   }
 
   deleteItem(id: string): Observable<JsonItemResponse<OrderItem>> {
-    return this.service.deleteItem(id);
+    return this.serviceItem.deleteItem(id);
   }
 
   addItem(item: OrderItem): Observable<JsonItemResponse<OrderItem>> {
-    return this.service.addItem(item);
+    return this.serviceItem.addItem(item);
   }
 
   updateItem(item: OrderItem, id: string): Observable<any> {
-    return this.service.updateItem(item, id);
+    return this.serviceItem.updateItem(item, id);
   }
 }

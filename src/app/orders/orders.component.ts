@@ -39,7 +39,7 @@ export class OrdersComponent implements OnInit {
 
   onChange(event) {
     if (event !== undefined) {
-      this.newOrder.client = event;
+      // this.newOrder.client = event;
       this.newOrder.clientId = event.id;
       this.newOrder.discount = event.discount;
     }

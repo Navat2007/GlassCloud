@@ -168,7 +168,7 @@
                   Ваберите материал
                 </option>
                 <option *ngFor="let item of materialsByDepth"
-                        value={{item.id}}>{{item.type.name + ' : ' + item.depth + ' мм'}}
+                        value={{item.id}}>{{item.type.name}} : {{item.color.name}} : {{item.depth}} мм
                 </option>
               </select>
             </td>

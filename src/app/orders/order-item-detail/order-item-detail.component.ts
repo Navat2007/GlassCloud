@@ -94,6 +94,7 @@ export class OrderItemDetailComponent implements OnInit {
 
   getItem(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
     this.service.getItem(id)
       .subscribe(json => {
         this.orderItem = json.data;
