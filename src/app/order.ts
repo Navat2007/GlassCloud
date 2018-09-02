@@ -18,6 +18,7 @@ export class Order {
   clientName: string;
   clientId: string;
   items: OrderItem[];
+  deleted: boolean;
 }
 
 export class OrderItem {
@@ -35,4 +36,5 @@ export class OrderItem {
   process: Process[];
   orderId: string;
   materialId: string;
+  deleted: boolean;
 }

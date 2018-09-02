@@ -26,6 +26,10 @@ export class OrdersComponent implements OnInit {
     this.clientService.update();
   }
 
+  getOrdersWithoutDeleted(): Order[] {
+    return this.orders.filter(order => !order.deleted);
+  }
+
   getOrders(): void {
     this.service.getItems()
       .subscribe(json => this.orders = json.data);

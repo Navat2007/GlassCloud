@@ -36,6 +36,10 @@ export class OrderDetailComponent implements OnInit {
     this.update();
   }
 
+  getItemsWithoutDeleted(): OrderItem[] {
+    return this.order.items.filter(item => !item.deleted);
+  }
+
   getOrder(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
@@ -116,7 +120,6 @@ export class OrderDetailComponent implements OnInit {
   }
 
 
-
   save(): void {
     this.service.updateItem(this.order, this.order.id)
       .subscribe(res => {
@@ -124,6 +127,7 @@ export class OrderDetailComponent implements OnInit {
           this.init();
           this.disabled = true;
         }
+        this.getOrder();
       });
   }
 
