@@ -62,6 +62,7 @@ export class OrderItemDetailComponent implements OnInit {
     if (this.processService.processes) {
       list = this.processService.processes
         .filter(process => {
+          if (this.orderItem.process === undefined) { return true; }
           for (let j = 0; j < this.orderItem.process.length; j++) {
             if (this.orderItem.process[j].id === process.id) {
               return false;
@@ -80,6 +81,7 @@ export class OrderItemDetailComponent implements OnInit {
       list = this.materialService.materials
         .filter(i => i.depth === +this.depth)
         .filter(item => {
+          if (this.orderItem.material === undefined) { return true; }
           for (let j = 0; j < this.orderItem.material.length; j++) {
             if (this.orderItem.material[j].id === item.id) {
               return false;
@@ -146,7 +148,12 @@ export class OrderItemDetailComponent implements OnInit {
     }
 
     this.processService.getItem(this.idSelectedProcess)
-      .subscribe(json => this.orderItem.process.push(json.data));
+      .subscribe(json => {
+        if (this.orderItem.process === undefined) {
+          this.orderItem.process = [];
+        }
+        this.orderItem.process.push(json.data);
+      });
   }
 
   deleteProcess(id: string) {
