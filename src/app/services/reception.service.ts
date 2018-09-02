@@ -27,7 +27,7 @@ export class ReceptionService {
       .pipe(
         catchError(this.logger.handleError('getCurrentReception', []))
       )
-      .map(res => this.currentReception = res)
+      .map(res => this.currentReception = res.data)
       .map(res => this.receptionSelected = !!res);
   }
 
