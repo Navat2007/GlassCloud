@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Order} from '../order';
 import {OrderService} from '../services/order.service';
 import {ClientService} from '../services/client.service';
-import {Client} from '../client';
+import {NewOrderComponent} from './new-order/new-order.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-orders',
@@ -11,13 +12,12 @@ import {Client} from '../client';
 })
 export class OrdersComponent implements OnInit {
 
-  orders: Order[];
-  newOrder?: Order;
   client?: any;
 
   constructor(
-    private service: OrderService,
+    public service: OrderService,
     public clientService: ClientService,
+    private modalService: NgbModal
   ) {
   }
 
@@ -27,31 +27,10 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders(): void {
-    this.service.getItems()
-      .subscribe(json => this.orders = json.data.filter(order => !order.deleted));
-  }
-
-  customSearchFn(term: string, item: Client) {
-    term = term.toLocaleLowerCase();
-    // return item.name.toLocaleLowerCase().indexOf(term) > -1 || item.phone.toLocaleLowerCase() === term;
-    return item.name.toLocaleLowerCase().indexOf(term) > -1 || item.phone.toLocaleLowerCase().indexOf(term) > -1;
-  }
-
-  onChange(event) {
-    if (event !== undefined) {
-      // this.newOrder.client = event;
-      this.newOrder.clientId = event.id;
-      this.newOrder.discount = event.discount;
-    }
-  }
-
-  addOrder() {
-    this.service.addItem(this.newOrder)
-      .subscribe(res => this.getOrders());
+    this.service.update();
   }
 
   delete(order: Order): void {
-    this.orders = this.orders.filter(h => h !== order);
     this.service.deleteItem(order.id).subscribe();
   }
 
@@ -60,8 +39,7 @@ export class OrdersComponent implements OnInit {
   }
 
   add(): void {
-    this.client = null;
-    this.newOrder = new Order();
+    this.modalService.open(NewOrderComponent, { centered: true, size: 'lg' });
   }
 
   public selected(value: any): void {

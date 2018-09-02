@@ -6,7 +6,6 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {LoggingService} from './logging.service';
 import {JsonItemResponse} from './jsonItem';
-import {OrderItemService} from './order-item.service';
 import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
@@ -14,24 +13,26 @@ import {catchError, tap} from 'rxjs/operators';
 })
 export class OrderService {
 
+  orders: Order[];
+
   private serviceUrl = environment.serverHost + '/api/order';
   private service: GlassServiceService<JsonItemResponse<Order>, Order>;
 
   constructor(
     private http: HttpClient,
     private logging: LoggingService,
-    public orderItemService: OrderItemService,
   ) {
     this.service = new GlassServiceService<JsonItemResponse<Order>, Order>(this.http, this.logging);
     this.service.setUrl(this.serviceUrl).setName('order');
   }
 
   update() {
-
+    this.getItems();
   }
 
-  getItems(): Observable<JsonItemResponse<Order[]>> {
-    return this.service.getItems();
+  getItems() {
+    this.service.getItems()
+      .subscribe(json => this.orders = json.data.filter(order => !order.deleted));
   }
 
   getItem(id: string): Observable<JsonItemResponse<Order>> {
@@ -39,6 +40,7 @@ export class OrderService {
   }
 
   deleteItem(id: string): Observable<JsonItemResponse<Order>> {
+    this.orders = this.orders.filter(h => h.id !== id);
     return this.service.deleteItem(id);
   }
 

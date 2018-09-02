@@ -47,6 +47,7 @@
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           Заказы<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="newOrder()">Новый заказ</a>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/order">Список заказов</a>
         </div>
       </li>

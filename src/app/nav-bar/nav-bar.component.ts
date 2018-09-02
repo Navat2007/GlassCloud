@@ -4,6 +4,8 @@ import {Reception} from '../reception';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {UserService} from '../services/user.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NewOrderComponent} from '../orders/new-order/new-order.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,6 +19,7 @@ export class NavBarComponent implements OnInit {
     public receptionService: ReceptionService,
     private as: AuthService, private router: Router,
     public userService: UserService,
+    private modalService: NgbModal
   ) {
   }
 
@@ -35,5 +38,9 @@ export class NavBarComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     });
+  }
+
+  newOrder(): void {
+    this.modalService.open(NewOrderComponent, { centered: true, size: 'lg' });
   }
 }
