@@ -26,13 +26,9 @@ export class OrdersComponent implements OnInit {
     this.clientService.update();
   }
 
-  getOrdersWithoutDeleted(): Order[] {
-    return this.orders.filter(order => !order.deleted);
-  }
-
   getOrders(): void {
     this.service.getItems()
-      .subscribe(json => this.orders = json.data);
+      .subscribe(json => this.orders = json.data.filter(order => !order.deleted));
   }
 
   customSearchFn(term: string, item: Client) {

@@ -8,6 +8,7 @@ import {Material} from '../../material';
 import {ProcessService} from '../../services/process.service';
 import {Process} from '../../process';
 import {forEach} from '@angular/router/src/utils/collection';
+import {OrderService} from '../../services/order.service';
 
 @Component({
   selector: 'app-order-item-detail',
@@ -34,6 +35,7 @@ export class OrderItemDetailComponent implements OnInit {
     public processService: ProcessService,
     private location: Location,
     private route: ActivatedRoute,
+    private orderService: OrderService,
   ) {
   }
 

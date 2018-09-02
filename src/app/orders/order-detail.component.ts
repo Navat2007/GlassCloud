@@ -14,6 +14,7 @@ import {OrderItemService} from '../services/order-item.service';
 })
 export class OrderDetailComponent implements OnInit {
   @Input() order: Order;
+  orderItems: OrderItem[];
   disabled = true;
   newItem?: OrderItem;
   depth?: number;
@@ -36,10 +37,6 @@ export class OrderDetailComponent implements OnInit {
     this.update();
   }
 
-  getItemsWithoutDeleted(): OrderItem[] {
-    return this.order.items.filter(item => !item.deleted);
-  }
-
   getOrder(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.service.getItem(id)
@@ -52,7 +49,10 @@ export class OrderDetailComponent implements OnInit {
   getOrderItems(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.orderItemService.getItems(id)
-      .subscribe(json => this.order.items = json.data);
+      .subscribe(json => {
+        this.orderItems = json.data.filter(item => !item.deleted);
+        this.order.items = json.data;
+      });
   }
 
   update() {
@@ -104,6 +104,9 @@ export class OrderDetailComponent implements OnInit {
     this.newItem.orderId = this.order.id;
     this.newItem.material = new Material();
     this.newItem.process = [];
+    this.newItem.processSum = 0;
+    this.newItem.summa = 0;
+    this.newItem.perimeter = 0;
   }
 
   addItem() {
@@ -114,13 +117,22 @@ export class OrderDetailComponent implements OnInit {
     this.newItem.number = this.order.items.length + 1;
 
     this.order.items.push(this.newItem);
+    this.orderItems.push(this.newItem);
 
-    this.orderItemService.recalculateItem(this.newItem);
-    this.service.recalculateOrder(this.order);
+    this.recalculateOrder();
   }
 
+  private recalculateOrder() {
+    this.service.recalculateOrder(this.order)
+      .subscribe(json => {
+        this.orderItems = json.data.items;
+        this.order = json.data;
+      });
+  }
 
   save(): void {
+    this.recalculateOrder();
+
     this.service.updateItem(this.order, this.order.id)
       .subscribe(res => {
         if (res) {

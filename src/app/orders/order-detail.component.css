@@ -6,12 +6,22 @@ label {
   color: #607D8B;
   font-weight: bold;
 }
+
 input {
   height: 2em;
   font-size: 1em;
   padding-left: .4em;
 }
 
+.order-desc {
+  height: 30px;
+}
+
 /*.modal-big {*/
-  /*width: 1000px;*/
+/*width: 1000px;*/
 /*}*/
+
+.prokrutka {
+  overflow-x: scroll; /* прокрутка по горизонтали */
+  height: 300px; /* высота нашего блока */
+}

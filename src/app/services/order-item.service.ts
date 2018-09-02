@@ -52,27 +52,4 @@ export class OrderItemService {
   updateItem(item: OrderItem, id: string): Observable<any> {
     return this.serviceItem.updateItem(item, id);
   }
-
-  // ------------------------
-  public recalculateItem(orderItem: OrderItem) {
-    orderItem.perimeter = (orderItem.length * orderItem.width) * 2 * (orderItem.count / 1000);
-
-    let area = (orderItem.length * orderItem.width) / 1000000;
-    if (area < (0.0625 * orderItem.count)) {
-      area = 0.0625 * orderItem.count;
-    } else {
-      area = area * orderItem.count;
-    }
-    const summa = area * orderItem.material.price;
-    orderItem.area = area;
-
-    let processSum = 0;
-    orderItem.process.forEach(process => {
-      processSum += orderItem.perimeter * process.price;
-    });
-
-    orderItem.processSum = processSum;
-
-    orderItem.summa = summa + processSum;
-  }
 }

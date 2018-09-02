@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {LoggingService} from './logging.service';
 import {JsonItemResponse} from './jsonItem';
+import {OrderItemService} from './order-item.service';
+import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class OrderService {
   constructor(
     private http: HttpClient,
     private logging: LoggingService,
+    public orderItemService: OrderItemService,
   ) {
     this.service = new GlassServiceService<JsonItemResponse<Order>, Order>(this.http, this.logging);
     this.service.setUrl(this.serviceUrl).setName('order');
@@ -48,11 +51,11 @@ export class OrderService {
   }
 
 //  ----------------
-  public recalculateOrder(order: Order) {
-    order.summa = 0;
-    order.items.forEach(item => {
-      order.summa += item.summa;
-    });
-    order.discountSum = order.summa - (order.summa * order.discount / 100.0);
+  public recalculateOrder(order: Order): Observable<JsonItemResponse<Order>> {
+    return this.http.post<JsonItemResponse<Order>>(this.serviceUrl + '/calculate', order)
+      .pipe(
+        tap(_ => this.logging.log(`added ${name} w/ ${order}`)),
+        catchError(this.logging.handleError<any>('calculate order'))
+      );
   }
 }

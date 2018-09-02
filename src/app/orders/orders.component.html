@@ -19,7 +19,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of getOrdersWithoutDeleted()" routerLink="/order/{{item.id}}">
+  <tr *ngFor="let item of orders" routerLink="/order/{{item.id}}">
     <th scope="row">{{item.number}}</th>
     <td>{{item.lastUpdated | date: 'yyyy.dd.MM HH:ss'}}</td>
     <td>{{item.description}}</td>
