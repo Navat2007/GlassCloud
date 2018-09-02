@@ -7,6 +7,7 @@ import {MaterialService} from '../../services/material.service';
 import {Material} from '../../material';
 import {ProcessService} from '../../services/process.service';
 import {Process} from '../../process';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-order-item-detail',
@@ -62,13 +63,27 @@ export class OrderItemDetailComponent implements OnInit {
     if (this.processService.processes) {
       list = this.processService.processes
         .filter(process => {
-          if (this.orderItem.process === undefined) { return true; }
+          if (process.material === undefined) {
+            return false;
+          }
+
+          if (this.orderItem.process === undefined) {
+            return true;
+          }
+
           for (let j = 0; j < this.orderItem.process.length; j++) {
             if (this.orderItem.process[j].id === process.id) {
               return false;
             }
           }
-          return true;
+
+          for (let j = 0; j < process.material.length; j++) {
+            if (process.material[j].id === this.orderItem.material.id) {
+              return true;
+            }
+          }
+
+          return false;
         });
     }
     this.isEmptyProcessList = list.length === 0;
@@ -81,7 +96,9 @@ export class OrderItemDetailComponent implements OnInit {
       list = this.materialService.materials
         .filter(i => i.depth === +this.depth)
         .filter(item => {
-          if (this.orderItem.material === undefined) { return true; }
+          if (this.orderItem.material === undefined) {
+            return true;
+          }
           for (let j = 0; j < this.orderItem.material.length; j++) {
             if (this.orderItem.material[j].id === item.id) {
               return false;

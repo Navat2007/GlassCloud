@@ -46,4 +46,13 @@ export class OrderService {
   updateItem(item: Order, id: string): Observable<any> {
     return this.service.updateItem(item, id);
   }
+
+//  ----------------
+  public recalculateOrder(order: Order) {
+    order.summa = 0;
+    order.items.forEach(item => {
+      order.summa += item.summa;
+    });
+    order.discountSum = order.summa - (order.summa * order.discount / 100.0);
+  }
 }
