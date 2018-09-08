@@ -31,7 +31,8 @@ export class NewClientComponent implements OnInit {
     this.newClient.type = this.service.getById(this.idSelectedType);
 
     this.service.addItem(this.newClient)
-      .subscribe(() => {
+      .subscribe(json => {
+        this.service.client = json.data.name;
         this.service.update();
         this.activeModal.dismiss('Cross click');
       });

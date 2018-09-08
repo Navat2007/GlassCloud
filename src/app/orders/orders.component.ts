@@ -12,7 +12,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class OrdersComponent implements OnInit {
 
-  client?: any;
+  // client?: any;
 
   constructor(
     public service: OrderService,

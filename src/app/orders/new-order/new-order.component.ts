@@ -14,7 +14,6 @@ import {NewClientComponent} from '../../clients/new-client/new-client.component'
 export class NewOrderComponent implements OnInit {
 
   newOrder?: Order;
-  client?: any;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -51,7 +50,7 @@ export class NewOrderComponent implements OnInit {
   }
 
   add(): void {
-    this.client = null;
+    this.clientService.client = null;
     this.newOrder = new Order();
   }
 

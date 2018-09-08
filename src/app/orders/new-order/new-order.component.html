@@ -23,7 +23,7 @@
         <ng-select [items]="clientService.clients"
                    bindLabel="phone"
                    [loading]="false"
-                   [(ngModel)]="client"
+                   [(ngModel)]="clientService.client"
                    [dropdownPosition]="'no'"
                    placeholder="Введите номер телефона или имя"
                    bindValue="name"
@@ -45,7 +45,7 @@
     <tr>
       <td>Заказчик</td>
       <td>
-        {{client}}
+        {{clientService.client}}
       </td>
       <td></td>
       <td></td>

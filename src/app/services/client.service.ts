@@ -17,6 +17,7 @@ export class ClientService {
 
   clients: Client[];
   clientTypes: ClientType[];
+  client?: any;
 
   constructor(
     private http: HttpClient,
