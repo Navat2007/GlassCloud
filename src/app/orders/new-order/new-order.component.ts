@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ClientService} from '../../services/client.service';
 import {Order} from '../../order';
 import {OrderService} from '../../services/order.service';
 import {Client} from '../../client';
+import {NewClientComponent} from '../../clients/new-client/new-client.component';
 
 @Component({
   selector: 'app-new-order',
@@ -17,6 +18,7 @@ export class NewOrderComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
+    private modalService: NgbModal,
     public clientService: ClientService,
     private service: OrderService,
   ) {
@@ -30,7 +32,6 @@ export class NewOrderComponent implements OnInit {
 
   onChange(event) {
     if (event !== undefined) {
-      // this.newOrder.client = event;
       this.newOrder.clientId = event.id;
       this.newOrder.discount = event.discount;
     }
@@ -52,5 +53,9 @@ export class NewOrderComponent implements OnInit {
   add(): void {
     this.client = null;
     this.newOrder = new Order();
+  }
+
+  newClient() {
+    this.modalService.open(NewClientComponent, { centered: true, size: 'lg' });
   }
 }

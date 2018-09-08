@@ -35,6 +35,7 @@ import {ProcessDetailComponent} from './processes/process-detail/process-detail.
 import {OrderItemDetailComponent} from './orders/order-item-detail/order-item-detail.component';
 import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 import { NewOrderComponent } from './orders/new-order/new-order.component';
+import { NewClientComponent } from './clients/new-client/new-client.component';
 
 const appRoutes: Routes = [
   {path: 'order', component: AppComponent}
@@ -82,9 +83,11 @@ const appRoutes: Routes = [
     OrderItemDetailComponent,
     ClientDetailComponent,
     NewOrderComponent,
+    NewClientComponent,
   ],
   entryComponents: [
     NewOrderComponent,
+    NewClientComponent,
   ],
   providers: [
     // AuthService,

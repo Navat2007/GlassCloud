@@ -1,0 +1,83 @@
+<div class="modal-header">
+  <h2 class="modal-title" id="modal-basic-title">Новый клиент</h2>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <table class="table">
+    <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>Юр.лицо / Физ.лицо</td>
+      <td>
+        <select (change)="onChangeType($event.target.value)" class="custom-select">
+          <option selected *ngIf="!idSelectedType" value="-1">
+            Ваберите тип клиента
+          </option>
+          <option *ngFor="let item of service.clientTypes"
+                  value={{item.id}}>{{item.name}}
+          </option>
+        </select>
+      </td>
+      <td>Скидка, %</td>
+      <td>
+        <input [(ngModel)]="newClient.discount" type="number" class="card-text">
+      </td>
+    </tr>
+    <tr>
+      <td>ФИО</td>
+      <td colspan="3">
+        <input [(ngModel)]="newClient.name" class="card-text fio">
+      </td>
+    </tr>
+
+    <tr>
+      <td>ИНН</td>
+      <td>
+        <input [(ngModel)]="newClient.inn" class="card-text" type="number">
+      </td>
+
+      <td>Расчетный счет</td>
+      <td>
+        <input [(ngModel)]="newClient.account" class="card-text">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Номер телефона</td>
+      <td>
+        <input [(ngModel)]="newClient.phone" class="card-text">
+      </td>
+
+      <td>Email</td>
+      <td>
+        <input [(ngModel)]="newClient.email" type="email" class="card-text">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Комментарий</td>
+      <td colspan="3">
+        <textarea [(ngModel)]="newClient.description" class="card-text form-control"></textarea>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <a type="button" class="btn btn-outline-green waves-light" (click)="addClient()"
+     data-dismiss="modal">Добавить</a>
+  <a type="button" class="btn btn-outline-gray waves-light"
+     (click)="activeModal.dismiss('Cross click')">Отменить</a>
+</div>

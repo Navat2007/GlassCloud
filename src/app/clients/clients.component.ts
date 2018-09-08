@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Client, ClientType} from '../client';
 import {ClientService} from '../services/client.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NewClientComponent} from './new-client/new-client.component';
 
 @Component({
   selector: 'app-clients',
@@ -9,11 +10,9 @@ import {ClientService} from '../services/client.service';
 })
 export class ClientsComponent implements OnInit {
 
-  newClient?: Client;
-  idSelectedType?: string;
-
   constructor(
     public service: ClientService,
+    private modalService: NgbModal,
   ) {
   }
 
@@ -23,19 +22,6 @@ export class ClientsComponent implements OnInit {
   }
 
   add(): void {
-    this.idSelectedType = null;
-    this.newClient = new Client();
-    this.newClient.discount = 0;
-  }
-
-  addClient() {
-    this.newClient.type = this.service.getById(this.idSelectedType);
-
-    this.service.addItem(this.newClient)
-      .subscribe(res => this.service.update());
-  }
-
-  onChangeType(id: string) {
-    this.idSelectedType = id;
+    this.modalService.open(NewClientComponent, { centered: true, size: 'lg' });
   }
 }

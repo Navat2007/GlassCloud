@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Новый заказ</h4>
+  <h2 class="modal-title" id="modal-basic-title">Новый заказ</h2>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -35,25 +35,38 @@
           </ng-template>
         </ng-select>
       </td>
+      <td>
+        <a type="button" class="btn-sm btn-outline-green waves-light" (click)="newClient()"
+           data-dismiss="modal">+</a>
+      </td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>Заказчик</td>
       <td>
         {{client}}
       </td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
 
     <tr>
       <td>Скидка, %</td>
-      <td *ngIf="newOrder.discount">
+      <td>
         <input [(ngModel)]="newOrder.discount" type="number" class="card-text">
       </td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>Описание</td>
       <td colspan="3">
         <textarea [(ngModel)]="newOrder.description" class="card-text form-control"></textarea>
       </td>
+      <td></td>
     </tr>
     </tbody>
   </table>
